@@ -1,9 +1,10 @@
 # 🧠 Memória Mestre (Índice Roteador RAG Agêntico): Ollimia Squeeze
 
-> **Status:** Home Page Oficial Ollimia (`index_ollimia_home.html`) com Brandbook v2.0 (Verde Origem + IBM Plex Sans Condensed), Vídeos Hero 01 & 02 em Loop Duplo, Redesign Luxury Countertop & Galeria Botânica de Azeites com Ajustes da Isabella.  
-> **Arquitetura de Memória:** RAG Agêntico em Dupla Camada (Índice Mestre < 60 linhas)  
+> **Status Oficial:** Home Page Oficial Ollimia (`index.html`) com Brandbook v2.0 (Verde Origem + IBM Plex Sans Condensed), Vídeos Hero 01 & 02 em Loop Duplo, Redesign Luxury Hero Box, Luxury Countertop Cards & Galeria Botânica de Azeites com 100% dos Ajustes da Isabella.  
+> **Link Público no Ar:** [https://odjavan.github.io/ollimia/](https://odjavan.github.io/ollimia/)  
+> **Repositório GitHub:** `https://github.com/odjavan/ollimia` (Público)  
 > **Workspace Local:** `C:\2026\Ollimia`  
-> **Última Atualização:** 2026-08-18 (Ajustes da Isabella, Brandbook v2.0, Dual-Video Hero, Luxury Countertop Cards & Botanical Collection Showcase)  
+> **Última Atualização:** 2026-08-18 (Publicação Automática GitHub Pages, Brandbook v2.0, Redesign Hero Squeeze Box & 100% Ajustes da Isabella)  
 
 ---
 
@@ -18,19 +19,18 @@
    - *Conteúdo:* Operador de Full Commerce (NovaTrade/Komport), Parceria Rappi + QR Code nas embalagens reais, Conta Hostinger criada, 3 SKUs e precificação.
 
 3. 📐 **[Wireframe do Site, Conteúdo & Jornada do Usuário](file:///C:/2026/Ollimia/docs/memory/MEMORY_SITE_WIREFRAME.md)**
-   - *Conteúdo:* Wireframe navegável de 7 páginas, **Embalagens Reais do PDF em 100% do Site**, Hero Section com Vídeo de Fundo e Landing Page QR Code.
+   - *Conteúdo:* Wireframe navegável de 7 páginas, **Embalagens Reais do PDF em 100% do Site**, Hero Section com Vídeo de Fundo Cinemático Duplo, Hero Card Luxury, Redesign Countertop e Galeria Botânica.
 
 4. 🎨 **[Benchmarks Visuais, Design System & Referências UI](file:///C:/2026/Ollimia/docs/memory/MEMORY_BENCHMARKS_DESIGN.md)**
-   - *Conteúdo:* 7 sites benchmarks em `index.html` (com a Home Oficial em acesso externo `index_ollimia_home.html`).
+   - *Conteúdo:* Brandbook v2.0 com cores oficiais (Verde Origem `#1E2614`, Verde Pomar `#4F5C13`, Verde Colina `#9DA300`, Âmbar Solar `#D89346`, Marfim Natural `#E7E4C9`) e `IBM Plex Sans Condensed`.
 
 ---
 
 ## 📌 Resumo Executivo Rápido
 - **Produto & Embalagem Real:** Ollimia — Azeite de Oliva Extra Virgem Espanhol Picual em Garrafa Squeeze (*Chef-Style*). **REGRA RIGOROSA:** Uso exclusivo da embalagem real extraída do PDF Comercial (`APRESENTACAO COMERCIAL OLLIMIA.pdf`) — garrafa verde-escuro/preto fosco, bico cônico preto de dosagem, emblema V dourado e rótulo bipartido com logo script branco.
-- **Hospedagem & Infra:** Conta criada na **Hostinger** (plano VPS em breve).
-- **Reunião de Apresentação:** Quarta-feira (12/08/2026) das 11:00 às 12:00 BRT.
-- **Decisão E-commerce Fase 1:** Sem botão "Shop Now" / Venda Online Direta no primeiro momento.
-- **Estratégia Rappi & QR Code:** Embalagens reais com QR Code para atração e retenção B2C.
+- **Site no Ar:** `https://odjavan.github.io/ollimia/` rodando a partir do arquivo `index.html`.
+- **Decisão E-commerce Fase 1:** Sem botão "Shop Now" / Venda Online Direta no primeiro momento. CTAs focadas em **"Onde Encontrar"**, **"Seja Revendedor"** e **"Entre em Contato"**.
+- **Ajustes da Isabella:** 100% integrados no site e nos arquivos de memória.
 
 ---
 
