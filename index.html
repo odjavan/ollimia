@@ -1,0 +1,856 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ollimia Squeeze — O Primeiro Azeite de Bancada Chef-Style do Brasil</title>
+  <meta name="description" content="Azeite de Oliva Extra Virgem Espanhol Picual em garrafa squeeze opaca flexível com bico dosador inteligente. Dosagem cirúrgica sem sujeira ou desperdício.">
+  
+  <!-- Design System CSS Oficial (Brandbook v2.0) -->
+  <link rel="stylesheet" href="styles/design-system-ollimia.css">
+  
+  <style>
+    /* Estilos Adicionais Específicos para a Home Page */
+    .hero-bg-glow {
+      position: absolute;
+      width: 550px;
+      height: 550px;
+      background: radial-gradient(circle, rgba(157, 163, 0, 0.22) 0%, rgba(30, 38, 20, 0) 70%);
+      top: -100px;
+      left: -100px;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .rating-pill {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: rgba(231, 228, 201, 0.08);
+      border: 1px solid rgba(231, 228, 201, 0.18);
+      padding: 10px 20px;
+      border-radius: var(--radius-pill);
+      width: fit-content;
+      margin-top: 28px;
+    }
+
+    .rating-stars {
+      color: #FFC107;
+      font-size: 0.95rem;
+    }
+
+    .rating-text {
+      font-size: 0.85rem;
+      color: var(--ollimia-marfim);
+      font-weight: 500;
+    }
+
+    /* Grid do Storytelling (Editorial) */
+    .story-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      align-items: center;
+    }
+
+    .story-img-box {
+      border-radius: var(--radius-card);
+      overflow: hidden;
+      box-shadow: var(--shadow-hover);
+      border: 1px solid var(--color-border-light);
+    }
+
+    .story-img-box img {
+      width: 100%;
+      height: auto;
+      display: block;
+      transition: var(--transition-normal);
+    }
+
+    .story-img-box:hover img {
+      transform: scale(1.03);
+    }
+
+    /* Accordion FAQ */
+    .faq-container {
+      max-width: 800px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .faq-item {
+      background: #FFF;
+      border: 1px solid var(--color-border-light);
+      border-radius: var(--radius-card);
+      overflow: hidden;
+      transition: var(--transition-fast);
+    }
+
+    .faq-question {
+      padding: 24px 28px;
+      font-family: var(--font-display);
+      font-size: 1.15rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      color: var(--ollimia-carbon);
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .faq-answer {
+      padding: 0 28px 24px;
+      font-size: 0.95rem;
+      color: var(--color-text-muted);
+      display: none;
+      border-top: 1px solid rgba(0,0,0,0.05);
+      padding-top: 16px;
+    }
+
+    .faq-item.active .faq-answer {
+      display: block;
+    }
+
+    .faq-item.active {
+      border-color: var(--ollimia-verde-colina);
+      box-shadow: var(--shadow-card);
+    }
+
+    /* UGC Video Cards */
+    .ugc-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+    }
+
+    .ugc-card {
+      background: #FFF;
+      border-radius: var(--radius-card);
+      padding: 28px;
+      border: 1px solid var(--color-border-light);
+      box-shadow: var(--shadow-card);
+    }
+
+    .ugc-author {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+
+    .ugc-avatar {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: var(--ollimia-verde-colina);
+      color: var(--ollimia-carbon);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+    }
+
+    .ugc-role {
+      font-size: 0.8rem;
+      color: var(--color-text-muted);
+    }
+
+    .ugc-quote {
+      font-size: 0.95rem;
+      font-style: italic;
+      color: var(--color-text-main);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- MARQUEE BAR SUPERIOR -->
+  <div class="top-marquee">
+    <div class="marquee-content">
+      🫒 OLLIMIA SQUEEZE • AZEITE EXTRA VIRGEM ESPANHOL PICUAL • BICO DOSADOR INTELIGENTE • CHEF'S STYLE DE BANCADA • 0% DE QUEBRA • DOSAGEM CIRÚRGICA NA BANCADA • 🫒 OLLIMIA SQUEEZE • AZEITE EXTRA VIRGEM ESPANHOL PICUAL • BICO DOSADOR INTELIGENTE • CHEF'S STYLE DE BANCADA • 0% DE QUEBRA • DOSAGEM CIRÚRGICA NA BANCADA •
+    </div>
+  </div>
+
+  <!-- HEADER NAVEGÁVEL STICKY -->
+  <header class="ollimia-header">
+    <a href="#" class="header-brand">
+      <span class="brand-logo-text">Ollimia</span>
+      <span class="brand-badge">Squeeze</span>
+    </a>
+
+    <nav class="header-nav">
+      <a href="#diferenciais" class="nav-link">O Squeeze</a>
+      <a href="#produtos" class="nav-link">Linha Ollimia</a>
+      <a href="#comparativo" class="nav-link">Na Bancada</a>
+      <a href="#antifraude" class="nav-link">Transparência</a>
+      <a href="#origem" class="nav-link">Origem</a>
+      <a href="#faq" class="nav-link">FAQ</a>
+    </nav>
+
+    <div style="display: flex; gap: 12px; align-items: center;">
+      <a href="#conversao" class="btn-ollimia btn-primary" style="padding: 10px 22px; font-size: 0.85rem;">
+        Seja Revendedor
+      </a>
+    </div>
+  </header>
+
+  <!-- MÓDULO 01: HERO SECTION (ABOVE THE FOLD COM DUAL-VÍDEO BACKGROUND E CAMADA VERDE ORIGEM) -->
+  <section class="hero-section" style="position: relative; overflow: hidden; background: var(--ollimia-verde-origem);">
+    
+    <!-- VÍDEOS DE FUNDO EM LOOP DUPLO SEM SOM -->
+    <div class="hero-video-wrapper">
+      <video class="hero-video-item video-active" id="heroVid1" autoplay loop muted playsinline poster="assets/images/hero_squeeze.png">
+        <source src="Vídeo/site/video-01.mp4" type="video/mp4">
+      </video>
+      <video class="hero-video-item" id="heroVid2" autoplay loop muted playsinline poster="assets/images/hero_squeeze.png">
+        <source src="Vídeo/site/video-02.mp4" type="video/mp4">
+      </video>
+      <!-- CAMADA DE SOBREPOSIÇÃO VERDE ORIGEM CONFORME BRANDBOOK -->
+      <div class="hero-green-overlay"></div>
+    </div>
+
+    <div class="hero-bg-glow"></div>
+
+    <div class="hero-content" style="position: relative; z-index: 2;">
+      <div class="hero-tag">
+        ✨ Lançamento Exclusivo • Chef's Style
+      </div>
+      <h1 class="hero-title">
+        A Nova Era do <span style="color: var(--ollimia-verde-colina);">Azeite de Oliva</span>
+      </h1>
+      <p class="hero-subtitle">
+        O primeiro <strong>Azeite de Bancada Chef-Style</strong> do Brasil. Embalagem squeeze opaca flexível de origem francesa com bico dosador inteligente. Dosagem cirúrgica, zero sujeira e preservação máxima de polifenóis.
+      </p>
+      
+      <div class="hero-actions">
+        <a href="#conversao" class="btn-ollimia btn-primary">
+          📍 Onde Encontrar
+        </a>
+        <a href="#conversao" class="btn-ollimia btn-secondary">
+          🏢 Seja Revendedor (B2B)
+        </a>
+      </div>
+
+      <div class="rating-pill">
+        <div class="rating-stars">★★★★★</div>
+        <div class="rating-text">Aprovado por chefs e apaixonados por gastronomia no Brasil.</div>
+      </div>
+    </div>
+
+    <div class="hero-media-wrapper" style="position: relative; z-index: 2;">
+      <div class="hero-squeeze-card" style="background: rgba(30, 38, 20, 0.75); border: 1px solid rgba(231, 228, 201, 0.25); backdrop-filter: blur(12px);">
+        <div class="squeeze-floating-badge" style="background: var(--ollimia-ambar-solar); color: #000; font-weight: 800;">
+          Picual • Andaluzia 🇪🇸
+        </div>
+        <div class="squeeze-img-frame">
+          <img src="assets/images/hero_squeeze.png" alt="Ollimia Azeite Squeeze 500ml" class="squeeze-mockup">
+        </div>
+        <div style="color: var(--ollimia-marfim); font-family: var(--font-display); font-size: 1.3rem; text-transform: uppercase; font-weight: 700; letter-spacing: 0.5px;">
+          Ollimia Picual 500ml
+        </div>
+        <p style="color: var(--ollimia-verde-colina); font-size: 0.85rem; margin-top: 4px; font-weight: 600;">
+          Garrafa Flexible • Bico Anti-Gotejamento
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- MÓDULO 02: PRESS & MARQUEE DE PROVA SOCIAL COM ÍCONES VETORIAIS -->
+  <section class="press-bar" style="background: var(--ollimia-verde-origem); border-top: 1px solid rgba(231, 228, 201, 0.15); border-bottom: 1px solid rgba(231, 228, 201, 0.15); padding: 20px 4%;">
+    <div class="press-title" style="color: var(--ollimia-ambar-solar); font-size: 0.8rem; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 12px;">Reconhecimento & Mídia Gastronômica</div>
+    <div class="press-logos">
+      <!-- Item 1: Gastronomia Brasil -->
+      <div class="press-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 2a9 9 0 0 0-9 9v1h18v-1a9 9 0 0 0-9-9z"/>
+          <path d="M3 15h18v2a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-2z"/>
+          <line x1="12" y1="2" x2="12" y2="4"/>
+        </svg>
+        <span>GASTRONOMIA BRASIL</span>
+      </div>
+
+      <span class="press-dot" style="color: var(--ollimia-ambar-solar);">•</span>
+
+      <!-- Item 2: Chef's Style Magazine -->
+      <div class="press-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
+          <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
+          <line x1="8" y1="6" x2="16" y2="6"/>
+          <line x1="8" y1="10" x2="14" y2="10"/>
+        </svg>
+        <span>CHEF'S STYLE MAGAZINE</span>
+      </div>
+
+      <span class="press-dot" style="color: var(--ollimia-ambar-solar);">•</span>
+
+      <!-- Item 3: Revista Azeites Premium -->
+      <div class="press-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/>
+          <path d="M12 14v4M10 16h4"/>
+        </svg>
+        <span>REVISTA AZEITES PREMIUM</span>
+      </div>
+
+      <span class="press-dot" style="color: var(--ollimia-ambar-solar);">•</span>
+
+      <!-- Item 4: Food & Design Daily -->
+      <div class="press-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+        </svg>
+        <span>FOOD & DESIGN DAILY</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- MÓDULO 03: PENSADO PARA A BANCADA DA SUA COZINHA (REDESIGN LUXURY COUNTERTOP CARDS) -->
+  <section id="diferenciais" class="section-padding" style="background: var(--ollimia-verde-origem); color: var(--ollimia-marfim);">
+    <div class="section-header">
+      <span class="section-tag" style="color: var(--ollimia-ambar-solar);">Engenharia & Design Gastronômico</span>
+      <h2 class="section-title" style="color: var(--ollimia-marfim);">Pensado para a Bancada da sua Cozinha</h2>
+    </div>
+
+    <div class="countertop-grid">
+      <!-- Card 1 -->
+      <div class="countertop-card-luxury">
+        <div class="card-top-header">
+          <span class="stamp-number">SELO 01</span>
+          <div class="gold-icon-wrapper">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
+            </svg>
+          </div>
+        </div>
+        <h3 class="card-luxury-title">Origem Andaluzia</h3>
+        <p class="card-luxury-desc">Azeitonas Picual colhidas nos olivais da Espanha. Frutado verde intenso com altíssima concentração de polifenóis antioxidantes.</p>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="countertop-card-luxury">
+        <div class="card-top-header">
+          <span class="stamp-number">SELO 02</span>
+          <div class="gold-icon-wrapper">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/>
+              <circle cx="12" cy="14" r="3" fill="var(--ollimia-ambar-solar)" opacity="0.4"/>
+            </svg>
+          </div>
+        </div>
+        <h3 class="card-luxury-title">Dosagem Cirúrgica</h3>
+        <p class="card-luxury-desc">Bico dosador twist anti-pingos. Controle total do fluxo pela pressão da mão: um fio delicado em saladas ou dosagem precisa na frigideira.</p>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="countertop-card-luxury">
+        <div class="card-top-header">
+          <span class="stamp-number">SELO 03</span>
+          <div class="gold-icon-wrapper">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+            </svg>
+          </div>
+        </div>
+        <h3 class="card-luxury-title">Proteção UV Opaca</h3>
+        <p class="card-luxury-desc">A garrafa opaca bloqueia 100% da claridade e do oxigênio. Seu azeite mantém o frescor do lagar e os benefícios nutricionais até a última gota.</p>
+      </div>
+
+      <!-- Card 4 -->
+      <div class="countertop-card-luxury">
+        <div class="card-top-header">
+          <span class="stamp-number">SELO 04</span>
+          <div class="gold-icon-wrapper">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+              <polyline points="9 22 9 12 15 12 15 22"/>
+            </svg>
+          </div>
+        </div>
+        <h3 class="card-luxury-title">Objeto de Bancada</h3>
+        <p class="card-luxury-desc">Design limpo e sofisticado feito para ficar exposto ao lado do fogão. Mais praticidade, menos sujeira e uma verdadeira experiência de Chef.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- MÓDULO 04: LINHA OLLIMIA (REFORMULAÇÃO BOTÂNICA & GALERIA DE AZEITES) -->
+  <section id="produtos" class="section-padding" style="background: linear-gradient(180deg, var(--ollimia-verde-origem) 0%, #12170C 100%); color: var(--ollimia-marfim);">
+    <div class="section-header">
+      <span class="script-subtitle" style="font-size: 2.2rem;">Olives Collection</span>
+      <h2 class="section-title" style="color: var(--ollimia-marfim); margin-top: -6px;">Conheça a Linha Ollimia</h2>
+    </div>
+
+    <div class="botanical-showcase-grid">
+      <!-- SKU 1: Picual 500ml -->
+      <div class="botanical-card">
+        <div>
+          <div class="botanical-card-header">
+            <span class="script-subtitle">Andalucía Collection</span>
+            <h3 class="botanical-card-title">Picual Extra Virgem 500ml</h3>
+            <div class="gourmet-stamp-seal">
+              <span>🫒 100% EXTRA VIRGEM • ESPANHA</span>
+            </div>
+          </div>
+
+          <div class="pedestal-img-wrapper">
+            <div class="pedestal-arch"></div>
+            <img src="assets/images/real_squeeze_500ml_transparent.png" alt="Azeite Ollimia Picual 500ml Real PDF" class="pedestal-bottle-img">
+          </div>
+
+          <!-- Régua Organoléptica -->
+          <div class="organoleptic-box">
+            <div class="organoleptic-row">
+              <span class="organoleptic-label">Frutado Herbáceo</span>
+              <div class="organoleptic-meter">
+                <div class="organoleptic-fill" style="width: 95%;"></div>
+              </div>
+            </div>
+            <div class="organoleptic-row">
+              <span class="organoleptic-label">Amargor & Picância</span>
+              <div class="organoleptic-meter">
+                <div class="organoleptic-fill" style="width: 88%;"></div>
+              </div>
+            </div>
+            <div class="organoleptic-row">
+              <span class="organoleptic-label">Acidez Máxima</span>
+              <span style="font-family: var(--font-display); font-weight: 700; color: var(--ollimia-verde-colina); font-size: 0.85rem;">≤ 0,18%</span>
+            </div>
+            <div class="organoleptic-row">
+              <span class="organoleptic-label">Polifenóis Totais</span>
+              <span style="font-family: var(--font-display); font-weight: 700; color: var(--ollimia-ambar-solar); font-size: 0.85rem;">> 520 mg/kg</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="botanical-card-footer">
+          <div>
+            <div style="font-size: 0.75rem; text-transform: uppercase; opacity: 0.75; font-family: var(--font-display);">Sugestão Lote VIP</div>
+            <div style="font-family: var(--font-display); font-size: 1.6rem; font-weight: 700; color: var(--ollimia-verde-colina);">R$ 42,90</div>
+          </div>
+          <a href="#conversao" class="btn-ollimia btn-primary" style="padding: 12px 22px; font-size: 0.85rem;">📍 Onde Encontrar</a>
+        </div>
+      </div>
+
+      <!-- SKU 2: Picual Master 750ml -->
+      <div class="botanical-card" style="border-color: rgba(216, 147, 70, 0.35);">
+        <div>
+          <div class="botanical-card-header">
+            <span class="script-subtitle" style="color: var(--ollimia-verde-colina);">Gastronomic Master</span>
+            <h3 class="botanical-card-title">Picual Master 750ml</h3>
+            <div class="gourmet-stamp-seal" style="background: rgba(216, 147, 70, 0.15); border-color: var(--ollimia-ambar-solar); color: var(--ollimia-ambar-solar);">
+              <span>🌟 EDIÇÃO CHEF DE BANCADA</span>
+            </div>
+          </div>
+
+          <div class="pedestal-img-wrapper">
+            <div class="pedestal-arch" style="border-color: rgba(216, 147, 70, 0.25);"></div>
+            <img src="assets/images/real_squeeze_750ml_transparent.png" alt="Azeite Ollimia 750ml Real PDF" class="pedestal-bottle-img">
+          </div>
+
+          <!-- Régua Organoléptica -->
+          <div class="organoleptic-box">
+            <div class="organoleptic-row">
+              <span class="organoleptic-label">Frutado Herbáceo</span>
+              <div class="organoleptic-meter">
+                <div class="organoleptic-fill" style="width: 98%;"></div>
+              </div>
+            </div>
+            <div class="organoleptic-row">
+              <span class="organoleptic-label">Amargor & Picância</span>
+              <div class="organoleptic-meter">
+                <div class="organoleptic-fill" style="width: 90%;"></div>
+              </div>
+            </div>
+            <div class="organoleptic-row">
+              <span class="organoleptic-label">Acidez Máxima</span>
+              <span style="font-family: var(--font-display); font-weight: 700; color: var(--ollimia-verde-colina); font-size: 0.85rem;">≤ 0,15%</span>
+            </div>
+            <div class="organoleptic-row">
+              <span class="organoleptic-label">Polifenóis Totais</span>
+              <span style="font-family: var(--font-display); font-weight: 700; color: var(--ollimia-ambar-solar); font-size: 0.85rem;">> 550 mg/kg</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="botanical-card-footer">
+          <div>
+            <div style="font-size: 0.75rem; text-transform: uppercase; opacity: 0.75; font-family: var(--font-display);">Volume Família</div>
+            <div style="font-family: var(--font-display); font-size: 1.6rem; font-weight: 700; color: var(--ollimia-ambar-solar);">R$ 54,90</div>
+          </div>
+          <a href="#conversao" class="btn-ollimia btn-secondary" style="padding: 12px 22px; font-size: 0.85rem;">🏢 Seja Revendedor</a>
+        </div>
+      </div>
+
+      <!-- SKU 3: Alentejo Português -->
+      <div class="botanical-card">
+        <div>
+          <div class="botanical-card-header">
+            <span class="script-subtitle">Tradición Portugal</span>
+            <h3 class="botanical-card-title">Alentejo Suave 500ml</h3>
+            <div class="gourmet-stamp-seal" style="background: rgba(216, 147, 70, 0.15); border-color: var(--ollimia-ambar-solar); color: var(--ollimia-ambar-solar);">
+              <span>🍷 PERFIL SUAVE & EQUILIBRADO</span>
+            </div>
+          </div>
+
+          <div class="pedestal-img-wrapper">
+            <div class="pedestal-arch"></div>
+            <img src="assets/images/real_squeeze_alentejo_transparent.png" alt="Azeite Ollimia Alentejo Portugal Real Squeeze" class="pedestal-bottle-img">
+          </div>
+
+          <!-- Régua Organoléptica -->
+          <div class="organoleptic-box">
+            <div class="organoleptic-row">
+              <span class="organoleptic-label">Frutado Herbáceo</span>
+              <div class="organoleptic-meter">
+                <div class="organoleptic-fill" style="width: 75%;"></div>
+              </div>
+            </div>
+            <div class="organoleptic-row">
+              <span class="organoleptic-label">Amargor & Picância</span>
+              <div class="organoleptic-meter">
+                <div class="organoleptic-fill" style="width: 60%;"></div>
+              </div>
+            </div>
+            <div class="organoleptic-row">
+              <span class="organoleptic-label">Acidez Máxima</span>
+              <span style="font-family: var(--font-display); font-weight: 700; color: var(--ollimia-verde-colina); font-size: 0.85rem;">≤ 0,20%</span>
+            </div>
+            <div class="organoleptic-row">
+              <span class="organoleptic-label">Polifenóis Totais</span>
+              <span style="font-family: var(--font-display); font-weight: 700; color: var(--ollimia-ambar-solar); font-size: 0.85rem;">> 410 mg/kg</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="botanical-card-footer">
+          <div>
+            <div style="font-size: 0.75rem; text-transform: uppercase; opacity: 0.75; font-family: var(--font-display);">Perfil Delicado</div>
+            <div style="font-family: var(--font-display); font-size: 1.6rem; font-weight: 700; color: var(--ollimia-ambar-solar);">R$ 39,90</div>
+          </div>
+          <a href="#conversao" class="btn-ollimia btn-terracotta" style="padding: 12px 22px; font-size: 0.85rem;">📍 Onde Encontrar</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MÓDULO 05: COMPARATIVO EDITORIAL (POR QUE O SQUEEZE NA BANCADA?) -->
+  <section id="comparativo" class="section-padding comparative-section">
+    <div class="section-header">
+      <span class="section-tag">A Evolução da Bancada</span>
+      <h2 class="section-title">Mais Praticidade, Menos Sujeira e uma Experiência de Chef</h2>
+    </div>
+
+    <div class="comparative-grid">
+      <!-- Coluna Garrafa Tradicional -->
+      <div class="comp-column glass-col">
+        <div class="comp-header">
+          <div style="font-size: 2rem;">🍾</div>
+          <div>
+            <div class="comp-title" style="color: #666;">Garrafa Tradicional de Vidro</div>
+            <div style="font-size: 0.85rem; color: #888;">Modelo Convencional de Prateleira</div>
+          </div>
+        </div>
+        <ul class="comp-list">
+          <li class="comp-item"><span class="icon-bad">✕</span> Dosagem descontrolada que pode encharcar o prato sem querer.</li>
+          <li class="comp-item"><span class="icon-bad">✕</span> Escorre pela lateral da garrafa e pode lambuzar armários e superfícies.</li>
+          <li class="comp-item"><span class="icon-bad">✕</span> Garrafa pesada e escorregadia com risco de queda e sujeira na bancada.</li>
+          <li class="comp-item"><span class="icon-bad">✕</span> Vidro exposto à claridade pode acelerar a perda gradual de aroma e sabor.</li>
+          <li class="comp-item"><span class="icon-bad">✕</span> Costuma ser guardado no armário escuro, longe da ação do fogão.</li>
+        </ul>
+      </div>
+
+      <!-- Coluna Ollimia Squeeze -->
+      <div class="comp-column ollimia-col" style="border-color: var(--ollimia-verde-colina);">
+        <div class="comp-header">
+          <div style="font-size: 2rem;">🫒</div>
+          <div>
+            <div class="comp-title" style="color: var(--ollimia-verde-colina);">Ollimia Squeeze Chef-Style</div>
+            <div style="font-size: 0.85rem; color: rgba(231, 228, 201, 0.8);">Pensado para a Dinâmica Real da Cozinha</div>
+          </div>
+        </div>
+        <ul class="comp-list">
+          <li class="comp-item"><span class="icon-good">✓</span> <strong>Dosagem cirúrgica:</strong> controle exato do fluxo pela pressão manual.</li>
+          <li class="comp-item"><span class="icon-good">✓</span> <strong>Bico dosador inteligente:</strong> corte limpo de gota sem sujeira na embalagem.</li>
+          <li class="comp-item"><span class="icon-good">✓</span> <strong>Garrafa flexible ultra leve:</strong> fácil manuseio com 0% risco de quebra.</li>
+          <li class="comp-item"><span class="icon-good">✓</span> <strong>Barreira opaca UV total:</strong> preserva polifenóis e notas aromáticas intactas.</li>
+          <li class="comp-item"><span class="icon-good">✓</span> <strong>Objeto de bancada:</strong> feito para ficar exposto ao lado do fogão.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- MÓDULO 06: TRANSPARÊNCIA ANTIFRAUDE -->
+  <section id="antifraude" class="section-padding" style="background: #FFF;">
+    <div class="story-grid">
+      <div>
+        <span class="section-tag">Rastreabilidade Total</span>
+        <h2 class="section-title" style="margin-bottom: 20px;">Zero Fraude. Transparência em Cada Garrafa.</h2>
+        <p style="font-size: 1.05rem; color: var(--color-text-muted); margin-bottom: 24px;">
+          Garantia total de pureza. Cada garrafa squeeze do azeite Ollimia conta com um sistema de rastreabilidade individual impresso no rótulo.
+        </p>
+        <div style="display: flex; flex-direction: column; gap: 16px;">
+          <div style="display: flex; gap: 12px; align-items: flex-start;">
+            <div style="background: rgba(157, 163, 0, 0.2); color: var(--ollimia-verde-origem); font-weight: 800; padding: 6px 12px; border-radius: 8px;">1</div>
+            <div><strong>Aponte a Câmera:</strong> Escaneie o QR Code individual do rótulo da sua garrafa.</div>
+          </div>
+          <div style="display: flex; gap: 12px; align-items: flex-start;">
+            <div style="background: rgba(157, 163, 0, 0.2); color: var(--ollimia-verde-origem); font-weight: 800; padding: 6px 12px; border-radius: 8px;">2</div>
+            <div><strong>Laudo de Qualidade:</strong> Acesse na hora a análise técnica do lote de colheita.</div>
+          </div>
+          <div style="display: flex; gap: 12px; align-items: flex-start;">
+            <div style="background: rgba(157, 163, 0, 0.2); color: var(--ollimia-verde-origem); font-weight: 800; padding: 6px 12px; border-radius: 8px;">3</div>
+            <div><strong>Confira os Índices:</strong> Veja o teor exato de polifenóis (>500mg) e a acidez (≤0,18%).</div>
+          </div>
+        </div>
+      </div>
+      <div class="story-img-box">
+        <img src="assets/images/real_pour_pasta.jpg" alt="Uso real do azeite Ollimia em pratos gourmet">
+      </div>
+    </div>
+  </section>
+
+  <!-- MÓDULO 07: STORYTELLING EDITORIAL (ORIGEM ESPANHA E ENVASE EM PORTUGAL) -->
+  <section id="origem" class="section-padding" style="background: var(--ollimia-marfim);">
+    <div class="story-grid">
+      <div class="story-img-box">
+        <img src="assets/images/andalusia_harvest.png" alt="Colheita de Azeitonas na Andaluzia Espanha">
+      </div>
+      <div>
+        <span class="section-tag">Da Andaluzia para a sua Bancada</span>
+        <h2 class="section-title" style="margin-bottom: 20px;">Tradição Mediterrânea & Design Contemporâneo</h2>
+        <p style="font-size: 1.05rem; color: var(--color-text-muted); margin-bottom: 16px;">
+          Nossas olivas da variedade <strong>Picual</strong> são colhidas no momento ideal de maturação nos olivais da Andaluzia (Espanha), a região produtora de maior prestígio do planeta.
+        </p>
+        <p style="font-size: 1.05rem; color: var(--color-text-muted); margin-bottom: 24px;">
+          O azeite extraído a frio (<27°C) segue para o envase rigoroso em Portugal, onde é acondicionado na garrafa flexível de alta precisão de origem francesa.
+        </p>
+        <a href="#conversao" class="btn-ollimia btn-terracotta">Onde Encontrar</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- MÓDULO 08: PROVA SOCIAL & DEPOIMENTOS DE CHEFS -->
+  <section class="section-padding" style="background: var(--ollimia-cream-light);">
+    <div class="section-header">
+      <span class="section-tag">Comunidade Culinária</span>
+      <h2 class="section-title">Quem Testa na Cozinha, Não Volta Atrás</h2>
+    </div>
+
+    <div class="ugc-grid">
+      <div class="ugc-card">
+        <div class="ugc-author">
+          <div class="ugc-avatar">CB</div>
+          <div>
+            <div style="font-weight: 700; font-family: var(--font-display);">Chef Bernardo M.</div>
+            <div class="ugc-role">Restaurante & Gastronomia Urbana</div>
+          </div>
+        </div>
+        <p class="ugc-quote">"O controle do bico é inacreditável. Você consegue desenhar o fio de azeite exatamente onde quer na louça, sem pingar no balcão."</p>
+      </div>
+
+      <div class="ugc-card">
+        <div class="ugc-author">
+          <div class="ugc-avatar" style="background: var(--ollimia-ambar-solar); color: #FFF;">IG</div>
+          <div>
+            <div style="font-weight: 700; font-family: var(--font-display);">Isabela G.</div>
+            <div class="ugc-role">Food Creator & Enthusiast</div>
+          </div>
+        </div>
+        <p class="ugc-quote">"A garrafa fica linda exposta ao lado do fogão. É 100% prática para o dia a dia e o sabor frutado do Picual é maravilhoso!"</p>
+      </div>
+
+      <div class="ugc-card">
+        <div class="ugc-author">
+          <div class="ugc-avatar" style="background: var(--ollimia-verde-colina); color: #000;">RD</div>
+          <div>
+            <div style="font-weight: 700; font-family: var(--font-display);">Empório Delícias</div>
+            <div class="ugc-role">Revendedor B2B • São Paulo</div>
+          </div>
+        </div>
+        <p class="ugc-quote">"O produto chama atenção na prateleira imediatamente. Os clientes adoram a praticidade da garrafa e voltam pelo sabor extraordinário."</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- MÓDULO 09: FAQ ACCORDION -->
+  <section id="faq" class="section-padding" style="background: #FFF;">
+    <div class="section-header">
+      <span class="section-tag">Tire suas Dúvidas</span>
+      <h2 class="section-title">Perguntas Frequentes</h2>
+    </div>
+
+    <div class="faq-container">
+      <div class="faq-item active" onclick="toggleFaq(this)">
+        <div class="faq-question">
+          <span>O material da garrafa squeeze altera a qualidade do azeite?</span>
+          <span>▼</span>
+        </div>
+        <div class="faq-answer">
+          Não! A embalagem é produzida com polímeros flexíveis de alta densidade importados da França, 100% livres de BPA. Ela foi desenhada para criar uma barreira opaca que protege o azeite da oxidação luminosa melhor que garrafas de vidro convencionais.
+        </div>
+      </div>
+
+      <div class="faq-item" onclick="toggleFaq(this)">
+        <div class="faq-question">
+          <span>O que torna o Azeite Picual da Andaluzia tão especial?</span>
+          <span>▼</span>
+        </div>
+        <div class="faq-answer">
+          A azeitona Picual é reconhecida mundialmente pela sua alta estabilidade à oxidação e elevadíssima concentração de polifenóis (antioxidantes naturais). Possui aroma herbáceo intenso e um toque picante elegante no final da degustação.
+        </div>
+      </div>
+
+      <div class="faq-item" onclick="toggleFaq(this)">
+        <div class="faq-question">
+          <span>Sou lojista ou empório, como posso revender Ollimia?</span>
+          <span>▼</span>
+        </div>
+        <div class="faq-answer">
+          Trabalhamos com condições especiais de atendimento direto B2B em caixas master. Preencha a aba "Seja Revendedor" no formulário abaixo para análise comercial rápida da nossa equipe.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MÓDULO 10: RODAPÉ COMERCIAL DE CONVERSÃO -->
+  <section id="conversao" class="footer-conversion-section" style="background: var(--ollimia-verde-origem);">
+    <div class="section-header" style="margin-bottom: 30px;">
+      <span class="section-tag" style="color: var(--ollimia-verde-colina);">Entre em Contato com a Ollimia</span>
+      <h2 class="section-title" style="color: var(--ollimia-marfim);">Conecte sua Loja ao Universo Ollimia</h2>
+    </div>
+
+    <!-- Abas de Seleção de Perfil -->
+    <div class="tabs-header">
+      <button class="tab-btn active" onclick="switchTab('b2c')">📍 Onde Encontrar (Consumidor)</button>
+      <button class="tab-btn" onclick="switchTab('b2b')">🏢 Seja um Revendedor B2B</button>
+      <button class="tab-btn" onclick="switchTab('distribuidor')">🚚 Ollimia Pelo Mundo (Distribuição)</button>
+    </div>
+
+    <!-- Painel 1: Consumidor - Onde Encontrar -->
+    <div id="panel-b2c" class="tab-panel active">
+      <h3 style="font-family: var(--font-display); text-transform: uppercase; margin-bottom: 8px;">Saiba Onde Encontrar Ollimia na sua Cidade</h3>
+      <p style="font-size: 0.9rem; color: rgba(231, 228, 201, 0.75); margin-bottom: 24px;">Cadastre seu e-mail e WhatsApp para receber o mapa de empórios e parceiros autorizados em primeira mão.</p>
+      <form onsubmit="submitForm(event, 'Consumidor - Onde Encontrar')">
+        <div class="form-group">
+          <label class="form-label">Nome Completo</label>
+          <input type="text" class="form-input" placeholder="Seu nome" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label">WhatsApp com DDD</label>
+          <input type="tel" class="form-input" placeholder="(11) 99999-9999" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Cidade e Estado</label>
+          <input type="text" class="form-input" placeholder="Ex: São Paulo / SP" required>
+        </div>
+        <button type="submit" class="btn-ollimia btn-primary" style="width: 100%;">Consultar Onde Encontrar</button>
+      </form>
+    </div>
+
+    <!-- Painel 2: Seja um Revendedor B2B (3 Passos) -->
+    <div id="panel-b2b" class="tab-panel">
+      <h3 style="font-family: var(--font-display); text-transform: uppercase; margin-bottom: 8px;">Seja um Revendedor (Supermercados & Empórios)</h3>
+      <p style="font-size: 0.9rem; color: rgba(231, 228, 201, 0.75); margin-bottom: 24px;">Jornada em 3 Passos: 1. Cadastro ➔ 2. Análise Comercial ➔ 3. <strong>Pronto, sua loja está conectada ao universo Ollimia! Agora você está pronto para receber Ollimia.</strong></p>
+      <form onsubmit="submitForm(event, 'Seja um Revendedor B2B')">
+        <div class="form-group">
+          <label class="form-label">Nome do Estabelecimento / Empório</label>
+          <input type="text" class="form-input" placeholder="Ex: Empório Gourmet SP" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label">CNPJ da Empresa</label>
+          <input type="text" class="form-input" placeholder="00.000.000/0001-00" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label">WhatsApp do Comprador</label>
+          <input type="tel" class="form-input" placeholder="(11) 99999-9999" required>
+        </div>
+        <button type="submit" class="btn-ollimia btn-primary" style="width: 100%;">Enviar Cadastro para Análise</button>
+      </form>
+    </div>
+
+    <!-- Painel 3: Ollimia pelo Mundo (Distribuição) -->
+    <div id="panel-distribuidor" class="tab-panel">
+      <h3 style="font-family: var(--font-display); text-transform: uppercase; margin-bottom: 8px;">Ollimia Pelo Mundo — Expansão & Distribuição</h3>
+      <p style="font-size: 0.9rem; color: rgba(231, 228, 201, 0.75); margin-bottom: 24px;">Buscamos parceiros distribuidores com capacidade logística regional, nacional e internacional.</p>
+      <form onsubmit="submitForm(event, 'Distribuição - Ollimia Pelo Mundo')">
+        <div class="form-group">
+          <label class="form-label">Razão Social do Distribuidor</label>
+          <input type="text" class="form-input" placeholder="Nome da Distribuidora" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Região ou País de Atuação</label>
+          <input type="text" class="form-input" placeholder="Ex: Região Sul / América Latina" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label">E-mail Corporativo</label>
+          <input type="email" class="form-input" placeholder="comercial@distribuidora.com" required>
+        </div>
+        <button type="submit" class="btn-ollimia btn-terracotta" style="width: 100%;">Entre em Contato</button>
+      </form>
+    </div>
+
+    <!-- FOOTER FINAL -->
+    <div style="border-top: 1px solid rgba(231, 228, 201, 0.15); margin-top: 60px; padding-top: 30px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; font-size: 0.85rem; color: rgba(231, 228, 201, 0.65);">
+      <div>
+        © 2026 OLLIMIA SQUEEZE • Todos os direitos reservados. Azeite Extra Virgem Picual Espanhol.
+      </div>
+      <div style="display: flex; gap: 20px;">
+        <a href="#" style="color: var(--ollimia-marfim); text-decoration: none;">Política de Privacidade</a>
+        <a href="#" style="color: var(--ollimia-marfim); text-decoration: none;">Termos de Uso</a>
+        <a href="https://instagram.com/azeiteollimia" target="_blank" style="color: var(--ollimia-verde-colina); text-decoration: none;">@azeiteollimia</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- LÓGICA INTERATIVA EM JS -->
+  <script>
+    // FAQ Accordion Toggle
+    function toggleFaq(element) {
+      const allFaqs = document.querySelectorAll('.faq-item');
+      allFaqs.forEach(item => {
+        if (item !== element) item.classList.remove('active');
+      });
+      element.classList.toggle('active');
+    }
+
+    // Tab Switching para Conversão no Rodapé
+    function switchTab(tabName) {
+      document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+      document.querySelectorAll('.tab-panel').forEach(panel => panel.classList.remove('active'));
+      
+      event.target.classList.add('active');
+      document.getElementById('panel-' + tabName).classList.add('active');
+    }
+
+    // Handler de Formulários
+    function submitForm(event, tipo) {
+      event.preventDefault();
+      alert('✅ Solicitação de [' + tipo + '] recebida com sucesso! Nossa equipe comercial entrará em contato em breve.');
+    }
+
+    // JS DUAL-VIDEO HERO BACKGROUND SWITCHER (Transição Suave a cada 7 segundos)
+    (function initHeroVideoSwitcher() {
+      const v1 = document.getElementById('heroVid1');
+      const v2 = document.getElementById('heroVid2');
+      if (!v1 || !v2) return;
+
+      let currentVid = 1;
+      setInterval(() => {
+        if (currentVid === 1) {
+          v1.classList.remove('video-active');
+          v2.classList.add('video-active');
+          currentVid = 2;
+        } else {
+          v2.classList.remove('video-active');
+          v1.classList.add('video-active');
+          currentVid = 1;
+        }
+      }, 7000);
+    })();
+  </script>
+
+</body>
+</html>

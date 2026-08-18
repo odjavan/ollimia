@@ -1,0 +1,1734 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ollimia — Wireframe Interativo NAVEGÁVEL (v2 Final)</title>
+<style>
+  :root {
+    --bg-page: #f4f4f0;
+    --bg-card: #ffffff;
+    --bg-block: #ebebe5;
+    --bg-block-dark: #deded6;
+    --border-dark: #222220;
+    --border-muted: #aaaaa2;
+    --border-light: #cccccc;
+    --text-main: #1e1e1c;
+    --text-muted: #585852;
+    
+    /* Status Badges */
+    --status-ready-bg: #e1efe1;
+    --status-ready-text: #276227;
+    --status-ready-border: #8bbd8b;
+    
+    --status-pending-bg: #fdf3e1;
+    --status-pending-text: #96610b;
+    --status-pending-border: #e6b86a;
+    
+    --status-phase2-bg: #eaeaea;
+    --status-phase2-text: #595959;
+    --status-phase2-border: #b0b0b0;
+
+    --brand-olive: #3b5245;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background-color: var(--bg-page);
+    color: var(--text-main);
+    line-height: 1.5;
+    padding-bottom: 60px;
+  }
+
+  /* TOP HEADER / APP TOOLBAR */
+  header.app-toolbar {
+    background-color: #1a1a18;
+    color: #f0f0eb;
+    padding: 14px 24px;
+    border-bottom: 3px solid var(--brand-olive);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  }
+
+  .toolbar-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .brand-title {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .brand-title h1 {
+    font-size: 18px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    margin: 0;
+    color: #ffffff;
+    font-family: 'Courier New', Courier, monospace;
+  }
+
+  .brand-title span.tag-ver {
+    background: var(--brand-olive);
+    color: #fff;
+    font-size: 10px;
+    padding: 2px 6px;
+    border-radius: 3px;
+    text-transform: uppercase;
+    font-family: monospace;
+  }
+
+  .toolbar-controls {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .view-mode-toggle {
+    display: flex;
+    background: #2d2d2a;
+    padding: 3px;
+    border-radius: 6px;
+    border: 1px solid #444440;
+  }
+
+  .view-btn {
+    background: transparent;
+    border: none;
+    color: #aaa;
+    padding: 6px 12px;
+    font-size: 11px;
+    font-weight: 600;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: all 0.2s;
+  }
+
+  .view-btn.active {
+    background: #ffffff;
+    color: #1a1a18;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+  }
+
+  .lang-select-box {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    color: #ccc;
+  }
+
+  .lang-select-box select {
+    background: #2d2d2a;
+    color: #fff;
+    border: 1px solid #444;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 11px;
+    cursor: pointer;
+  }
+
+  /* CRITIQUE & LEGEND HEADER */
+  .meta-panel {
+    max-width: 1200px;
+    margin: 20px auto 0;
+    padding: 0 20px;
+  }
+
+  .meta-card {
+    background: #fff;
+    border: 2px solid var(--border-dark);
+    border-radius: 8px;
+    padding: 16px 20px;
+    box-shadow: 3px 3px 0px var(--border-dark);
+  }
+
+  .meta-card h2 {
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    margin-bottom: 8px;
+    color: var(--brand-olive);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .meta-card p {
+    font-size: 12px;
+    color: var(--text-muted);
+    margin-bottom: 12px;
+  }
+
+  .status-legend {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px dashed var(--border-light);
+  }
+
+  .status-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 3px 8px;
+    border-radius: 4px;
+    font-size: 11px;
+    font-weight: 600;
+    border: 1px solid;
+    font-family: monospace;
+  }
+
+  .status-ready { background: var(--status-ready-bg); color: var(--status-ready-text); border-color: var(--status-ready-border); }
+  .status-pending { background: var(--status-pending-bg); color: var(--status-pending-text); border-color: var(--status-pending-border); }
+  .status-phase2 { background: var(--status-phase2-bg); color: var(--status-phase2-text); border-color: var(--status-phase2-border); }
+
+  /* SITEMAP NAV TABS */
+  .sitemap-nav {
+    max-width: 1200px;
+    margin: 20px auto 0;
+    padding: 0 20px;
+  }
+
+  .nav-tabs {
+    display: flex;
+    gap: 6px;
+    overflow-x: auto;
+    padding-bottom: 4px;
+    scrollbar-width: thin;
+  }
+
+  .nav-tab {
+    background: #e4e4dd;
+    border: 2px solid var(--border-dark);
+    border-bottom: none;
+    border-radius: 6px 6px 0 0;
+    padding: 10px 14px;
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--text-muted);
+    cursor: pointer;
+    white-space: nowrap;
+    transition: all 0.15s ease-in-out;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .nav-tab span.num {
+    font-size: 10px;
+    font-family: monospace;
+    opacity: 0.7;
+  }
+
+  .nav-tab:hover {
+    background: #ffffff;
+    color: var(--text-main);
+  }
+
+  .nav-tab.active {
+    background: #ffffff;
+    color: var(--text-main);
+    border-bottom: 2px solid #ffffff;
+    margin-bottom: -2px;
+    box-shadow: 0 -2px 6px rgba(0,0,0,0.05);
+  }
+
+  .nav-tab.opt {
+    border-style: dashed;
+  }
+
+  /* BROWSER WINDOW SIMULATION */
+  .browser-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+
+  .browser-window {
+    background: #ffffff;
+    border: 2px solid var(--border-dark);
+    border-radius: 8px;
+    box-shadow: 4px 6px 0px var(--border-dark);
+    overflow: hidden;
+    margin-top: 0;
+  }
+
+  .browser-bar {
+    background: var(--bg-block-dark);
+    border-bottom: 2px solid var(--border-dark);
+    padding: 10px 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .window-dots {
+    display: flex;
+    gap: 6px;
+  }
+
+  .window-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    border: 1px solid var(--border-dark);
+  }
+  .dot-red { background: #ff5f56; }
+  .dot-yellow { background: #ffbd2e; }
+  .dot-green { background: #27c93f; }
+
+  .url-bar {
+    background: #ffffff;
+    border: 1px solid var(--border-dark);
+    border-radius: 4px;
+    padding: 4px 12px;
+    font-family: monospace;
+    font-size: 12px;
+    flex: 1;
+    color: var(--text-main);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .url-bar .secure {
+    color: var(--brand-olive);
+    font-weight: bold;
+    margin-right: 6px;
+  }
+
+  .browser-canvas {
+    padding: 0;
+    min-height: 500px;
+  }
+
+  /* PAGE PANELS */
+  .page-panel {
+    display: none;
+  }
+
+  .page-panel.active {
+    display: block;
+  }
+
+  /* STACKED MODE SHOWS ALL */
+  .mode-stacked .page-panel {
+    display: block !important;
+    margin-bottom: 40px;
+    border-bottom: 4px double var(--border-dark);
+    padding-bottom: 30px;
+  }
+  .mode-stacked .page-panel:last-child {
+    border-bottom: none;
+  }
+
+  .page-header-banner {
+    background: var(--bg-block);
+    border-bottom: 1px solid var(--border-muted);
+    padding: 12px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .page-header-banner h2 {
+    font-size: 16px;
+    font-family: monospace;
+    color: var(--text-main);
+  }
+
+  /* WIREFRAME BLOCKS & SECTIONS */
+  .wf-block {
+    padding: 24px;
+    border-bottom: 1px dashed var(--border-light);
+    position: relative;
+  }
+
+  .wf-block:last-child {
+    border-bottom: none;
+  }
+
+  .block-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 14px;
+    gap: 10px;
+  }
+
+  .block-title {
+    font-size: 12px;
+    font-family: monospace;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    color: var(--text-muted);
+    background: var(--bg-block);
+    padding: 2px 8px;
+    border-radius: 3px;
+    border: 1px solid var(--border-light);
+  }
+
+  .block-annotation {
+    background: #fcf8e3;
+    border: 1px solid #faebcc;
+    color: #8a6d3b;
+    padding: 8px 12px;
+    border-radius: 4px;
+    font-size: 11px;
+    margin-bottom: 14px;
+    line-height: 1.4;
+  }
+  .block-annotation strong { color: #6b5122; }
+
+  /* WIREFRAME PRIMITIVES & COMPONENTS */
+  .wire-hero {
+    background: var(--bg-block);
+    border: 2px dashed var(--border-muted);
+    border-radius: 6px;
+    padding: 30px 20px;
+    text-align: center;
+    position: relative;
+  }
+
+  .wire-img-placeholder {
+    background: repeating-linear-gradient(
+      45deg,
+      #e2e2da,
+      #e2e2da 12px,
+      #d4d4cb 12px,
+      #d4d4cb 24px
+    );
+    border: 2px dashed var(--border-muted);
+    border-radius: 6px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    color: var(--text-muted);
+    font-family: monospace;
+    font-size: 12px;
+    text-align: center;
+    min-height: 140px;
+  }
+  .wire-img-placeholder icon { font-size: 24px; margin-bottom: 6px; }
+
+  .wire-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  .wire-grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
+  .wire-grid-4 { display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 12px; }
+
+  @media (max-width: 768px) {
+    .wire-grid-2, .wire-grid-3, .wire-grid-4 { grid-template-columns: 1fr; }
+  }
+
+  .wire-card {
+    background: #ffffff;
+    border: 1px solid var(--border-dark);
+    border-radius: 6px;
+    padding: 16px;
+    box-shadow: 2px 2px 0px var(--border-dark);
+  }
+
+  .wire-card.highlight {
+    border-color: var(--brand-olive);
+    background: #f7faf8;
+  }
+
+  .wire-btn {
+    display: inline-block;
+    background: var(--border-dark);
+    color: #ffffff;
+    padding: 10px 20px;
+    font-size: 12px;
+    font-weight: 700;
+    border-radius: 4px;
+    border: 2px solid var(--border-dark);
+    cursor: pointer;
+    text-decoration: none;
+    text-align: center;
+    font-family: monospace;
+  }
+
+  .wire-btn.outline {
+    background: #ffffff;
+    color: var(--border-dark);
+  }
+
+  .wire-btn.brand {
+    background: var(--brand-olive);
+    border-color: var(--brand-olive);
+  }
+
+  .wire-form-group {
+    margin-bottom: 12px;
+  }
+  .wire-form-group label {
+    display: block;
+    font-size: 11px;
+    font-weight: 700;
+    font-family: monospace;
+    margin-bottom: 4px;
+  }
+  .wire-input, .wire-select, .wire-textarea {
+    width: 100%;
+    padding: 8px 10px;
+    border: 1px solid var(--border-dark);
+    border-radius: 4px;
+    font-size: 12px;
+    font-family: inherit;
+    background: #fff;
+  }
+
+  .pill-group {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+    margin: 8px 0;
+  }
+  .pill {
+    font-size: 10px;
+    font-family: monospace;
+    padding: 2px 8px;
+    border-radius: 12px;
+    background: var(--bg-block);
+    border: 1px solid var(--border-muted);
+  }
+
+  /* SQUEEZE INNOVATION SPECIFIC STYLES */
+  .squeeze-feature-box {
+    border: 2px solid var(--brand-olive);
+    border-radius: 8px;
+    padding: 20px;
+    background: #f4f8f5;
+  }
+  .squeeze-diagram {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin-top: 14px;
+  }
+  .squeeze-step {
+    flex: 1;
+    min-width: 160px;
+    background: #fff;
+    border: 1px solid var(--border-dark);
+    padding: 12px;
+    border-radius: 6px;
+    text-align: center;
+  }
+  .squeeze-step .step-num {
+    background: var(--brand-olive);
+    color: #fff;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 11px;
+    margin-bottom: 6px;
+  }
+
+  /* FAQ ACCORDION WIRES */
+  .faq-accordion-wire {
+    border: 1px solid var(--border-dark);
+    border-radius: 6px;
+    overflow: hidden;
+  }
+  .faq-item-wire {
+    border-bottom: 1px solid var(--border-light);
+  }
+  .faq-item-wire:last-child { border-bottom: none; }
+  .faq-header-wire {
+    background: #fff;
+    padding: 12px 16px;
+    font-weight: 700;
+    font-size: 13px;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .faq-header-wire:hover { background: var(--bg-block); }
+  .faq-body-wire {
+    padding: 14px 16px;
+    background: var(--bg-page);
+    font-size: 12px;
+    color: var(--text-main);
+    border-top: 1px dashed var(--border-light);
+    display: none;
+  }
+  .faq-item-wire.open .faq-body-wire { display: block; }
+  .faq-item-wire.open .faq-header-wire { background: #f0f0ea; }
+
+  /* FOOTER WIREFRAME */
+  .wire-footer {
+    background: var(--border-dark);
+    color: #ffffff;
+    padding: 30px 24px;
+  }
+  .wire-footer a { color: #cccccc; text-decoration: none; font-size: 12px; }
+  .wire-footer a:hover { color: #ffffff; text-decoration: underline; }
+
+  .asia-banner {
+    background: #fff0f0;
+    border: 1px solid #ffc0c0;
+    color: #900;
+    padding: 10px 14px;
+    border-radius: 4px;
+    font-size: 11px;
+    margin-bottom: 12px;
+  }
+
+</style>
+</head>
+<body>
+
+<!-- TOP APP TOOLBAR -->
+<header class="app-toolbar">
+  <div class="toolbar-container">
+    <div class="brand-title">
+      <h1>OLLIMIA</h1>
+      <span class="tag-ver">Wireframe v2 Navegável</span>
+    </div>
+    
+    <div class="toolbar-controls">
+      <div class="view-mode-toggle">
+        <button class="view-btn active" id="btn-tab-mode" onclick="setViewMode('tab')">📑 Navegação por Páginas</button>
+        <button class="view-btn" id="btn-stacked-mode" onclick="setViewMode('stacked')">📜 Visão Geral (Empilhado)</button>
+      </div>
+
+      <div class="lang-select-box">
+        <label for="lang-selector">🌐 Idioma:</label>
+        <select id="lang-selector" onchange="changeLanguage(this.value)">
+          <option value="pt-br">🇧🇷 PT-BR (Padrão)</option>
+          <option value="pt-pt">🇵🇹 PT-PT (Portugal)</option>
+          <option value="es">🇪🇸 ES (Espanha)</option>
+          <option value="en">🇺🇸 EN (Inglês)</option>
+          <option value="fr">🇫🇷 FR (Francês)</option>
+          <option value="asia">🇨🇳 Ásia / China (E-commerce)</option>
+        </select>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- METADATA & CRITIQUE PANEL -->
+<div class="meta-panel">
+  <div class="meta-card" style="padding: 0; overflow: hidden;">
+    <div onclick="toggleGovernanceCard()" style="cursor: pointer; padding: 14px 20px; background: #fff; display: flex; justify-content: space-between; align-items: center; user-select: none;">
+      <h2 style="margin: 0; font-size: 14px; text-transform: uppercase; letter-spacing: 0.8px; color: var(--brand-olive);">
+        📐 Estrutura & Governança do Wireframe Ollimia
+      </h2>
+      <span id="meta-toggle-icon" style="font-size: 12px; font-weight: bold; color: var(--brand-olive); background: var(--bg-block); padding: 4px 8px; border-radius: 4px; border: 1px solid var(--border-light);">
+        ▼ (Clique para ver)
+      </span>
+    </div>
+
+    <div id="meta-governance-body" style="display: none; padding: 16px 20px; border-top: 1px dashed var(--border-light); background: #fafaf8;">
+      <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 12px;">
+        Este wireframe interativo traduz com precisão o <strong>Mapa de 7 Páginas</strong> acordado no <em>Questionário Estratégico (Resposta 3.1)</em> e na <em>Memória do Projeto</em>. Diferente de propostas externas estáticas, este protótipo é <strong>100% navegável</strong>, prioriza a <strong>Inovação do Squeeze (Chef-Style)</strong> como elemento central de diferenciação, e separa estritamente os funis B2C (Consumidor Final) e B2B (Revenda/Distribuição).
+      </p>
+
+      <div class="status-legend">
+        <span class="status-badge status-ready">🟢 [CONTEÚDO PRONTO] - Dados/Copys validados em briefing</span>
+        <span class="status-badge status-pending">🟡 [FOTO TEMPORÁRIA (Placeholder)] - Aguarda fotos/captação de Agosto/2026</span>
+        <span class="status-badge status-phase2">⚪ [FASE 2] - Funcionalidade pós-lançamento (Sem travar v1)</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SITEMAP TAB NAVIGATION -->
+<nav class="sitemap-nav">
+  <div class="nav-tabs" id="sitemap-tabs">
+    <div class="nav-tab active" onclick="switchPage('page-01', this)">
+      <span class="num">01. HOME</span>
+      Sobre a Ollimia
+    </div>
+    <div class="nav-tab" onclick="switchPage('page-02', this)">
+      <span class="num">02. PROCESSO</span>
+      Produção & Qualidade
+    </div>
+    <div class="nav-tab" onclick="switchPage('page-03', this)">
+      <span class="num">03. PRODUTOS</span>
+      Extra Virgem + Origem
+    </div>
+    <div class="nav-tab" onclick="switchPage('page-04', this)">
+      <span class="num">04. ONDE ENCONTRAR</span>
+      Pontos de Venda / Waitlist
+    </div>
+    <div class="nav-tab" onclick="switchPage('page-05', this)">
+      <span class="num">05. REVENDEDOR</span>
+      Para o Seu Negócio (B2B)
+    </div>
+    <div class="nav-tab" onclick="switchPage('page-06', this)">
+      <span class="num">06. DISTRIBUIDOR</span>
+      Seja um Distribuidor
+    </div>
+    <div class="nav-tab" onclick="switchPage('page-07', this)">
+      <span class="num">07. FAQS</span>
+      Perguntas Frequentes
+    </div>
+    <div class="nav-tab opt" onclick="switchPage('page-opt', this)">
+      <span class="num">OPCIONAL</span>
+      Store Locator
+    </div>
+  </div>
+</nav>
+
+<!-- BROWSER SIMULATOR CONTAINER -->
+<main class="browser-container">
+  <div class="browser-window" id="browser-window">
+    
+    <!-- BROWSER TOP BAR -->
+    <div class="browser-bar">
+      <div class="window-dots">
+        <span class="window-dot dot-red"></span>
+        <span class="window-dot dot-yellow"></span>
+        <span class="window-dot dot-green"></span>
+      </div>
+      <div class="url-bar">
+        <span><span class="secure">🔒 https://</span><span id="display-url">ollimia.com/</span></span>
+        <span style="font-size: 10px; color: var(--text-muted);" id="display-lang-tag">PT-BR (Detecção Automática)</span>
+      </div>
+    </div>
+
+    <!-- CANVAS BODY CONTAINER FOR PAGES -->
+    <div class="browser-canvas">
+
+      <!-- ========================================== -->
+      <!-- PAGE 01: HOME -->
+      <!-- ========================================== -->
+      <section class="page-panel active" id="page-01">
+        <div class="page-header-banner">
+          <h2>PÁGINA 01 — HOME ("Sobre a Ollimia")</h2>
+          <span class="status-badge status-ready">Foco: Posicionamento, Inovação Squeeze & Storytelling</span>
+        </div>
+
+        <!-- HERO SECTION -->
+        <div class="wf-block">
+          <div class="block-meta">
+            <span class="block-title">Bloco 1.1 — Destaque Squeeze & Proposta de Valor</span>
+            <span class="status-badge status-pending">🟡 FOTO TEMPORÁRIA (Captação Agosto/2026)</span>
+          </div>
+
+          <div class="block-annotation">
+            <strong>Objetivo Prático desta Seção:</strong> O topo da página traz a principal novidade visual da marca: a troca da garrafa de vidro tradicional pelo Squeeze prático de uso profissional com Bico Inteligente (uma quebra visual de padrão que chama a atenção imediata do cliente). Como as fotos e vídeos oficiais serão gravados em agosto, esta área principal de destaque exibe uma foto temporária (placeholder) de alta qualidade.
+          </div>
+
+          <div class="wire-hero">
+            <div class="wire-grid-2" style="align-items: center;">
+              <div style="text-align: left;">
+                <span class="pill" style="background: var(--brand-olive); color: #fff;">Lançamento no Brasil</span>
+                <h1 style="font-size: 26px; margin: 10px 0; font-family: monospace;">O Azeite Extra Virgem Feito Para Ser Usado na Bancada.</h1>
+                <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 16px;">
+                  Sem sujeira, sem escorrer e com controle cirúrgico de dosagem. Azeite de Oliva Extra Virgem Espanhol & Português em embalagem squeeze de uso profissional.
+                </p>
+                <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                  <button class="wire-btn brand" onclick="triggerModal('waitlist')">Entrar na Lista de Espera (B2C)</button>
+                  <button class="wire-btn outline" onclick="switchPageDirect('page-05')">Seja um Revendedor (B2B)</button>
+                </div>
+              </div>
+
+              <div class="wire-img-placeholder" style="min-height: 200px;">
+                <div style="font-size: 32px;">🧴✨</div>
+                <strong>[FOTO TEMPORÁRIA (Placeholder)]</strong>
+                <span>Imagem de destaque do Squeeze Ollimia em bancada de cozinha gourmet (será substituída após a sessão de fotos de Agosto)</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- SQUEEZE DIFFERENTIAL HIGHLIGHT -->
+        <div class="wf-block">
+          <div class="block-meta">
+            <span class="block-title">Bloco 1.2 — A Inovação Física (Por Que Squeeze?)</span>
+            <span class="status-badge status-ready">🟢 CONTEÚDO PRONTO (Briefing Resposta 5 e 6)</span>
+          </div>
+
+          <div class="squeeze-feature-box">
+            <h3 style="font-size: 16px; margin-bottom: 8px; font-family: monospace; color: var(--brand-olive);">
+              💡 O Fim das Garrafas de Vidro Sujas e Pesadas
+            </h3>
+            <p style="font-size: 12px; color: var(--text-main);">
+              Projetado para quem cozinha de verdade. Esqueça garrafas de vidro que quebram, escorrem azeite na mesa ou deixam a luz oxidar o produto.
+            </p>
+
+            <div class="squeeze-diagram">
+              <div class="squeeze-step">
+                <div class="step-num">1</div>
+                <strong>Mecanismo Twist-to-Open</strong>
+                <p style="font-size: 11px; color: var(--text-muted); margin-top: 4px;">Gire a ponta para abrir. Sem remover tampas ou perder peças na cozinha.</p>
+              </div>
+
+              <div class="squeeze-step">
+                <div class="step-num">2</div>
+                <strong>Corte Por Rompimento de Tensão</strong>
+                <p style="font-size: 11px; color: var(--text-muted); margin-top: 4px;">Bico hidrofóbico inteligente. Ao soltar, o fluxo corta seco. Zero gotejamento.</p>
+              </div>
+
+              <div class="squeeze-step">
+                <div class="step-num">3</div>
+                <strong>Proteção UV & 100% BPA Free</strong>
+                <p style="font-size: 11px; color: var(--text-muted); margin-top: 4px;">Polímero opaco atóxico que cega os raios solares e preserva os polifenóis.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- INSTITUTIONAL STORYTELLING -->
+        <div class="wf-block">
+          <div class="block-meta">
+            <span class="block-title">Bloco 1.3 — Propósito & Origem Institucional</span>
+            <span class="status-badge status-ready">🟢 CONTEÚDO PRONTO (Questionário Resposta 2.1 & Bastidores)</span>
+          </div>
+
+          <div class="block-annotation">
+            <strong>Tom de Voz Institucional Definido (Resposta 2.1):</strong> Texto escrito em 3ª pessoa ("A Ollimia nasce com o propósito de..."), transmitindo autoridade gastronômica, tradição e transparência.
+          </div>
+
+          <div class="wire-grid-2" style="align-items: center;">
+            <div class="wire-card">
+              <h3 style="font-size: 15px; margin-bottom: 10px; font-family: monospace;">"A Ollimia nasce com o propósito de redefinir a relação com o azeite na cozinha."</h3>
+              <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 10px;">
+                Nossa história une duas famílias apaixonadas por gastronomia e tradição mediterrânea: Guto e Isa. Ao entrarem em contato com Antonio, produtor tradicional da Andaluzia e do Alentejo, uniram a pureza secular da extração a frio à conveniência moderna das cozinhas profissionais.
+              </p>
+              <p style="font-size: 12px; color: var(--text-muted);">
+                Trazer o melhor azeite das maiores regiões olivícolas do mundo em uma embalagem feita para o uso real e diário.
+              </p>
+            </div>
+
+            <div class="wire-card">
+              <div class="wire-img-placeholder" style="min-height: 140px;">
+                <span>📷 [PLACEHOLDER FOTO FUNDADORES / OLIVAIS]</span>
+                <span style="font-size: 10px; margin-top: 4px;">Imagens dos campos de oliveiras ou bastidores (Captação de Guto em Portugal - Agosto)</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- TWO TERROIRS (PRODUCT CARDS PREVIEW) -->
+        <div class="wf-block">
+          <div class="block-meta">
+            <span class="block-title">Bloco 1.4 — Nossos Terroirs (Espanha & Portugal)</span>
+            <span class="status-badge status-ready">🟢 CONTEÚDO PRONTO (Questionário Resposta 2.3)</span>
+          </div>
+
+          <div class="wire-grid-2">
+            <div class="wire-card highlight">
+              <div class="pill-group">
+                <span class="pill">🇪🇸 Andaluzia (Espanha)</span>
+                <span class="pill">Picual</span>
+                <span class="pill">Acidez ≤ 0,5%</span>
+              </div>
+              <h3 style="font-size: 16px; margin: 8px 0; font-family: monospace;">Ollimia Extra Virgem</h3>
+              <p style="font-size: 11px; color: var(--text-muted); margin-bottom: 12px;">
+                "Perfeito para todos os momentos". Extraído de olivas colhidas em Novembro. Equilíbrio perfeito entre notas verdes e maduras para refogar, grelhar e cozinhar.
+              </p>
+              <div style="display: flex; justify-content: space-between; align-items: center;">
+                <span style="font-size: 11px; font-weight: bold;">Tamanhos: 500ml e 750ml</span>
+                <button class="wire-btn outline" onclick="switchPageDirect('page-03')">Ver Detalhes</button>
+              </div>
+            </div>
+
+            <div class="wire-card highlight">
+              <div class="pill-group">
+                <span class="pill">🇵🇹 Alentejo (Portugal)</span>
+                <span class="pill">Cobrançosa Terroir</span>
+                <span class="pill">Acidez ≤ 0,3%</span>
+              </div>
+              <h3 style="font-size: 16px; margin: 8px 0; font-family: monospace;">Ollimia Origem (Colheita Selecionada)</h3>
+              <p style="font-size: 11px; color: var(--text-muted); margin-bottom: 12px;">
+                "Perfeito para finalizar". Produzido com as primeiras azeitonas verdes da safra (Early Harvest). Cor verde intensa, aroma marcante de maçã verde e amêndoa.
+              </p>
+              <div style="display: flex; justify-content: space-between; align-items: center;">
+                <span style="font-size: 11px; font-weight: bold;">Tamanho: 500ml</span>
+                <button class="wire-btn outline" onclick="switchPageDirect('page-03')">Ver Detalhes</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- CONDITIONAL SOCIAL PROOF (PHASE 2) -->
+        <div class="wf-block">
+          <div class="block-meta">
+            <span class="block-title">Bloco 1.5 — Depoimentos de Chefs e Especialistas</span>
+            <span class="status-badge status-phase2">⚪ FASE 2 (Condicional)</span>
+          </div>
+
+          <div class="block-annotation">
+            <strong>Status (Resposta 2.2):</strong> Como o lote oficial ainda não chegou ao Brasil, não há depoimentos gravados de chefs renomados. Este bloco entra condicionalmente e não trava o lançamento do site v1.
+          </div>
+
+          <div class="wire-hero" style="border-style: dotted; opacity: 0.7;">
+            <em>[BLOCO DE PROVA SOCIAL — Reservado para 3 citações de Chefs parceiros após distribuição de amostras]</em>
+          </div>
+        </div>
+
+        <!-- B2C & B2B DIRECTORY NAVIGATION FOOTER LINK -->
+        <div class="wf-block">
+          <div class="block-meta">
+            <span class="block-title">Bloco 1.6 — Pontes de Navegação Rápida</span>
+            <span class="status-badge status-ready">🟢 CONTEÚDO PRONTO</span>
+          </div>
+
+          <div class="wire-grid-3">
+            <div class="wire-card" style="text-align: center;">
+              <h4>🛒 Consumidor Final</h4>
+              <p style="font-size: 11px; color: var(--text-muted); margin: 6px 0 12px;">Conheça a linha completa de azeites.</p>
+              <button class="wire-btn outline" style="width: 100%;" onclick="switchPageDirect('page-03')">Nossos Produtos</button>
+            </div>
+
+            <div class="wire-card" style="text-align: center;">
+              <h4>🏪 Supermercados & Lojistas</h4>
+              <p style="font-size: 11px; color: var(--text-muted); margin: 6px 0 12px;">Condições de revenda via Domazzi.</p>
+              <button class="wire-btn outline" style="width: 100%;" onclick="switchPageDirect('page-05')">Seja um Revendedor</button>
+            </div>
+
+            <div class="wire-card" style="text-align: center;">
+              <h4>📍 Pontos de Venda</h4>
+              <p style="font-size: 11px; color: var(--text-muted); margin: 6px 0 12px;">Onde encontrar Ollimia no Brasil.</p>
+              <button class="wire-btn outline" style="width: 100%;" onclick="switchPageDirect('page-04')">Onde Encontrar</button>
+            </div>
+          </div>
+        </div>
+
+      </section>
+
+      <!-- ========================================== -->
+      <!-- PAGE 02: PROCESSO DE PRODUÇÃO -->
+      <!-- ========================================== -->
+      <section class="page-panel" id="page-02">
+        <div class="page-header-banner">
+          <h2>PÁGINA 02 — PROCESSO DE PRODUÇÃO</h2>
+          <span class="status-badge status-ready">Foco: Rastreabilidade, Qualidade & Controle Laboratorial</span>
+        </div>
+
+        <div class="wf-block">
+          <div class="block-meta">
+            <span class="block-title">Bloco 2.1 — A Jornada do Olival ao Envase</span>
+            <span class="status-badge status-ready">🟢 CONTEÚDO PRONTO (Briefing Bloco 1)</span>
+          </div>
+
+          <div class="block-annotation">
+            <strong>Conteúdo Rastreável:</strong> Detalhamento técnico da colheita manual/mecanizada, extração a frio (< 27°C) dentro de 24h e envase imediato em garrafas opacas BPA-Free.
+          </div>
+
+          <div class="wire-grid-3">
+            <div class="wire-card">
+              <span class="step-num" style="background: var(--brand-olive); color: #fff; padding: 2px 8px; border-radius: 50%; font-weight: bold;">1</span>
+              <h4 style="margin: 8px 0 4px; font-family: monospace;">Colheita Selecionada</h4>
+              <p style="font-size: 11px; color: var(--text-muted);">
+                Colheita antecipada em Outubro para o linha <em>Origem</em> (máximo teor de polifenóis) e colheita de Novembro para a linha <em>Extra Virgem</em>.
+              </p>
+            </div>
+
+            <div class="wire-card">
+              <span class="step-num" style="background: var(--brand-olive); color: #fff; padding: 2px 8px; border-radius: 50%; font-weight: bold;">2</span>
+              <h4 style="margin: 8px 0 4px; font-family: monospace;">Prensagem a Frio (24h)</h4>
+              <p style="font-size: 11px; color: var(--text-muted);">
+                Extração exclusivamente mecânica a temperaturas inferiores a 27°C, preservando intactos todos os antioxidantes naturais e o aroma herbáceo.
+              </p>
+            </div>
+
+            <div class="wire-card">
+              <span class="step-num" style="background: var(--brand-olive); color: #fff; padding: 2px 8px; border-radius: 50%; font-weight: bold;">3</span>
+              <h4 style="margin: 8px 0 4px; font-family: monospace;">Envase Squeeze Blindado</h4>
+              <p style="font-size: 11px; color: var(--text-muted);">
+                Engarrafado imediatamente em Portugal/Espanha em polímero opaco 100% livre de BPA, protegendo contra luz solar e oxidação no transporte.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="wf-block">
+          <div class="block-meta">
+            <span class="block-title">Bloco 2.2 — Acervo Visual de Produção</span>
+            <span class="status-badge status-pending">🟡 PLACEHOLDER (Recomendação do Produtor)</span>
+          </div>
+
+          <div class="block-annotation">
+            <strong>Orientação do Produtor (Resposta 7.1):</strong> O produtor espanhol/português recomendou o uso de imagens mais genéricas e estéticas de olival até a viagem de Guto a Portugal no início de Agosto/2026.
+          </div>
+
+          <div class="wire-grid-2">
+            <div class="wire-img-placeholder" style="min-height: 120px;">
+              🖼️ [PLACEHOLDER FOTO OLIVAL ANDALUZIA / ALENTEJO]
+            </div>
+            <div class="wire-img-placeholder" style="min-height: 120px;">
+              🏭 [PLACEHOLDER FOTO LAGAR & PRENSAGEM A FRIO]
+            </div>
+          </div>
+        </div>
+
+        <div class="wf-block">
+          <div class="block-meta">
+            <span class="block-title">Bloco 2.3 — Métricas de Controle de Qualidade (Ficha Técnica)</span>
+            <span class="status-badge status-ready">🟢 CONTEÚDO PRONTO (Ficha Técnica & FAQ)</span>
+          </div>
+
+          <div class="wire-grid-3">
+            <div class="wire-card" style="text-align: center;">
+              <div style="font-size: 24px; font-weight: bold; color: var(--brand-olive); font-family: monospace;">≤ 0,3%</div>
+              <strong style="font-size: 12px;">Acidez Linha Origem</strong>
+              <p style="font-size: 11px; color: var(--text-muted); margin-top: 4px;">Muitíssimo abaixo do limite legal de 0,8% exigido para extravirgem.</p>
+            </div>
+
+            <div class="wire-card" style="text-align: center;">
+              <div style="font-size: 24px; font-weight: bold; color: var(--brand-olive); font-family: monospace;">> 500 mg/kg</div>
+              <strong style="font-size: 12px;">Polifenóis Totais</strong>
+              <p style="font-size: 11px; color: var(--text-muted); margin-top: 4px;">Alto poder antioxidante e cardioprotetor natural.</p>
+            </div>
+
+            <div class="wire-card" style="text-align: center;">
+              <div style="font-size: 24px; font-weight: bold; color: var(--brand-olive); font-family: monospace;">Md = 0</div>
+              <strong style="font-size: 12px;">Zero Defeitos Sensoriais</strong>
+              <p style="font-size: 11px; color: var(--text-muted); margin-top: 4px;">Mediana de defeito zero em laudo oficial de análise organoléptica.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ========================================== -->
+      <!-- PAGE 03: NOSSOS PRODUTOS -->
+      <!-- ========================================== -->
+      <section class="page-panel" id="page-03">
+        <div class="page-header-banner">
+          <h2>PÁGINA 03 — NOSSOS PRODUTOS</h2>
+          <span class="status-badge status-ready">Foco: Portfólio de SKUs & Especificações Técnicas</span>
+        </div>
+
+        <div class="wf-block">
+          <div class="block-meta">
+            <span class="block-title">Bloco 3.1 — Seção A: Ollimia Extra Virgem ("Para Todos os Momentos")</span>
+            <span class="status-badge status-ready">🟢 CONTEÚDO PRONTO (Briefing & Questionário)</span>
+          </div>
+
+          <div class="wire-card">
+            <div class="wire-grid-2" style="align-items: center;">
+              <div class="wire-img-placeholder" style="min-height: 180px;">
+                🧴 [RENDER SQUEEZE VERDE OLLIMIA EXTRA VIRGEM 500ml & 750ml]
+              </div>
+
+              <div>
+                <span class="pill" style="background: var(--brand-olive); color: #fff;">Linha Uso Diário & Cozimento</span>
+                <h3 style="font-size: 20px; font-family: monospace; margin: 6px 0;">Ollimia Extra Virgem — Picual da Andaluzia</h3>
+                <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 12px;">
+                  "O verdadeiro azeite extravirgem para o seu dia a dia. Tenha a estabilidade e a qualidade da Andaluzia na sua panela, por um preço que cabe na sua rotina."
+                </p>
+
+                <div class="pill-group">
+                  <span class="pill">Varietal 100% Picual</span>
+                  <span class="pill">Acidez ≤ 0,5%</span>
+                  <span class="pill">Colheita de Novembro</span>
+                  <span class="pill">Espanha</span>
+                </div>
+
+                <div style="background: var(--bg-block); padding: 10px; border-radius: 4px; font-size: 11px; margin: 12px 0;">
+                  <strong>Perfil Sensorial:</strong> Cor dourada com tons esmeralda, sabor equilibrado com notas frutadas suaves. Alta estabilidade térmica para refogados, grelhados e assados.
+                </div>
+
+                <div style="display: flex; gap: 10px; align-items: center;">
+                  <span style="font-size: 12px; font-weight: bold;">Tamanhos:</span>
+                  <button class="wire-btn outline" style="padding: 4px 10px;">500 ml</button>
+                  <button class="wire-btn outline" style="padding: 4px 10px;">750 ml</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="wf-block">
+          <div class="block-meta">
+            <span class="block-title">Bloco 3.2 — Seção B: Ollimia Origem ("Perfeito para Finalizar")</span>
+            <span class="status-badge status-ready">🟢 CONTEÚDO PRONTO (Briefing & Questionário)</span>
+          </div>
+
+          <div class="wire-card highlight">
+            <div class="wire-grid-2" style="align-items: center;">
+              <div class="wire-img-placeholder" style="min-height: 180px;">
+                🧴 [RENDER SQUEEZE BRANCO OLLIMIA ORIGEM 500ml]
+              </div>
+
+              <div>
+                <span class="pill" style="background: #276227; color: #fff;">Linha Seleção Precoce & Finalização</span>
+                <h3 style="font-size: 20px; font-family: monospace; margin: 6px 0;">Ollimia Origem — Cobrançosa Terroir do Alentejo</h3>
+                <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 12px;">
+                  "Produzido exclusivamente com as primeiras azeitonas verdes da safra, um momento onde sacrificamos o rendimento para capturar o máximo teor de antioxidantes, frescor e pureza."
+                </p>
+
+                <div class="pill-group">
+                  <span class="pill">Cobrançosa Terroir</span>
+                  <span class="pill">Acidez ≤ 0,3%</span>
+                  <span class="pill">Polifenóis > 500 mg/kg</span>
+                  <span class="pill">Portugal</span>
+                </div>
+
+                <div style="background: #eaf3ed; padding: 10px; border-radius: 4px; font-size: 11px; margin: 12px 0; border: 1px solid #c2e0cb;">
+                  <strong>Perfil Sensorial:</strong> Cor verde intensa, aroma marcante de maçã verde e amêndoa, picância e amargor vivos. Perfeito para saladas, carnes grelhadas, pães e uso medicinal.
+                </div>
+
+                <div style="display: flex; gap: 10px; align-items: center;">
+                  <span style="font-size: 12px; font-weight: bold;">Tamanho disponível:</span>
+                  <button class="wire-btn brand" style="padding: 4px 10px;">500 ml</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="wf-block">
+          <div class="block-meta">
+            <span class="block-title">Bloco 3.3 — Receitas e Vídeos de Criadores</span>
+            <span class="status-badge status-phase2">⚪ FASE 2 (Desenvolvimento Futuro)</span>
+          </div>
+
+          <div class="block-annotation">
+            <strong>Decisão do Questionário (Resposta 3.2 e 3.3):</strong> A seção de receitas e vídeos TikTok de criadores cozinhando com o azeite será desenvolvida conforme as amostras forem distribuídas. Entra na Fase 2 do site sem travar o lançamento.
+          </div>
+
+          <div class="wire-hero" style="border-style: dashed; opacity: 0.8;">
+            📽️ <em>[BLOCO DE VÍDEOS DE CRIADORES TIKTOK & RECEITAS DE CHEFS — Reservado para Fase 2]</em>
+          </div>
+        </div>
+
+        <!-- DUAL SEPARATED CTAS FOR B2C VS B2B -->
+        <div class="wf-block">
+          <div class="block-meta">
+            <span class="block-title">Bloco 3.4 — CTAs de Saída Roteados (Resposta 3.5)</span>
+            <span class="status-badge status-ready">🟢 CONTEÚDO PRONTO</span>
+          </div>
+
+          <div class="block-annotation">
+            <strong>Regra Estrutural (Resposta 3.5):</strong> O caminho do consumidor final que deseja comprar para consumo fica estritamente separado do caminho do lojista que deseja revender.
+          </div>
+
+          <div class="wire-grid-2">
+            <div class="wire-card" style="text-align: center;">
+              <h4>👤 Sou Consumidor Final</h4>
+              <p style="font-size: 11px; color: var(--text-muted); margin: 6px 0 12px;">Quero ser avisado em primeira mão quando o lote for disponibilizado.</p>
+              <button class="wire-btn brand" style="width: 100%;" onclick="triggerModal('waitlist')">Quero Entrar na Lista de Espera</button>
+            </div>
+
+            <div class="wire-card" style="text-align: center;">
+              <h4>🏬 Sou Lojista / Supermercadista</h4>
+              <p style="font-size: 11px; color: var(--text-muted); margin: 6px 0 12px;">Quero colocar o azeite Ollimia na minha prateleira ou empório.</p>
+              <button class="wire-btn outline" style="width: 100%;" onclick="switchPageDirect('page-05')">Solicitar Tabela de Revenda</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ========================================== -->
+      <!-- PAGE 04: ONDE ENCONTRAR -->
+      <!-- ========================================== -->
+      <section class="page-panel" id="page-04">
+        <div class="page-header-banner">
+          <h2>PÁGINA 04 — ONDE ENCONTRAR</h2>
+          <span class="status-badge status-pending">Foco: Lista de Espera B2C & Expansão de Canais</span>
+        </div>
+
+        <div class="wf-block">
+          <div class="block-meta">
+            <span class="block-title">Bloco 4.1 — Status Atual do Lote Nacionalizado</span>
+            <span class="status-badge status-pending">🟡 PLACEHOLDER (Fase Pré-Operacional)</span>
+          </div>
+
+          <div class="block-annotation">
+            <strong>Cenário Atual (Questionário Resposta 1.3):</strong> A marca está em fase de desembaraço e integração logística com a parceira Domazzi. Por enquanto, a página funciona como captura de lista de espera e mapeamento de demanda regional.
+          </div>
+
+          <div class="wire-hero" style="text-align: center; padding: 40px 20px;">
+            <h3 style="font-size: 20px; font-family: monospace; margin-bottom: 10px;">Ollimia Está Chegando às Melhores Gôndolas do Brasil</h3>
+            <p style="font-size: 12px; color: var(--text-muted); max-width: 600px; margin: 0 auto 20px;">
+              Estamos finalizando a distribuição em supermercados gourmet, empórios e no TikTok Shop. Cadastre seu e-mail para receber aviso de disponibilidade na sua cidade.
+            </p>
+
+            <div style="max-width: 400px; margin: 0 auto; display: flex; gap: 8px;">
+              <input type="email" class="wire-input" placeholder="Digite seu e-mail..." />
+              <button class="wire-btn brand" onclick="alert('E-mail cadastrado na Waitlist!')">Cadastrar</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- SPECIAL ASIA MARKET TOGGLE CONTAINER -->
+        <div class="wf-block" id="asia-market-block">
+          <div class="block-meta">
+            <span class="block-title">Bloco 4.2 — Canal E-Commerce Mercado Asiático / China</span>
+            <span class="status-badge status-ready">🟢 CONTEÚDO PRONTO (Questionário Resposta 1.2 & 1.3)</span>
+          </div>
+
+          <div class="asia-banner">
+            <strong>🌏 Mercado Asiático (Opção Dedicada):</strong> Para visitantes da Ásia/China, este bloco exibe o contato do responsável de prospecção internacional (Artur) e a ponte para e-commerce direto.
+          </div>
+
+          <div class="wire-card">
+            <h4>Asia & China Distribution Hub</h4>
+            <p style="font-size: 11px; color: var(--text-muted); margin-top: 4px;">
+              Direct e-commerce and commercial partnership for Asian markets. Contact: <strong>Artur (Head of Asian Prospecting)</strong>.
+            </p>
+            <button class="wire-btn outline" style="margin-top: 10px; font-size: 11px;">Contact Asia Sales Representative</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- ========================================== -->
+      <!-- PAGE 05: SEJA UM REVENDEDOR (B2B) -->
+      <!-- ========================================== -->
+      <section class="page-panel" id="page-05">
+        <div class="page-header-banner">
+          <h2>PÁGINA 05 — PARA O SEU NEGÓCIO / SEJA UM REVENDEDOR</h2>
+          <span class="status-badge status-ready">Foco: Captação Ativa de Lojistas & Supermercados</span>
+        </div>
+
+        <div class="wf-block">
+          <div class="block-meta">
+            <span class="block-title">Bloco 5.1 — Como Funciona a Parceria Comercial (Caminho Logístico)</span>
+            <span class="status-badge status-ready">🟢 CONTEÚDO PRONTO (Questionário Resposta 4.2)</span>
+          </div>
+
+          <div class="block-annotation">
+            <strong>Modelo Operacional Explicado (Resposta 4.2):</strong> O revendedor/supermercadista efetua o pedido pela plataforma parceira Domazzi. Caso seja um parceiro de menor porte, o pedido é feito direto com a Ollimia e a Domazzi efetua a entrega e faturamento atacadista.
+          </div>
+
+          <div class="wire-grid-3">
+            <div class="wire-card">
+              <strong style="color: var(--brand-olive); font-family: monospace;">PASSO 1</strong>
+              <h4 style="margin: 6px 0;">Solicitação de Cadastro</h4>
+              <p style="font-size: 11px; color: var(--text-muted);">Preencha o formulário ao lado com os dados da sua empresa e canal de venda.</p>
+            </div>
+
+            <div class="wire-card">
+              <strong style="color: var(--brand-olive); font-family: monospace;">PASSO 2</strong>
+              <h4 style="margin: 6px 0;">Análise & Condição Comercial</h4>
+              <p style="font-size: 11px; color: var(--text-muted);">Nossa equipe valida a tabela adequada ao seu segmento (Físico vs Online vs Empório).</p>
+            </div>
+
+            <div class="wire-card">
+              <strong style="color: var(--brand-olive); font-family: monospace;">PASSO 3</strong>
+              <h4 style="margin: 6px 0;">Faturamento via Domazzi</h4>
+              <p style="font-size: 11px; color: var(--text-muted);">Pedido faturado e despachado diretamente pelo operador logístico nacional.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- FORMULARIO DE REVENDEDOR COM CAMPOS DEFINIDOS (RESPOSTA 4.6) -->
+        <div class="wf-block">
+          <div class="block-meta">
+            <span class="block-title">Bloco 5.2 — Formulário Oficial de Qualificação de Revendedor</span>
+            <span class="status-badge status-ready">🟢 CONTEÚDO PRONTO (Questionário Resposta 4.6)</span>
+          </div>
+
+          <div class="wire-card" style="max-width: 800px; margin: 0 auto;">
+            <h3 style="font-size: 16px; font-family: monospace; margin-bottom: 14px; text-align: center;">
+              Seja um Revendedor Autorizado Ollimia
+            </h3>
+
+            <form onsubmit="event.preventDefault(); alert('Solicitação de revenda enviada com sucesso! Nossa equipe entrará em contato.');">
+              <div class="wire-grid-2">
+                <div class="wire-form-group">
+                  <label for="b2b-name">Nome Completo do Responsável *</label>
+                  <input type="text" id="b2b-name" class="wire-input" placeholder="Ex: Carlos Silva" required />
+                </div>
+
+                <div class="wire-form-group">
+                  <label for="b2b-email">E-mail Corporativo *</label>
+                  <input type="email" id="b2b-email" class="wire-input" placeholder="carlos@empresa.com.br" required />
+                </div>
+              </div>
+
+              <div class="wire-grid-2">
+                <div class="wire-form-group">
+                  <label for="b2b-phone">Telefone / WhatsApp *</label>
+                  <input type="tel" id="b2b-phone" class="wire-input" placeholder="(11) 99999-9999" required />
+                </div>
+
+                <div class="wire-form-group">
+                  <label for="b2b-company">Nome da Empresa / Razão Social *</label>
+                  <input type="text" id="b2b-company" class="wire-input" placeholder="Empório Gourmet Ltda" required />
+                </div>
+              </div>
+
+              <!-- EXACT DROPDOWN DEFINED IN QUESTIONNAIRE 4.6 -->
+              <div class="wire-form-group">
+                <label for="b2b-type">Tipo de Negócio (Selecione o seu segmento) *</label>
+                <select id="b2b-type" class="wire-select" required>
+                  <option value="">-- Selecione uma opção --</option>
+                  <option value="supermercado_fisico">Supermercado Físico</option>
+                  <option value="supermercado_online">Supermercado Online</option>
+                  <option value="emporio">Empório / Boutique Gourmet</option>
+                  <option value="ecommerce_independente">E-commerce Independente</option>
+                  <option value="produtos_naturais">Loja de Produtos Naturais</option>
+                  <option value="loja_bairro">Loja de Bairro / Mercearia</option>
+                  <option value="produtos_importados">Loja de Produtos Importados</option>
+                  <option value="restaurantes_cafes">Restaurantes e Cafés</option>
+                </select>
+              </div>
+
+              <div class="wire-form-group">
+                <label for="b2b-obs">Mensagem / Observações (Opcional)</label>
+                <textarea id="b2b-obs" class="wire-textarea" rows="3" placeholder="Informe sua cidade, estimativa de volume ou dúvidas..."></textarea>
+              </div>
+
+              <button type="submit" class="wire-btn brand" style="width: 100%; padding: 12px; font-size: 13px;">
+                Enviar Solicitação de Parceria Comercial
+              </button>
+            </form>
+          </div>
+        </div>
+
+        <div class="wf-block">
+          <div class="block-meta">
+            <span class="block-title">Bloco 5.3 — Estrutura de Página Única</span>
+            <span class="status-badge status-ready">🟢 CONTEÚDO PRONTO (Questionário Resposta 4.7)</span>
+          </div>
+
+          <div class="block-annotation">
+            <strong>Decisão de Arquitetura (Resposta 4.7):</strong> Mantida uma única página unificada de parceria B2B para todos os segmentos, evitando fragmentação e custos repetidos de navegação.
+          </div>
+        </div>
+      </section>
+
+      <!-- ========================================== -->
+      <!-- PAGE 06: SEJA UM DISTRIBUIDOR -->
+      <!-- ========================================== -->
+      <section class="page-panel" id="page-06">
+        <div class="page-header-banner">
+          <h2>PÁGINA 06 — SEJA UM DISTRIBUIDOR</h2>
+          <span class="status-badge status-ready">Foco: Institucional B2B & Due Diligence (Frente A.2 SEO)</span>
+        </div>
+
+        <div class="wf-block">
+          <div class="block-meta">
+            <span class="block-title">Bloco 6.1 — Portal Institucional para Grandes Tradings e Importadores</span>
+            <span class="status-badge status-ready">🟢 CONTEÚDO PRONTO (Resumo Executivo Frente A.2)</span>
+          </div>
+
+          <div class="block-annotation">
+            <strong>Objetivo de SEO B2B:</strong> Esta página atrai grandes distribuidores nacionais de alimentos (ex: Ricex, Direto, NovaTrade, Komport) que pesquisam ativamente por marcas inovadoras de azeite para representação.
+          </div>
+
+          <div class="wire-card">
+            <h3 style="font-size: 18px; font-family: monospace; margin-bottom: 10px;">
+              Expansão de Distribuição Ollimia no Brasil e América Latina
+            </h3>
+            <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 16px;">
+              A Ollimia busca parceiros distribuidores com capacidade logística regional e capilaridade em redes de varejo. Oferecemos posicionamento de marca premium, diferenciação física inquestionável em garrafa squeeze e suporte contínuo de marketing de performance.
+            </p>
+
+            <div class="wire-grid-2">
+              <div style="background: var(--bg-block); padding: 14px; border-radius: 6px;">
+                <strong>Diferenciais Comerciais:</strong>
+                <ul style="font-size: 11px; margin-top: 6px; padding-left: 16px; color: var(--text-muted);">
+                  <li>Azeite 100% Extra Virgem colhido na Andaluzia e Alentejo.</li>
+                  <li>Embalagem Squeeze leve (Redução drástica de custo de frete vs vidro).</li>
+                  <li>Demanda gerada ativamente via tráfego pago e afiliados TikTok.</li>
+                </ul>
+              </div>
+
+              <div style="background: var(--bg-block); padding: 14px; border-radius: 6px;">
+                <strong>Contato de Relações Comerciais:</strong>
+                <p style="font-size: 11px; color: var(--text-muted); margin-top: 6px;">
+                  Para reuniões diretas de due diligence e alinhamento de lote de importação:
+                </p>
+                <button class="wire-btn brand" style="margin-top: 10px; width: 100%;" onclick="alert('Abrir canal direto de Due Diligence B2B')">
+                  Falar com a Diretoria Comercial
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ========================================== -->
+      <!-- PAGE 07: FAQS (PERGUNTAS FREQUENTES) -->
+      <!-- ========================================== -->
+      <section class="page-panel" id="page-07">
+        <div class="page-header-banner">
+          <h2>PÁGINA 07 — FAQS (PERGUNTAS FREQUENTES)</h2>
+          <span class="status-badge status-ready">Foco: Quebra de Objeções & Educação sobre Squeeze</span>
+        </div>
+
+        <div class="wf-block">
+          <div class="block-meta">
+            <span class="block-title">Bloco 7.1 — FAQs Oficiais da Marca (Conteúdo 100% Integrado)</span>
+            <span class="status-badge status-ready">🟢 CONTEÚDO PRONTO (Documento FAQ site Ollimia.pdf)</span>
+          </div>
+
+          <div class="block-annotation">
+            <strong>Integração SSoT:</strong> Todas as 7 perguntas do PDF oficial estão integradas abaixo em formato de sanfona (accordion) funcional.
+          </div>
+
+          <div class="faq-accordion-wire">
+            <!-- FAQ 1 -->
+            <div class="faq-item-wire open">
+              <div class="faq-header-wire" onclick="toggleFaq(this)">
+                <span>1. Por que o Azeite Ollimia utiliza embalagem PET/plástico em vez de vidro? Isso altera a qualidade do produto?</span>
+                <span>▼</span>
+              </div>
+              <div class="faq-body-wire">
+                <strong>Resposta:</strong> Não altera em nada a qualidade — pelo contrário, ela foi pensada para proteger seu azeite e o planeta! Utilizamos um polímero atóxico premium (100% livre de BPA e reciclável), desenvolvido especialmente para blindar o azeite contra a luz e a oxidação, preservando todo o frescor, aroma e nutrientes originais. Além disso, garrafas de vidro são extremamente pesadas e exigem muito mais combustível no transporte: ao escolher nossa embalagem ultra leve e inquebrável, reduzimos drasticamente a emissão de CO₂ na logística.
+              </div>
+            </div>
+
+            <!-- FAQ 2 -->
+            <div class="faq-item-wire">
+              <div class="faq-header-wire" onclick="toggleFaq(this)">
+                <span>2. O Azeite Ollimia é 100% puro e extravirgem? Como posso ter certeza disso?</span>
+                <span>▼</span>
+              </div>
+              <div class="faq-body-wire">
+                <strong>Resposta:</strong> Sim, 100% puro e prensado a frio. Nosso azeite passa por rigorosos testes de qualidade e laudos laboratoriais que comprovam sua pureza, sem qualquer adição de óleos vegetais ou misturas. Trabalhamos com total transparência para que você leve para a mesa um produto autêntico, saudável e de alta gastronomia.
+              </div>
+            </div>
+
+            <!-- FAQ 3 -->
+            <div class="faq-item-wire">
+              <div class="faq-header-wire" onclick="toggleFaq(this)">
+                <span>3. Qual é o nível de acidez do Azeite Ollimia e o que isso significa?</span>
+                <span>▼</span>
+              </div>
+              <div class="faq-body-wire">
+                <strong>Resposta:</strong> O Azeite Ollimia Tradicional possui acidez máxima de ≤ 0,5% enquanto o Ollimia Origem possui ≤ 0,3% (muito abaixo do limite legal de 0,8% exigido para ser considerado extravirgem). Baixa acidez é indicador direto de azeitonas sadias, colhidas no ponto certo e processadas imediatamente. Na prática, isso se traduz em um azeite mais fresco, rico em antioxidantes e com sabor impecável.
+              </div>
+            </div>
+
+            <!-- FAQ 4 -->
+            <div class="faq-item-wire">
+              <div class="faq-header-wire" onclick="toggleFaq(this)">
+                <span>4. Por que escolher o Azeite Ollimia em vez dos azeites tradicionais de supermercado?</span>
+                <span>▼</span>
+              </div>
+              <div class="faq-body-wire">
+                <strong>Resposta:</strong> A maioria dos azeites industriais passa por longos processos de armazenamento e transporte até chegar às prateleiras, perdendo frescor e aroma. O Ollimia é produzido em lotes controlados, garantindo um azeite recém-extraído, com alto teor de polifenóis (antioxidantes naturais) e um perfil sensorial marcante que transforma qualquer refeição simples em uma experiência gourmet.
+              </div>
+            </div>
+
+            <!-- FAQ 5 -->
+            <div class="faq-item-wire">
+              <div class="faq-header-wire" onclick="toggleFaq(this)">
+                <span>5. Posso usar o Azeite Ollimia para cozinhar e grelhar ou ele deve ser usado apenas para finalizar?</span>
+                <span>▼</span>
+              </div>
+              <div class="faq-body-wire">
+                <strong>Resposta:</strong> Você pode usar das duas formas! Embora seja perfeito para finalizar saladas, massas e pães, o azeite extravirgem de alta qualidade é excelente para refogados e grelhados. Ele suporta temperaturas de cozimento doméstico sem perder suas propriedades benéficas, mantendo o valor nutricional da sua refeição.
+              </div>
+            </div>
+
+            <!-- FAQ 6 -->
+            <div class="faq-item-wire">
+              <div class="faq-header-wire" onclick="toggleFaq(this)">
+                <span>6. Como devo armazenar meu azeite em casa para preservar o sabor e o aroma?</span>
+                <span>▼</span>
+              </div>
+              <div class="faq-body-wire">
+                <strong>Resposta:</strong> Mantenha a garrafa sempre bem fechada, em local fresco, seco e ao abrigo da luz direta e do calor do fogão. Não é necessário refrigerar. Seguindo esses cuidados simples, seu azeite manterá todo o frescor e os aromas originais até a última gota.
+              </div>
+            </div>
+
+            <!-- FAQ 7 -->
+            <div class="faq-item-wire">
+              <div class="faq-header-wire" onclick="toggleFaq(this)">
+                <span>7. Quais são os principais benefícios do consumo diário do Azeite Ollimia para a saúde?</span>
+                <span>▼</span>
+              </div>
+              <div class="faq-body-wire">
+                <strong>Resposta:</strong> Por ser um extravirgem fresco e de extração a frio, o Ollimia é uma fonte poderosa de gorduras monoinsaturadas (gorduras boas) e polifenóis. O consumo regular auxilia na saúde cardiovascular, combate os radicais livres, possui ação anti-inflamatória natural e contribui para o bem-estar geral.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- FUTURE FAQS MAPPED -->
+        <div class="wf-block">
+          <div class="block-meta">
+            <span class="block-title">Bloco 7.2 — Mapeamento de Perguntas Futuras (Fase 2)</span>
+            <span class="status-badge status-phase2">⚪ FASE 2 (Pós-Nacionalização)</span>
+          </div>
+
+          <div class="wire-grid-3">
+            <div class="wire-card" style="opacity: 0.8;">
+              <strong>TikTok Shop & Onde Achar</strong>
+              <p style="font-size: 11px; color: var(--text-muted); margin-top: 4px;">Perguntas sobre como comprar diretamente no TikTok Shop.</p>
+            </div>
+
+            <div class="wire-card" style="opacity: 0.8;">
+              <strong>Autenticação via QR Code</strong>
+              <p style="font-size: 11px; color: var(--text-muted); margin-top: 4px;">Validação de lote e laudo oficial escaneando o rótulo.</p>
+            </div>
+
+            <div class="wire-card" style="opacity: 0.8;">
+              <strong>Prazo de Entrega E-commerce</strong>
+              <p style="font-size: 11px; color: var(--text-muted); margin-top: 4px;">Prazos e rastreamento assim que a loja online for ativada.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ========================================== -->
+      <!-- PAGE OPTIONAL: STORE LOCATOR -->
+      <!-- ========================================== -->
+      <section class="page-panel" id="page-opt">
+        <div class="page-header-banner">
+          <h2>PÁGINA OPCIONAL — STORE LOCATOR (MAPEAMENTO DE LOJAS)</h2>
+          <span class="status-badge status-phase2">Foco: Filtro por CEP & Redes Parceiras (Condicional)</span>
+        </div>
+
+        <div class="wf-block">
+          <div class="block-meta">
+            <span class="block-title">Bloco Opcional — Localizador de Lojas Físicas</span>
+            <span class="status-badge status-phase2">⚪ FASE 2 / OPCIONAL (Resposta 3.1)</span>
+          </div>
+
+          <div class="block-annotation">
+            <strong>Observação dos Sócios (Resposta 3.1):</strong> "Store Locator: Acho bem legal, tem que ver se não dá muito trabalho... teríamos que ir atualizando os novos parceiros sempre." Avaliar se entra na v1 ou após consolidação da rede Domazzi.
+          </div>
+
+          <div class="wire-card" style="text-align: center; padding: 40px 20px;">
+            <div style="font-size: 32px; margin-bottom: 10px;">🗺️📍</div>
+            <h3 style="font-size: 18px; font-family: monospace;">Encontre Ollimia no Supermercado Mais Próximo</h3>
+            <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 20px;">
+              Digite seu CEP ou cidade para localizar empórios e supermercados parceiros.
+            </p>
+
+            <div style="max-width: 400px; margin: 0 auto; display: flex; gap: 8px;">
+              <input type="text" class="wire-input" placeholder="Digite seu CEP ou Cidade..." />
+              <button class="wire-btn outline">Buscar Lojas</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </div><!-- END BROWSER CANVAS -->
+
+    <!-- ========================================== -->
+    <!-- GLOBAL FOOTER (PRESENT ON ALL PAGES) -->
+    <!-- ========================================== -->
+    <footer class="wire-footer">
+      <div class="wire-grid-3" style="gap: 30px;">
+        
+        <!-- NEWSLETTER CAPTURE (RESPOSTA 5.1 & 5.2) -->
+        <div>
+          <h4 style="font-family: monospace; font-size: 14px; margin-bottom: 8px; color: #fff;">
+            Inscreva-se na Nossa Newsletter
+          </h4>
+          <p style="font-size: 11px; color: #aaa; margin-bottom: 12px;">
+            Receba novidades da safra, receitas exclusivas e aviso em primeira mão sobre o lançamento de novos lotes no Brasil.
+          </p>
+
+          <div style="display: flex; gap: 6px;">
+            <input type="email" class="wire-input" placeholder="Seu melhor e-mail..." style="background: #2a2a28; color: #fff; border-color: #555;" />
+            <button class="wire-btn brand" style="padding: 6px 12px; font-size: 11px;" onclick="alert('Obrigado por se inscrever na newsletter Ollimia!')">Inscrever</button>
+          </div>
+          <span style="font-size: 10px; color: #888; margin-top: 4px; display: block;">
+            *Único ponto de captura global no rodapé (Resposta 5.1)
+          </span>
+        </div>
+
+        <!-- SITEMAP LINKS -->
+        <div>
+          <h4 style="font-family: monospace; font-size: 14px; margin-bottom: 8px; color: #fff;">Navegação</h4>
+          <ul style="list-style: none; font-size: 12px; line-height: 1.8;">
+            <li><a href="#" onclick="switchPageDirect('page-01'); return false;">• Home — Sobre a Ollimia</a></li>
+            <li><a href="#" onclick="switchPageDirect('page-02'); return false;">• Processo de Produção</a></li>
+            <li><a href="#" onclick="switchPageDirect('page-03'); return false;">• Nossos Produtos</a></li>
+            <li><a href="#" onclick="switchPageDirect('page-04'); return false;">• Onde Encontrar</a></li>
+            <li><a href="#" onclick="switchPageDirect('page-05'); return false;">• Seja um Revendedor (B2B)</a></li>
+            <li><a href="#" onclick="switchPageDirect('page-06'); return false;">• Seja um Distribuidor</a></li>
+            <li><a href="#" onclick="switchPageDirect('page-07'); return false;">• FAQs</a></li>
+          </ul>
+        </div>
+
+        <!-- SOCIAL & LEGAL -->
+        <div>
+          <h4 style="font-family: monospace; font-size: 14px; margin-bottom: 8px; color: #fff;">Marca & Redes</h4>
+          <p style="font-size: 11px; color: #aaa;">Instagram: <strong>@azeiteollimia</strong></p>
+          <p style="font-size: 11px; color: #aaa; margin-top: 8px;">
+            Domínio oficial: <strong>ollimia.com</strong> (Hospedagem VPS com tradução automática)
+          </p>
+
+          <div style="margin-top: 14px; font-size: 10px; color: #777;">
+            © 2026 Ollimia. Todos os direitos reservados.<br>
+            Compliance ANVISA / CONAR / TikTok Shop Aprovado.
+          </div>
+        </div>
+
+      </div>
+    </footer>
+
+  </div><!-- END BROWSER WINDOW -->
+</main>
+
+<!-- JAVASCRIPT FOR INTERACTIVITY AND ROUTING -->
+<script>
+  // Page Routing & Switching Logic
+  function switchPage(pageId, tabElement) {
+    // If in stacked mode, switch back to tab mode first for clean UX
+    var windowEl = document.getElementById('browser-window');
+    if (windowEl.classList.contains('mode-stacked')) {
+      setViewMode('tab');
+    }
+
+    // Hide all panels
+    var panels = document.querySelectorAll('.page-panel');
+    panels.forEach(function(panel) {
+      panel.classList.remove('active');
+    });
+
+    // Show target panel
+    var targetPanel = document.getElementById(pageId);
+    if (targetPanel) {
+      targetPanel.classList.add('active');
+    }
+
+    // Update Tab Styles
+    var tabs = document.querySelectorAll('.nav-tab');
+    tabs.forEach(function(tab) {
+      tab.classList.remove('active');
+    });
+
+    if (tabElement) {
+      tabElement.classList.add('active');
+    }
+
+    // Update Browser URL Bar Simulation
+    var urlMap = {
+      'page-01': 'ollimia.com/',
+      'page-02': 'ollimia.com/processo',
+      'page-03': 'ollimia.com/produtos',
+      'page-04': 'ollimia.com/onde-encontrar',
+      'page-05': 'ollimia.com/revendedor',
+      'page-06': 'ollimia.com/distribuidor',
+      'page-07': 'ollimia.com/faq',
+      'page-opt': 'ollimia.com/store-locator'
+    };
+
+    var displayUrl = document.getElementById('display-url');
+    if (displayUrl && urlMap[pageId]) {
+      displayUrl.textContent = urlMap[pageId];
+    }
+
+    // Scroll smoothly to browser top
+    window.scrollTo({
+      top: document.getElementById('browser-window').offsetTop - 80,
+      behavior: 'smooth'
+    });
+  }
+
+  // Direct Page Switcher from inline links
+  function switchPageDirect(pageId) {
+    var tabs = document.querySelectorAll('.nav-tab');
+    var tabMap = {
+      'page-01': 0,
+      'page-02': 1,
+      'page-03': 2,
+      'page-04': 3,
+      'page-05': 4,
+      'page-06': 5,
+      'page-07': 6,
+      'page-opt': 7
+    };
+    var tabIdx = tabMap[pageId];
+    if (tabs[tabIdx]) {
+      switchPage(pageId, tabs[tabIdx]);
+    }
+  }
+
+  // Toggle View Modes (Single Tab vs All Stacked)
+  function setViewMode(mode) {
+    var windowEl = document.getElementById('browser-window');
+    var btnTab = document.getElementById('btn-tab-mode');
+    var btnStacked = document.getElementById('btn-stacked-mode');
+
+    if (mode === 'stacked') {
+      windowEl.classList.add('mode-stacked');
+      btnTab.classList.remove('active');
+      btnStacked.classList.add('active');
+      document.getElementById('display-url').textContent = 'ollimia.com/ [VISÃO GERAL COMPLETA DO MAPA DO SITE]';
+    } else {
+      windowEl.classList.remove('mode-stacked');
+      btnTab.classList.add('active');
+      btnStacked.classList.remove('active');
+      // Re-trigger active tab
+      var activeTab = document.querySelector('.nav-tab.active');
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  }
+
+  // Governance Header Card Accordion Toggle
+  function toggleGovernanceCard() {
+    var body = document.getElementById('meta-governance-body');
+    var icon = document.getElementById('meta-toggle-icon');
+    if (body.style.display === 'none' || body.style.display === '') {
+      body.style.display = 'block';
+      icon.innerHTML = '▲ (Clique para fechar)';
+    } else {
+      body.style.display = 'none';
+      icon.innerHTML = '▼ (Clique para ver)';
+    }
+  }
+
+  // FAQ Accordion Toggle
+  function toggleFaq(headerElement) {
+    var item = headerElement.parentElement;
+    item.classList.toggle('open');
+  }
+
+  // Language Change Simulation
+  function changeLanguage(langCode) {
+    var langTag = document.getElementById('display-lang-tag');
+    var asiaBlock = document.getElementById('asia-market-block');
+
+    var langNames = {
+      'pt-br': '🇧🇷 PT-BR (Português Brasil)',
+      'pt-pt': '🇵🇹 PT-PT (Português Portugal)',
+      'es': '🇪🇸 ES (Espanhol)',
+      'en': '🇺🇸 EN (Inglês)',
+      'fr': '🇫🇷 FR (Francês)',
+      'asia': '🇨🇳 Ásia / China (E-commerce Ativo)'
+    };
+
+    if (langTag && langNames[langCode]) {
+      langTag.textContent = langNames[langCode];
+    }
+
+    if (langCode === 'asia') {
+      alert('Modo Mercado Asiático Ativado! Direcionando canal de contato comercial para Artur (E-commerce Ásia).');
+      switchPageDirect('page-04');
+    }
+  }
+
+  // Trigger Modal Simulation
+  function triggerModal(type) {
+    if (type === 'waitlist') {
+      var email = prompt('Digite seu e-mail para entrar na Lista de Espera B2C do azeite Ollimia:');
+      if (email) {
+        alert('Obrigado! Seu e-mail (' + email + ') foi adicionado à lista de espera prioritária.');
+      }
+    }
+  }
+</script>
+
+</body>
+</html>

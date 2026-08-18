@@ -1,0 +1,135 @@
+/* ==========================================================================
+   DESIGN SYSTEM 5: BORGO DE MEDICI (Tuscan Gourmet & B2B Wholesale Classic)
+   ========================================================================== */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=Cinzel:wght@700&family=Inter:wght@400;500;600&display=swap');
+
+:root {
+  --ds-bg: #F4F1EA;
+  --ds-card-bg: #FFFFFF;
+  --ds-navy: #1B2B36;
+  --ds-gold: #C5A059;
+  --ds-cream: #FAF9F5;
+  --ds-border: 1px solid #DCD6C8;
+  --ds-radius: 8px;
+  --ds-font-heading: 'Playfair Display', serif;
+  --ds-font-title: 'Cinzel', serif;
+  --ds-font-body: 'Inter', sans-serif;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background-color: var(--ds-bg);
+  color: var(--ds-navy);
+  font-family: var(--ds-font-body);
+  line-height: 1.6;
+}
+
+.site-header {
+  background: #FFF;
+  padding: 22px 0;
+  border-bottom: 2px solid var(--ds-gold);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.header-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo-text {
+  font-family: var(--ds-font-title);
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: var(--ds-navy);
+  text-decoration: none;
+  letter-spacing: 2px;
+}
+
+.btn-borgo {
+  background: var(--ds-navy);
+  color: var(--ds-gold);
+  padding: 14px 28px;
+  border-radius: var(--ds-radius);
+  font-family: var(--ds-font-title);
+  font-weight: 700;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  border: 1px solid var(--ds-gold);
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-block;
+  transition: all 0.2s ease;
+}
+
+.btn-borgo:hover {
+  background: var(--ds-gold);
+  color: var(--ds-navy);
+}
+
+.hero-borgo {
+  padding: 80px 0;
+  background: var(--ds-cream);
+  border-bottom: var(--ds-border);
+}
+
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 40px;
+  align-items: center;
+}
+
+.hero-title {
+  font-family: var(--ds-font-heading);
+  font-size: clamp(2.8rem, 5vw, 4.2rem);
+  font-weight: 700;
+  line-height: 1.1;
+  color: var(--ds-navy);
+  margin: 16px 0;
+}
+
+.hero-img-box {
+  background: #FFF;
+  border-radius: var(--ds-radius);
+  padding: 30px;
+  border: var(--ds-border);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+  text-align: center;
+}
+
+.hero-img-box img {
+  max-width: 100%;
+  max-height: 380px;
+  object-fit: contain;
+}
+
+.grid-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 28px;
+  margin-top: 40px;
+}
+
+.card-borgo {
+  background: var(--ds-card-bg);
+  border-radius: var(--ds-radius);
+  padding: 32px;
+  border: var(--ds-border);
+}
+
+.card-borgo img {
+  width: 100%;
+  height: 240px;
+  object-fit: contain;
+}

@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dossiê Analítico: Engenharia Reversa da Estratégia Online da Graza</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #FAF8F5;
+            --card-bg: #FFFFFF;
+            --text-main: #2A2A28;
+            --text-muted: #5A5A57;
+            --primary: #3E4A35; /* Olive Green */
+            --primary-light: #F0F3ED;
+            --accent: #D49A29; /* Olive Oil Gold */
+            --accent-light: #FBF6EC;
+            --border: #E8E5DF;
+            --shadow: 0 8px 30px rgba(62, 74, 53, 0.05);
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.7;
+            padding: 0;
+            margin: 0;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        /* Hero Header */
+        header {
+            text-align: center;
+            padding: 60px 20px;
+            background-color: var(--primary-light);
+            border-radius: 24px;
+            margin-bottom: 40px;
+            border: 1px solid var(--border);
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: "";
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(212,154,41,0.05) 0%, rgba(255,255,255,0) 70%);
+            pointer-events: none;
+        }
+
+        header h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 3em;
+            color: var(--primary);
+            line-height: 1.2;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+
+        header p.meta {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+        }
+
+        header .badge-container {
+            margin-top: 20px;
+        }
+
+        header .badge {
+            background-color: var(--primary);
+            color: #fff;
+            padding: 6px 16px;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+
+        /* Introduction */
+        .intro-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 30px;
+            margin-bottom: 40px;
+            box-shadow: var(--shadow);
+        }
+
+        .intro-card p {
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            text-align: justify;
+        }
+
+        /* Navigation / TOC */
+        .toc {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 15px;
+            margin-bottom: 40px;
+            list-style: none;
+            box-shadow: var(--shadow);
+        }
+
+        .toc li a {
+            text-decoration: none;
+            color: var(--primary);
+            font-weight: 600;
+            font-size: 0.9rem;
+            padding: 8px 16px;
+            border-radius: 8px;
+            transition: var(--transition);
+        }
+
+        .toc li a:hover {
+            background-color: var(--primary-light);
+        }
+
+        /* Section Styling */
+        section {
+            margin-bottom: 60px;
+        }
+
+        h2.section-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.2em;
+            color: var(--primary);
+            margin-bottom: 25px;
+            border-bottom: 2px solid var(--primary);
+            padding-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        h3.question-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.6em;
+            color: var(--primary);
+            margin: 30px 0 15px 0;
+            font-weight: 600;
+            background-color: var(--primary-light);
+            padding: 10px 15px;
+            border-radius: 8px;
+            border-left: 4px solid var(--primary);
+        }
+
+        p {
+            font-size: 1.05rem;
+            color: var(--text-main);
+            margin-bottom: 1.5em;
+            text-align: justify;
+        }
+
+        /* Grid Layouts */
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+            margin: 30px 0;
+        }
+
+        @media (max-width: 768px) {
+            .grid-2 {
+                grid-template-columns: 1fr;
+            }
+            header h1 {
+                font-size: 2.2em;
+            }
+        }
+
+        .card {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 25px;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent);
+        }
+
+        .card h4 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.4em;
+            color: var(--primary);
+            margin-bottom: 12px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .card ul {
+            list-style-position: inside;
+            margin-top: 10px;
+        }
+
+        .card li {
+            margin-bottom: 8px;
+            font-size: 0.95rem;
+            color: var(--text-muted);
+        }
+
+        /* Highlights */
+        .highlight-box {
+            background-color: var(--accent-light);
+            border-left: 4px solid var(--accent);
+            padding: 20px;
+            border-radius: 0 12px 12px 0;
+            margin: 25px 0;
+        }
+
+        .highlight-box p {
+            margin: 0;
+            font-style: italic;
+            color: #5c4314;
+        }
+
+        /* Custom Table Design */
+        .table-responsive {
+            overflow-x: auto;
+            margin: 30px 0;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            box-shadow: var(--shadow);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: var(--card-bg);
+            font-size: 0.95rem;
+        }
+
+        th, td {
+            padding: 15px 20px;
+            text-align: left;
+            border-bottom: 1px solid var(--border);
+        }
+
+        th {
+            background-color: var(--primary);
+            color: #ffffff;
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.8rem;
+            letter-spacing: 1px;
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        tr:hover td {
+            background-color: var(--primary-light);
+        }
+
+        /* ASMR / Sound Icon Badge */
+        .sound-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background-color: #E2E8F0;
+            color: #4A5568;
+            padding: 4px 10px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        /* Performance Metrics Layout */
+        .metrics-container {
+            display: flex;
+            gap: 20px;
+            margin: 30px 0;
+            flex-wrap: wrap;
+        }
+
+        .metric-card {
+            flex: 1;
+            min-width: 200px;
+            background: var(--primary);
+            color: #ffffff;
+            padding: 25px;
+            border-radius: 16px;
+            text-align: center;
+            box-shadow: var(--shadow);
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .metric-card.accent {
+            background: var(--card-bg);
+            color: var(--text-main);
+            border: 1px solid var(--accent);
+        }
+
+        .metric-card.accent .metric-value {
+            color: var(--accent);
+        }
+
+        .metric-value {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.8em;
+            font-weight: 700;
+            margin-bottom: 5px;
+            line-height: 1;
+        }
+
+        .metric-label {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            opacity: 0.9;
+        }
+
+        /* Citations and References */
+        .citation {
+            font-size: 0.75rem;
+            vertical-align: super;
+            color: var(--accent);
+            font-weight: bold;
+            text-decoration: none;
+            margin-left: 2px;
+        }
+
+        .references {
+            margin-top: 50px;
+            border-top: 1px solid var(--border);
+            padding-top: 30px;
+        }
+
+        .references h2 {
+            font-family: 'Cormorant Garamond', serif;
+            color: var(--primary);
+            font-size: 1.8em;
+            margin-bottom: 20px;
+        }
+
+        .references ol {
+            padding-left: 20px;
+        }
+
+        .references li {
+            margin-bottom: 10px;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+
+        .references a {
+            color: var(--primary);
+            text-decoration: none;
+            word-break: break-all;
+        }
+
+        .references a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <p class="meta">Engenharia Reversa & Inteligência Competitiva</p>
+            <h1>O Caso Graza no Marketing Digital</h1>
+            <div class="badge-container">
+                <span class="badge">Dossiê Especial CPG & D2C</span>
+            </div>
+        </header>
+
+        <div class="intro-card">
+            <p>Este dossiê apresenta uma análise aprofundada da estratégia online da marca americana de azeite de oliva <strong>Graza</strong>, com foco em crescimento acelerado (<em>Growth Marketing</em>). A engenharia reversa das suas ações abrange o posicionamento estratégico do produto, táticas no TikTok, o playbook de marketing de influência e os funis de conversão D2C, oferecendo aprendizados práticos e diretamente aplicáveis ao projeto da <strong>Ollimia</strong> no mercado brasileiro.</p>
+        </div>
+
+        <ul class="toc">
+            <li><a href="#eixo1">1. Posicionamento de Produto</a></li>
+            <li><a href="#eixo2">2. Estratégia no TikTok</a></li>
+            <li><a href="#eixo3">3. Playbook de Influenciadores</a></li>
+            <li><a href="#eixo4">4. Funis de Conversão & Vendas</a></li>
+            <li><a href="#performance">5. Performance & Métricas</a></li>
+        </ul>
+
+        <!-- EIXO 1 -->
+        <section id="eixo1">
+            <h2 class="section-title"> Eixo 1: Posicionamento e Arquitetura de Produto</h2>
+            
+            <h3 class="question-title">1. Divisão da Linha de Produtos: Sizzle vs Drizzle vs Frizzle</h3>
+            <p>A Graza segmentou sua linha de produtos de azeite de oliva extra virgem de maneira extremamente inteligente, dividindo-os por finalidades culinárias claras. Isso não apenas simplifica a jornada de compra do consumidor, como também elimina o receio clássico de gastar azeite caro para frituras diárias<a href="#ref-1" class="citation">[1]</a><a href="#ref-2" class="citation">[2]</a><a href="#ref-3" class="citation">[3]</a>.</p>
+
+            <div class="table-responsive">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Produto</th>
+                            <th>Finalidade Principal</th>
+                            <th>Tipo de Azeitona & Colheita</th>
+                            <th>Sabor & Acidez</th>
+                            <th>Volumetria</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Sizzle</strong> (Para cozinhar)</td>
+                            <td>Refogar, assar e fritar (altas temperaturas)</td>
+                            <td>Azeitonas Picual maduras, colhidas no pico da safra da Andaluzia.</td>
+                            <td>Sabor suave, equilibrado e menos picante. Resistência ao calor.</td>
+                            <td>750 ml</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Drizzle</strong> (Para finalizar)</td>
+                            <td>Finalização crua, saladas, pães e molhos</td>
+                            <td>Azeitonas Picual colhidas precocemente (verdes, em outubro).</td>
+                            <td>Intenso, herbáceo, picante e rico em antioxidantes/polifenóis<a href="#ref-4" class="citation">[4]</a>.</td>
+                            <td>500 ml</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Frizzle</strong> (Óleo em Spray)</td>
+                            <td>Grelhar e untar de forma ultrarrápida</td>
+                            <td>Colheita de meio de safra com sabor neutro.</td>
+                            <td>Sabor neutro e ponto de fumaça elevado<a href="#ref-5" class="citation">[5]</a><a href="#ref-6" class="citation">[6]</a>.</td>
+                            <td>750 ml</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h3 class="question-title">2. A garrafa squeeze como um "Countertop Object"</h3>
+            <p>A Graza elevou o azeite de oliva de uma commodity básica de supermercado para um <strong>"countertop object"</strong> (objeto de bancada desejável) ao inovar no design funcional<a href="#ref-7" class="citation">[7]</a>. Em vez das tradicionais garrafas de vidro que escorrem óleo e precisam ser guardadas escondidas, a marca implementou a garrafa squeeze plástica flexível opaca.</p>
+            <p>Essa escolha resolve três dores reais da cozinha:</p>
+            <div class="grid-2">
+                <div class="card">
+                    <h4>🧪 Proteção Física Total</h4>
+                    <p>A garrafa opaca bloqueia a entrada de luz e ar, os maiores inimigos do azeite extra virgem, mantendo a acidez baixa e o frescor por mais tempo<a href="#ref-8" class="citation">[8]</a>.</p>
+                </div>
+                <div class="card">
+                    <h4>👩‍🍳 Estética de Chef</h4>
+                    <p>O squeeze é inspirado nas cozinhas profissionais. Dá ao cozinheiro doméstico a sensação tátil e o controle de dosagem de um chef de restaurante de alta gastronomia<a href="#ref-9" class="citation">[9]</a><a href="#ref-10" class="citation">[10]</a>.</p>
+                </div>
+            </div>
+
+            <h3 class="question-title">3. Branding e Identidade Visual no Feed Digital</h3>
+            <p>O branding da Graza foi planejado especificamente para se destacar no Feed Visual (Instagram/TikTok). Os elementos estruturais são<a href="#ref-12" class="citation">[12]</a><a href="#ref-13" class="citation">[13]</a><a href="#ref-14" class="citation">[14]</a>:</p>
+            <ul>
+                <li><strong>Tipografia Híbrida:</strong> Usa a fonte serifada <strong>GT Alpina Typewriter</strong> para dar um aspecto artesanal, em contraste com a clássica <strong>ITC Garamond</strong>, mantendo o tom elegante e sofisticado<a href="#ref-15" class="citation">[15]</a>.</li>
+                <li><strong>Paleta de Cores:</strong> Verde oliva profundo para o frasco principal combinado com um bico dosador amarelo vibrante. O contraste de cores faz a garrafa pular da tela nos primeiros milissegundos do vídeo orgânico ou anúncio pago<a href="#ref-16" class="citation">[16]</a>.</li>
+                <li><strong>Ilustrações de Giz (Hand-Drawn):</strong> Desenhos lúdicos criados pelo estúdio Gander que humanizam a marca, afastando o produto daquela seriedade elitista comum dos azeites importados tradicionais<a href="#ref-17" class="citation">[17]</a><a href="#ref-18" class="citation">[18]</a>.</li>
+            </ul>
+        </section>
+
+        <!-- EIXO 2 -->
+        <section id="eixo2">
+            <h2 class="section-title"> Eixo 2: Estratégia no TikTok (Orgânico e Ads)</h2>
+            
+            <h3 class="question-title">1. Os 3 Formatos de Conteúdo de Maior Engajamento</h3>
+            <p>A estratégia de conteúdo orgânico da Graza explora os hábitos visuais e sonoros do feed For You do TikTok<a href="#ref-19" class="citation">[19]</a><a href="#ref-20" class="citation">[20]</a>:</p>
+            <div class="grid-2">
+                <div class="card">
+                    <span class="sound-badge">🔊 ASMR Sensorial</span>
+                    <h4>Food Porn & Squeeze Sound</h4>
+                    <p>Foco nos sons satisfatórios de cozimento: o azeite sendo espremido com precisão do bico inteligente, o chiado de vegetais na frigideira quente e a finalização com fios brilhantes de azeite Drizzle.</p>
+                </div>
+                <div class="card">
+                    <span class="sound-badge">🍳 Didática Prática</span>
+                    <h4>Receitas de 30 Segundos</h4>
+                    <p>Tutoriais curtos onde o squeeze é o grande herói facilitador do processo. Mostra como é prático temperar, cozinhar e untar usando apenas uma mão, sem sujeira na bancada.</p>
+                </div>
+            </div>
+
+            <h3 class="question-title">2. Ganchos (Hooks) de Alta Conversão nos Anúncios</h3>
+            <p>Para tráfego pago (TikTok Ads), a Graza utiliza ganchos baseados em quebra de padrão mental e prova social de autoridade<a href="#ref-21" class="citation">[21]</a><a href="#ref-22" class="citation">[22]</a>:</p>
+            
+            <div class="highlight-box">
+                <p><strong>Ganchos Textuais de Tensão Aberta:</strong><br>
+                • "Pare de usar azeites chatos na sua comida." (Quebra de crença comum)<br>
+                • "Por que os chefs de cozinha baniram as garrafas de vidro tradicionais?" (Autoridade)<br>
+                • "Espremido de verdade, não guardado no armário." (Reforço do pilar de produto)</p>
+            </div>
+
+            <h3 class="question-title">3. Estímulos Sensoriais de Desejo</h3>
+            <p>O squeeze físico gera um apelo tátil que a Graza explora nos closes dinâmicos de vídeo<a href="#ref-23" class="citation">[23]</a>. Demonstrar o azeite caindo como um fio cirúrgico e uniforme ativa o desejo de consumo imediato de alimentos (Food Porn), impulsionando a venda emocional por impulso direta no carrinho do TikTok Shop.</p>
+        </section>
+
+        <!-- EIXO 3 -->
+        <section id="eixo3">
+            <h2 class="section-title"> Eixo 3: Playbook de Influencer Marketing (Seeding / Gifting)</h2>
+            
+            <h3 class="question-title">1. Estratégia de Envio de Produtos Sem Pressão Comercial</h3>
+            <p>A Graza cresceu organicamente no pré-lançamento por meio do <strong>product seeding</strong> (envio em lote de produtos gratuitos) para criadores de culinária e entusiastas domésticos<a href="#ref-24" class="citation">[25]</a>. Eles enviaram em média **25 caixas por semana** antes do produto estar à venda<a href="#ref-26" class="citation">[26]</a>.</p>
+            <div class="highlight-box">
+                <p><strong>A Regra de Ouro:</strong> Nenhum influenciador era obrigado a postar. Esse envio sem compromisso gerou um boca a boca genuíno e posts muito mais espontâneos e apaixonados, impulsionando a confiança na marca logo na semana de abertura<a href="#ref-27" class="citation">[27]</a><a href="#ref-28" class="citation">[28]</a>.</p>
+            </div>
+
+            <h3 class="question-title">2. Critérios de Seleção e Unboxing "Instagramável"</h3>
+            <p>A curadoria da Graza foca em criadores de conteúdo com paixão nítida por gastronomia, desde chefs profissionais até cozinheiros de final de semana, valorizando o engajamento e a credibilidade em vez de contagem de seguidores vazia<a href="#ref-29" class="citation">[29]</a>.</p>
+            <p>O unboxing das caixas de recebidos é extremamente marcante: as caixas de papelão kraft trazem cores fortes da marca (amarelo e verde) e são acompanhadas por itens como funis de silicone e panos de prato personalizados, garantindo que o unboxing seja filmado organicamente<a href="#ref-30" class="citation">[30]</a><a href="#ref-31" class="citation">[31]</a>.</p>
+
+            <h3 class="question-title">3. Abordagem Amigável (Vibe FaceTime)</h3>
+            <p>A abordagem da marca aos influenciadores é casual, amigável e direta, sem o tom burocrático e corporativo de agências tradicionais. A Graza envia mensagens do tipo: *"Nós adoramos o seu estilo na cozinha e achamos que você merece cozinhar com ferramentas melhores. Deixa a gente te mandar uma caixa?"* Isso cria relacionamentos reais de longa duração<a href="#ref-32" class="citation">[32]</a>.</p>
+        </section>
+
+        <!-- EIXO 4 -->
+        <section id="eixo4">
+            <h2 class="section-title"> Eixo 4: Funis de Conversão e Oferta D2C</h2>
+            
+            <h3 class="question-title">1. Arquitetura do Funil de Vendas</h3>
+            <p>O funil do site da Graza é planejado para elevar o Valor de Tempo de Vida (LTV) e o Ticket Médio (AOV) desde a primeira visita<a href="#ref-33" class="citation">[33]</a>:</p>
+            <ul>
+                <li><strong>Combos (Bundles):</strong> O combo principal é o "The Duo" (Sizzle + Drizzle), incentivando a compra conjunta de uso diário e finalização<a href="#ref-34" class="citation">[34]</a>.</li>
+                <li><strong>Subscribe & Save (Recorrência):</strong> Oferece **10% de desconto definitivo** na assinatura de envios recorrentes a cada 1, 2 ou 3 meses, o que gera fluxo de caixa estável e previsível<a href="#ref-35" class="citation">[35]</a>.</li>
+                <li><strong>Assinatura Flexível:</strong> O cliente pode pular, adiar ou cancelar entregas com um clique, removendo a fricção mental e a resistência de se associar a contratos longos<a href="#ref-36" class="citation">[36]</a>.</li>
+            </ul>
+
+            <h3 class="question-title">2. Aumento do AOV com Acessórios e Refis</h3>
+            <p>A Graza incentiva os clientes que já possuem as garrafas squeeze a reutilizá-las comprando os **Refis em Lata** de 750ml, que protegem o azeite com gás nitrogênio contra oxidação e custam proporcionalmente menos, elevando a retenção de marca e a recorrência ecológica<a href="#ref-37" class="citation">[37]</a><a href="#ref-38" class="citation">[38]</a>. Eles também comercializam vestuário (bonés, panos de prato e aventais de chef) com a sua linguagem visual, transformando consumidores em promotores visuais da marca.</p>
+
+            <h3 class="question-title">3. Sequências de E-mail Marketing de Alta Retenção</h3>
+            <p>Os e-mails da Graza possuem design limpo, foco tipográfico e imagens reais de comida caindo no azeite<a href="#ref-39" class="citation">[39]</a><a href="#ref-40" class="citation">[40]</a>:</p>
+            <ul>
+                <li><strong>Welcome Flow (Boas-vindas):</strong> O primeiro e-mail dá um cupom de desconto (ex: `FIRSTSQUEEZE`) e explica a diferença didática dos produtos usando conteúdos de UGC. O segundo e-mail traz uma carta pessoal dos fundadores detalhando o propósito e a colheita na Espanha<a href="#ref-41" class="citation">[41]</a><a href="#ref-42" class="citation">[42]</a>.</li>
+                <li><strong>Fluxo de Abandono de Carrinho:</strong> Sequência divertida que lembra o cliente de levar o azeite para casa, usando prova social e imagens apelativas do bico inteligente derramando óleo<a href="#ref-43" class="citation">[43]</a>.</li>
+                <li><strong>Lembrete de Refil Predictivo:</strong> Com base na estimativa de consumo, a marca envia um e-mail oportuno após 30 ou 45 dias perguntando se a garrafa está vazia e oferecendo o refil em lata em um clique<a href="#ref-45" class="citation">[45]</a>.</li>
+            </ul>
+        </section>
+
+        <!-- PERFORMANCE -->
+        <section id="performance">
+            <h2 class="section-title"> 5. Dados de Performance e Crescimento</h2>
+            <p>Os números comprovam o poder de uma marca CPG focada em design disruptivo e marketing de comunidade online<a href="#ref-47" class="citation">[47]</a>:</p>
+            
+            <div class="metrics-container">
+                <div class="metric-card">
+                    <div class="metric-value">US$ 48.4M</div>
+                    <div class="metric-label">Faturamento Projetado (2024)</div>
+                </div>
+                <div class="metric-card accent">
+                    <div class="metric-value">24%</div>
+                    <div class="metric-label">Do Crescimento da Categoria nos EUA</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">US$ 100K</div>
+                    <div class="metric-label">Faturado na 1ª Semana de Lançamento</div>
+                </div>
+            </div>
+
+            <div class="highlight-box">
+                <p><strong>Conclusão para a Ollimia:</strong> O sucesso da Graza prova que garrafas squeeze de azeite não são apenas um "acessório diferente", mas sim uma nova categoria de consumo. Para a Ollimia, o foco no marketing digital deve unir a superioridade física do squeeze (limpeza/controle) com a autoridade culinária premium da origem Picual da Andaluzia, direcionando anúncios diretos ao carrinho do TikTok Shop.</p>
+            </div>
+        </section>
+
+        <!-- REFERENCES -->
+        <section class="references">
+            <h2>Referências Documentadas</h2>
+            <ol>
+                <li id="ref-1"><a href="https://www.graza.co/products/drizzle" target="_blank">Graza.co - "Drizzle" Olive Oil</a></li>
+                <li id="ref-2"><a href="https://www.myolivea.com/blogs/news/graza-olive-oil" target="_blank">MyOlivea - Graza Olive Oil Review: Pretty Bottles, Low Polyphenols</a></li>
+                <li id="ref-3"><a href="https://www.graza.co/products/frizzle-squeeze" target="_blank">Graza.co - "Frizzle" Squeeze</a></li>
+                <li id="ref-4"><a href="https://www.graza.co/blogs/education/a-helpful-guide-to-olive-oil-acidity" target="_blank">Graza.co - A Helpful Guide to Olive Oil Acidity</a></li>
+                <li id="ref-5"><a href="https://www.forbes.com/sites/andrewwatman/2025/02/25/drizzle-sizzle-and-now-frizzle-graza-debuts-new-high-heat-cooking-oil-and-spray-bottle-format/" target="_blank">Forbes - Drizzle, Sizzle, And Now Frizzle. Graza Debuts New High Heat Cooking Oil And Spray Bottle Format</a></li>
+                <li id="ref-6"><a href="https://www.graza.co/products/sizzle-drizzle-combo-pack" target="_blank">Graza.co - “Drizzle” & “Sizzle” Olive Oil</a></li>
+                <li id="ref-7"><a href="https://www.linkedin.com/posts/alicepolack_graza-didnt-sell-olive-oil-they-sold-a-activity-7477662226313728000-bspK" target="_blank">LinkedIn - Alice POLACK's Post: Graza didn't sell olive oil. They sold a kitchen counter you'd want to photograph.</a></li>
+                <li id="ref-8"><a href="https://www.foodnetwork.com/fn-dish/news/graza-olive-oil-squeeze-bottle-review" target="_blank">Food Network - We Tried Graza, The New Olive Oil That Comes in a Squeeze Bottle</a></li>
+                <li id="ref-9"><a href="https://www.foodandwine.com/graza-olive-oil-review-6826935" target="_blank">Food & Wine - Graza Olive Oil Review 2025, Tested & Reviewed</a></li>
+                <li id="ref-10"><a href="https://www.instagram.com/reel/DOohBRfkSrz/?hl=en" target="_blank">Instagram - How Graza turned olive oil into a $50M DTC powerhouse</a></li>
+                <li id="ref-12"><a href="https://brandarchive.xyz/identity/graza" target="_blank">Brand Archive - Graza Brand Identity</a></li>
+                <li id="ref-13"><a href="https://bpando.org/2023/04/06/squeezable-olive-oil-branding-packaging/" target="_blank">BP&O - Graza Olive Oil by Gander</a></li>
+                <li id="ref-14"><a href="https://www.youtube.com/watch?v=4nca_RRolbg" target="_blank">YouTube - How Friendly Branding Set Graza Olive Oil Apart</a></li>
+                <li id="ref-15"><a href="https://www.instagram.com/p/CZj7HVDNxMb/" target="_blank">Instagram - Graza's olive oil branding uses #GTAlpina Typewriter and ITC Garamond</a></li>
+                <li id="ref-16"><a href="https://www.tiktok.com/@color_palette_studio/video/7382215024531541291" target="_blank">TikTok - Inspired by the design genius of @Graza #colorpalette</a></li>
+                <li id="ref-17"><a href="https://takeagander.com/" target="_blank">Gander - Branding and Graphic Design Studio</a></li>
+                <li id="ref-18"><a href="https://thedieline.com/gander-designed-graza-is-olive-oil-meant-to-be-used/" target="_blank">The Dieline - Gander-Designed Graza Is Olive Oil 'Meant To Be Used' On Everything</a></li>
+                <li id="ref-19"><a href="https://www.tiktok.com/@iamnicorojas/video/7635060332934860045" target="_blank">TikTok - Graza's Bold Olive Oil Strategy: Squeeze Bottle & Viral</a></li>
+                <li id="ref-20"><a href="https://www.youtube.com/watch?v=zUlDkzFlQxI" target="_blank">YouTube - I Tried the VIRAL Graza “Drizzle” & “Sizzle” Extra Virgin Olive Oil</a></li>
+                <li id="ref-21"><a href="https://www.businessinsider.com/inside-graza-olive-oil-influencer-marketing-strategy-2024-5" target="_blank">Business Insider - How Olive-Oil Brand Graza Used Influencer Marketing to Grow</a></li>
+                <li id="ref-22"><a href="https://www.youtube.com/watch?v=AjVjf747m_c" target="_blank">YouTube - Graza's $48M Playbook: The DTC + Retail Strategy Nobody Talks About</a></li>
+                <li id="ref-23"><a href="https://www.facebook.com/getgraza/videos/crazy-fresh-olive-oil/1807171303195909/" target="_blank">Facebook - PSA: Graza is SO much more than a fun squeeze bottle.</a></li>
+                <li id="ref-25"><a href="https://www.getsaral.com/academy/graza-influencer-marketing" target="_blank">Saral - How Graza Reached $100K+ in Week 1 with Influencer Marketing</a></li>
+                <li id="ref-26"><a href="https://www.facebook.com/groups/MyDigitalMarketing/posts/6487933901288691/" target="_blank">Facebook - Weeks before the launch, their marketing manager began product seeding.</a></li>
+                <li id="ref-27"><a href="https://www.klaviyo.com/blog/guerrilla-marketing-for-ecommerce" target="_blank">Klaviyo - How Graza broke $500K in revenue</a></li>
+                <li id="ref-28"><a href="https://www.getsaral.com/academy/graza-influencer-marketing" target="_blank">Saral - How Graza Reached $100K+ in Week 1 with Influencer Marketing</a></li>
+                <li id="ref-29"><a href="https://www.klaviyo.com/blog/guerrilla-marketing-for-ecommerce" target="_blank">Klaviyo - How Graza broke $500K in revenue</a></li>
+                <li id="ref-30"><a href="https://www.getsaral.com/academy/graza-influencer-marketing" target="_blank">Saral - How Graza Reached $100K+ in Week 1 with Influencer Marketing</a></li>
+                <li id="ref-31"><a href="https://www.tiktok.com/@codytriesstuff/video/7367000016310914350" target="_blank">TikTok - Unboxing a big ol’ @Graza care package which unveils their new product</a></li>
+                <li id="ref-32"><a href="https://www.instagram.com/reel/C6v9_wYO8x2/?hl=en" target="_blank">Instagram - Unboxing a big ol' @getgraza care package which unveils their new product</a></li>
+                <li id="ref-33"><a href="https://www.getsaral.com/academy/graza-influencer-marketing" target="_blank">Saral - How Graza Reached $100K+ in Week 1 with Influencer Marketing</a></li>
+                <li id="ref-34"><a href="https://www.graza.co/products/sizzle-drizzle-combo-pack" target="_blank">Graza.co - “Drizzle” & “Sizzle” Olive Oil</a></li>
+                <li id="ref-35"><a href="https://www.graza.co/products/sizzle-drizzle-combo-pack" target="_blank">Graza.co - “Drizzle” & “Sizzle” Olive Oil</a></li>
+                <li id="ref-36"><a href="https://www.graza.co/products/sizzle-drizzle-combo-pack" target="_blank">Graza.co - “Drizzle” & “Sizzle” Olive Oil</a></li>
+                <li id="ref-37"><a href="https://www.instagram.com/reel/DOogwaiEZs6/" target="_blank">Instagram - How Graza turned olive oil into a $50M DTC powerhouse</a></li>
+                <li id="ref-38"><a href="https://www.graza.co/products/sizzle-refill-can" target="_blank">Graza.co - “Sizzle” Refill Can</a></li>
+                <li id="ref-39"><a href="https://www.graza.co/products/the-cooks-a-lot-refill-set" target="_blank">Graza.co - “The Cooks A Lot” Refill Set</a></li>
+                <li id="ref-40"><a href="https://www.dtcpatterns.com/dtc-patterns-articles/harvesting-high-converting-emails-with-graza-olive-oil" target="_blank">DTC Patterns - Harvesting High Converting Emails with Graza Olive Oil</a></li>
+                <li id="ref-41"><a href="https://sk.pinterest.com/pin/65020788365324870/" target="_blank">Pinterest - Harvesting High Converting Emails with Graza Olive Oil</a></li>
+                <li id="ref-42"><a href="https://www.dtcpatterns.com/dtc-patterns-articles/harvesting-high-converting-emails-with-graza-olive-oil" target="_blank">DTC Patterns - Harvesting High Converting Emails with Graza Olive Oil</a></li>
+                <li id="ref-43"><a href="https://www.dtcpatterns.com/dtc-patterns-articles/harvesting-high-converting-emails-with-graza-olive-oil" target="_blank">DTC Patterns - Harvesting High Converting Emails with Graza Olive Oil</a></li>
+                <li id="ref-45"><a href="https://www.dtcpatterns.com/dtc-patterns-articles/harvesting-high-converting-emails-with-graza-olive-oil" target="_blank">DTC Patterns - Harvesting High Converting Emails with Graza Olive Oil</a></li>
+                <li id="ref-47"><a href="https://www.dtcpatterns.com/dtc-patterns-articles/harvesting-high-converting-emails-with-graza-olive-oil" target="_blank">DTC Patterns - Harvesting High Converting Emails with Graza Olive Oil</a></li>
+                <li id="ref-48"><a href="https://www.cnbc.com/2024/06/07/how-graza-olive-oil-co-founder-andrew-benin-built-the-business.html" target="_blank">CNBC - How Graza Olive Oil co-founder Andrew Benin built the business</a></li>
+                <li id="ref-49"><a href="https://www.youtube.com/watch?v=8tnkWrWztV0" target="_blank">YouTube - How olive oil startup Graza brings in $48 million a year</a></li>
+                <li id="ref-50"><a href="https://www.linkedin.com/posts/dlechapman_graza-is-on-track-to-do-60-million-in-revenue-activity-7288172694313832449-eObL" target="_blank">LinkedIn - Graza is on track to do $60 million in revenue in their 3rd year.</a></li>
+                <li id="ref-51"><a href="https://www.cnbc.com/2024/06/07/how-graza-olive-oil-co-founder-andrew-benin-built-the-business.html" target="_blank">CNBC - How Graza Olive Oil co-founder Andrew Benin built the business</a></li>
+                <li id="ref-52"><a href="https://www.klaviyo.com/blog/guerrilla-marketing-for-ecommerce" target="_blank">Klaviyo - How Graza broke $500K in revenue</a></li>
+                <li id="ref-53"><a href="https://www.inc.com/maria-jose-gutierrez-chavez/how-this-cult-olive-oil-brand-just-expanded-into-wine/91260879" target="_blank">Inc. - Why This Cult Olive Oil Brand Just Expanded Into Wine</a></li>
+                <li id="ref-54"><a href="https://en.wikipedia.org/wiki/Graza" target="_blank">Wikipedia - Graza</a></li>
+            </ol>
+        </section>
+    </div>
+</body>
+</html>

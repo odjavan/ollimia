@@ -1,0 +1,156 @@
+/* ==========================================================================
+   DESIGN SYSTEM 4: FLY BY JING (Bold Neon DTC & Extra Condensed Typography)
+   ========================================================================== */
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@600;700&family=Inter:wght@400;600;800&display=swap');
+
+:root {
+  --ds-bg: #111111;
+  --ds-card-bg: #1A1A1A;
+  --ds-red: #FF2A2A;
+  --ds-yellow: #FFD600;
+  --ds-cream: #F8F5EE;
+  --ds-border: 1px solid #333333;
+  --ds-radius: 8px;
+  --ds-font-heading: 'Oswald', sans-serif;
+  --ds-font-body: 'Inter', sans-serif;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background-color: var(--ds-bg);
+  color: var(--ds-cream);
+  font-family: var(--ds-font-body);
+  line-height: 1.5;
+}
+
+.top-bar-fbj {
+  background: var(--ds-red);
+  color: #FFF;
+  font-family: var(--ds-font-heading);
+  font-size: 0.9rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  padding: 10px 0;
+  text-align: center;
+}
+
+.site-header {
+  background: var(--ds-bg);
+  padding: 18px 0;
+  border-bottom: var(--ds-border);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.header-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo-text {
+  font-family: var(--ds-font-heading);
+  font-size: 2.4rem;
+  font-weight: 700;
+  color: var(--ds-yellow);
+  text-decoration: none;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+.btn-fbj {
+  background: var(--ds-yellow);
+  color: #000;
+  padding: 14px 28px;
+  border-radius: var(--ds-radius);
+  font-family: var(--ds-font-heading);
+  font-weight: 700;
+  font-size: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-block;
+  transition: transform 0.15s ease;
+}
+
+.btn-fbj:hover {
+  transform: translateY(-2px);
+  background: #FFF;
+}
+
+.hero-fbj {
+  padding: 70px 0;
+}
+
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 40px;
+  align-items: center;
+}
+
+.hero-title {
+  font-family: var(--ds-font-heading);
+  font-size: clamp(3.2rem, 6vw, 4.8rem);
+  font-weight: 700;
+  line-height: 0.95;
+  text-transform: uppercase;
+  color: var(--ds-yellow);
+  letter-spacing: 1px;
+  margin: 16px 0;
+}
+
+.hero-img-box {
+  background: var(--ds-card-bg);
+  border-radius: var(--ds-radius);
+  padding: 30px;
+  border: 2px solid var(--ds-red);
+  text-align: center;
+}
+
+.hero-img-box img {
+  max-width: 100%;
+  max-height: 380px;
+  object-fit: contain;
+}
+
+.badge-strip {
+  background: var(--ds-red);
+  color: #FFF;
+  padding: 16px 0;
+  font-family: var(--ds-font-heading);
+  font-size: 1rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  text-align: center;
+}
+
+.grid-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 28px;
+  margin-top: 40px;
+}
+
+.card-fbj {
+  background: var(--ds-card-bg);
+  border-radius: var(--ds-radius);
+  padding: 28px;
+  border: var(--ds-border);
+}
+
+.card-fbj img {
+  width: 100%;
+  height: 240px;
+  object-fit: contain;
+}

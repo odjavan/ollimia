@@ -1,0 +1,1078 @@
+/* ==========================================================================
+   OLLIMIA SQUEEZE — OFFICIAL DESIGN SYSTEM CSS v2.0
+   Design Tokens, Brandbook Rules & DTC Luxury Aesthetic
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Condensed:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600;1,700&family=Alex+Brush&family=Playfair+Display:ital,wght@0,600;1,600;1,700&family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+:root {
+  /* --- PALETA OFICIAL DO BRANDBOOK OLLIMIA --- */
+  --ollimia-verde-origem:  #1E2614; /* #1e2614 - RGB 30, 38, 20 (Verde Origem - Fundo Master) */
+  --ollimia-verde-pomar:   #4F5C13; /* #4f5c13 - RGB 78, 92, 19 (Verde Pomar - Acentos & Cards) */
+  --ollimia-verde-colina:  #9DA300; /* #9da300 - RGB 157, 163, 0 (Verde Colina - Limão/Destaques) */
+  --ollimia-ambar-solar:   #D89346; /* #d89346 - RGB 216, 147, 70 (Âmbar Solar - Dourado/Rótulo) */
+  --ollimia-marfim:        #E7E4C9; /* #e7e4c9 - RGB 231, 228, 201 (Marfim Natural - Texto/Bordas) */
+
+  /* --- ALIASES DE COMPATIBILIDADE DA APLICAÇÃO --- */
+  --ollimia-olive-dark:   var(--ollimia-verde-origem);
+  --ollimia-olive-medium: var(--ollimia-verde-pomar);
+  --ollimia-olive-lime:   var(--ollimia-verde-colina);
+  --ollimia-terracotta:   var(--ollimia-ambar-solar);
+  --ollimia-cream:        var(--ollimia-marfim);
+  --ollimia-cream-light:  #FAF9F5;
+  --ollimia-carbon:       #141414;
+  --ollimia-gold:         var(--ollimia-ambar-solar);
+
+  /* --- CORES FUNCIONAIS & ESTADOS --- */
+  --color-text-main:    #141414;
+  --color-text-muted:   #5A6551;
+  --color-text-on-dark: var(--ollimia-marfim);
+  --color-border-light: rgba(30, 38, 20, 0.12);
+  --color-border-dark:  rgba(231, 228, 201, 0.18);
+
+  /* --- TIPOGRAFIA OFICIAL BRANDBOOK (PÁG 28) --- */
+  --font-display: 'IBM Plex Sans Condensed', sans-serif;
+  --font-body:    'IBM Plex Sans Condensed', 'Inter', sans-serif;
+  --font-accent:  'Playfair Display', serif;
+  --font-script:  'Alex Brush', cursive;
+
+  /* --- ESCALA TIPOGRÁFICA DYNAMIC CLAMP --- */
+  --font-size-h1: clamp(2.5rem, 5vw, 4.4rem);
+  --font-size-h2: clamp(1.9rem, 3.5vw, 2.9rem);
+  --font-size-h3: clamp(1.3rem, 2vw, 1.8rem);
+  --font-size-body: 1.05rem;
+  --font-size-sm: 0.9rem;
+
+  /* --- BORDAS & FORMAS --- */
+  --radius-pill: 999px;
+  --radius-card: 18px;
+  --radius-sm: 10px;
+
+  /* --- ELEVAÇÃO & SHADOWS LUXURY --- */
+  --shadow-card: 0 14px 35px rgba(30, 38, 20, 0.12);
+  --shadow-hover: 0 20px 45px rgba(30, 38, 20, 0.25);
+  --shadow-gold: 0 0 25px rgba(216, 147, 70, 0.3);
+  --shadow-pill: 0 4px 18px rgba(157, 163, 0, 0.4);
+
+  /* --- EFEITOS & TRANSIÇÕES --- */
+  --transition-fast: 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  --transition-normal: 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* RESET E BASE */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--ollimia-cream);
+  color: var(--color-text-main);
+  line-height: 1.6;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* MARQUEE ANNOUNCEMENT BAR */
+.top-marquee {
+  background: var(--ollimia-carbon);
+  color: var(--ollimia-olive-lime);
+  font-family: var(--font-display);
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  padding: 10px 0;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.marquee-content {
+  display: inline-block;
+  animation: marquee 55s linear infinite;
+}
+
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* HEADER & NAVIGATION */
+.ollimia-header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: rgba(30, 38, 22, 0.95);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--color-border-dark);
+  padding: 16px 4%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+}
+
+.brand-logo-text {
+  font-family: var(--font-accent);
+  font-style: italic;
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--ollimia-cream);
+}
+
+.brand-badge {
+  background: var(--ollimia-gold);
+  color: var(--ollimia-carbon);
+  font-family: var(--font-display);
+  font-size: 0.65rem;
+  font-weight: 800;
+  padding: 3px 8px;
+  border-radius: var(--radius-pill);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.header-nav {
+  display: flex;
+  gap: 24px;
+  align-items: center;
+}
+
+.nav-link {
+  color: var(--ollimia-cream);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.9rem;
+  transition: var(--transition-fast);
+}
+
+.nav-link:hover {
+  color: var(--ollimia-olive-lime);
+}
+
+/* BUTTON SYSTEM (PILL DTC) */
+.btn-ollimia {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  padding: 14px 28px;
+  border-radius: var(--radius-pill);
+  text-decoration: none;
+  border: 2px solid transparent;
+  cursor: pointer;
+  transition: var(--transition-normal);
+}
+
+.btn-primary {
+  background: var(--ollimia-olive-lime);
+  color: var(--ollimia-carbon);
+  box-shadow: var(--shadow-pill);
+}
+
+.btn-primary:hover {
+  background: #A0AE2E;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(140, 153, 38, 0.5);
+}
+
+.btn-secondary {
+  background: transparent;
+  color: var(--ollimia-cream);
+  border-color: rgba(245, 243, 233, 0.3);
+}
+
+.btn-secondary:hover {
+  background: rgba(245, 243, 233, 0.1);
+  border-color: var(--ollimia-cream);
+}
+
+.btn-terracotta {
+  background: var(--ollimia-terracotta);
+  color: #FFF;
+}
+
+.btn-terracotta:hover {
+  background: #C27B37;
+  transform: translateY(-2px);
+}
+
+/* HERO SECTION & VIDEO BACKGROUND */
+.hero-section {
+  background: var(--ollimia-olive-dark);
+  color: var(--ollimia-cream);
+  padding: 80px 4% 100px;
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 60px;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-video-bg {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  min-width: 100%;
+  min-height: 100%;
+  width: auto;
+  height: auto;
+  z-index: 1;
+  transform: translate(-50%, -50%);
+  object-fit: cover;
+  opacity: 0.38;
+  filter: saturate(1.2) contrast(1.1);
+  transition: opacity 0.5s ease;
+}
+
+.hero-video-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+  background: linear-gradient(
+    135deg,
+    rgba(30, 38, 22, 0.92) 0%,
+    rgba(30, 38, 22, 0.78) 50%,
+    rgba(20, 20, 20, 0.90) 100%
+  );
+  pointer-events: none;
+}
+
+.hero-content,
+.hero-media-wrapper,
+.hero-bg-glow {
+  position: relative;
+  z-index: 3;
+}
+
+.hero-section::after {
+  content: '';
+  position: absolute;
+  bottom: -40px;
+  right: -40px;
+  width: 300px;
+  height: 300px;
+  background: radial-gradient(circle, rgba(140, 153, 38, 0.15) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.hero-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(140, 153, 38, 0.15);
+  border: 1px solid rgba(140, 153, 38, 0.4);
+  color: var(--ollimia-olive-lime);
+  font-family: var(--font-display);
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  padding: 6px 16px;
+  border-radius: var(--radius-pill);
+  margin-bottom: 24px;
+}
+
+.hero-title {
+  font-family: var(--font-display);
+  font-size: var(--font-size-h1);
+  line-height: 1.05;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+  color: var(--ollimia-cream);
+}
+
+.hero-title span {
+  color: var(--ollimia-olive-lime);
+  font-family: var(--font-accent);
+  text-transform: none;
+  font-style: italic;
+  display: block;
+}
+
+.hero-subtitle {
+  font-size: 1.15rem;
+  color: rgba(245, 243, 233, 0.85);
+  margin-bottom: 36px;
+  max-width: 540px;
+  font-weight: 400;
+}
+
+.hero-actions {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.hero-media-wrapper {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.hero-squeeze-card {
+  background: linear-gradient(145deg, rgba(56, 70, 32, 0.6), rgba(30, 38, 22, 0.9));
+  border: 1px solid rgba(245, 243, 233, 0.15);
+  border-radius: 24px;
+  padding: 40px;
+  text-align: center;
+  position: relative;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
+  width: 100%;
+  max-width: 440px;
+}
+
+.squeeze-img-frame {
+  width: 220px;
+  height: 320px;
+  margin: 0 auto 20px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.squeeze-mockup {
+  max-height: 100%;
+  max-width: 100%;
+  object-fit: contain;
+  filter: drop-shadow(0 15px 25px rgba(0, 0, 0, 0.5));
+}
+
+.squeeze-floating-badge {
+  position: absolute;
+  top: 20px;
+  right: -10px;
+  background: var(--ollimia-gold);
+  color: var(--ollimia-carbon);
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 0.75rem;
+  padding: 8px 14px;
+  border-radius: var(--radius-pill);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
+  text-transform: uppercase;
+}
+
+/* PRESS / PRESS LOGOS BAR */
+.press-bar {
+  background: var(--ollimia-olive-medium);
+  padding: 24px 4%;
+  border-bottom: 1px solid var(--color-border-dark);
+  text-align: center;
+}
+
+.press-title {
+  color: rgba(245, 243, 233, 0.6);
+  font-family: var(--font-display);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-bottom: 16px;
+}
+
+.press-logos {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: clamp(14px, 2.5vw, 36px);
+  flex-wrap: nowrap;
+  white-space: nowrap;
+  overflow-x: auto;
+  color: var(--ollimia-cream);
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 0.95rem;
+  letter-spacing: 1px;
+  opacity: 0.9;
+  padding: 4px 0;
+}
+
+.press-dot {
+  color: var(--ollimia-gold);
+  font-size: 0.8rem;
+  opacity: 0.8;
+}
+
+/* SECTION CONTAINERS */
+.section-padding {
+  padding: 90px 4%;
+}
+
+.section-header {
+  text-align: center;
+  max-width: 700px;
+  margin: 0 auto 60px;
+}
+
+.section-tag {
+  color: var(--ollimia-olive-medium);
+  font-family: var(--font-display);
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-bottom: 12px;
+  display: block;
+}
+
+.section-title {
+  font-family: var(--font-display);
+  font-size: var(--font-size-h2);
+  line-height: 1.15;
+  text-transform: uppercase;
+  color: var(--ollimia-carbon);
+}
+
+/* FEATURES GRID (SEED STYLE) */
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 28px;
+}
+
+.feature-card {
+  background: #FFF;
+  border-radius: var(--radius-card);
+  padding: 36px 28px;
+  border: 1px solid var(--color-border-light);
+  box-shadow: var(--shadow-card);
+  transition: var(--transition-normal);
+  position: relative;
+  overflow: hidden;
+}
+
+.feature-card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-hover);
+  border-color: var(--ollimia-olive-lime);
+}
+
+.feature-badge-luxury {
+  width: 58px;
+  height: 58px;
+  border-radius: 16px;
+  background: linear-gradient(135deg, rgba(30, 38, 22, 0.95), rgba(56, 70, 32, 0.7));
+  border: 1.5px solid rgba(197, 160, 89, 0.5);
+  box-shadow: 0 8px 20px rgba(30, 38, 22, 0.15), inset 0 1px 0 rgba(245, 243, 233, 0.25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 24px;
+  transition: var(--transition-normal);
+}
+
+.feature-card:hover .feature-badge-luxury {
+  transform: translateY(-3px) scale(1.06);
+  border-color: var(--ollimia-gold);
+  box-shadow: 0 12px 24px rgba(197, 160, 89, 0.3);
+}
+
+.feature-icon {
+  width: 56px;
+  height: 56px;
+  border-radius: 14px;
+  background: rgba(140, 153, 38, 0.12);
+  color: var(--ollimia-olive-medium);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.6rem;
+  margin-bottom: 24px;
+}
+
+.feature-title {
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+  color: var(--ollimia-carbon);
+}
+
+.feature-desc {
+  font-size: 0.95rem;
+  color: var(--color-text-muted);
+}
+
+/* SHOWCASE PRODUCT CARDS */
+.product-showcase-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 32px;
+}
+
+.product-card {
+  background: var(--ollimia-olive-dark);
+  color: var(--ollimia-cream);
+  border-radius: 20px;
+  padding: 36px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-shadow: var(--shadow-card);
+  position: relative;
+}
+
+.card-frame-picual {
+  border: 2px solid var(--ollimia-olive-lime);
+  background: linear-gradient(160deg, rgba(30, 38, 22, 0.96), rgba(42, 54, 30, 0.88));
+  box-shadow: 0 14px 35px rgba(140, 153, 38, 0.18);
+  transition: var(--transition-normal);
+}
+.card-frame-picual:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 20px 45px rgba(140, 153, 38, 0.28);
+}
+
+.card-frame-master {
+  border: 2px solid var(--ollimia-gold);
+  background: linear-gradient(160deg, rgba(32, 28, 20, 0.96), rgba(48, 40, 26, 0.88));
+  box-shadow: 0 14px 35px rgba(197, 160, 89, 0.2);
+  transition: var(--transition-normal);
+}
+.card-frame-master:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 20px 45px rgba(197, 160, 89, 0.32);
+}
+
+.card-frame-alentejo {
+  border: 2px solid var(--ollimia-terracotta);
+  background: linear-gradient(160deg, rgba(35, 26, 20, 0.96), rgba(54, 38, 25, 0.88));
+  box-shadow: 0 14px 35px rgba(212, 140, 70, 0.18);
+  transition: var(--transition-normal);
+}
+.card-frame-alentejo:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 20px 45px rgba(212, 140, 70, 0.28);
+}
+
+.product-badge {
+  align-self: flex-start;
+  background: var(--ollimia-olive-lime);
+  color: var(--ollimia-carbon);
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 0.75rem;
+  padding: 6px 14px;
+  border-radius: var(--radius-pill);
+  text-transform: uppercase;
+  margin-bottom: 20px;
+}
+
+.product-title {
+  font-family: var(--font-display);
+  font-size: 1.8rem;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+
+.product-subtitle {
+  color: rgba(245, 243, 233, 0.7);
+  font-size: 0.9rem;
+  margin-bottom: 24px;
+}
+
+.product-img-box {
+  height: 260px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 24px;
+}
+
+.product-img-box img {
+  max-height: 100%;
+  object-fit: contain;
+  filter: drop-shadow(0 10px 20px rgba(0,0,0,0.6));
+}
+
+/* COMPARATIVE TABLE MODULE (VIDRO VS SQUEEZE) */
+.comparative-section {
+  background: var(--ollimia-cream-light);
+  border-top: 1px solid var(--color-border-light);
+  border-bottom: 1px solid var(--color-border-light);
+}
+
+.comparative-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 32px;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.comp-column {
+  border-radius: var(--radius-card);
+  padding: 40px;
+}
+
+.comp-column.glass-col {
+  background: #EAE6D8;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.comp-column.ollimia-col {
+  background: var(--ollimia-olive-dark);
+  color: var(--ollimia-cream);
+  border: 2px solid var(--ollimia-olive-lime);
+  box-shadow: var(--shadow-hover);
+}
+
+.comp-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 28px;
+  padding-bottom: 18px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.ollimia-col .comp-header {
+  border-bottom-color: rgba(245, 243, 233, 0.15);
+}
+
+.comp-title {
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  text-transform: uppercase;
+}
+
+.comp-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.comp-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  font-size: 0.95rem;
+}
+
+.icon-bad { color: #C53030; font-weight: bold; }
+.icon-good { color: var(--ollimia-olive-lime); font-weight: bold; }
+
+/* TRIPLE CONVERSION FOOTER (BACHAN'S STYLE) */
+.footer-conversion-section {
+  background: var(--ollimia-olive-dark);
+  color: var(--ollimia-cream);
+  padding: 80px 4% 40px;
+}
+
+.tabs-header {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 40px;
+  flex-wrap: wrap;
+}
+
+.tab-btn {
+  background: rgba(245, 243, 233, 0.08);
+  color: var(--ollimia-cream);
+  border: 1px solid rgba(245, 243, 233, 0.2);
+  padding: 12px 24px;
+  border-radius: var(--radius-pill);
+  font-family: var(--font-display);
+  font-size: 0.9rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: var(--transition-fast);
+}
+
+.tab-btn.active, .tab-btn:hover {
+  background: var(--ollimia-olive-lime);
+  color: var(--ollimia-carbon);
+  border-color: var(--ollimia-olive-lime);
+}
+
+.tab-panel {
+  max-width: 580px;
+  margin: 0 auto;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(245, 243, 233, 0.1);
+  border-radius: var(--radius-card);
+  padding: 40px;
+  display: none;
+}
+
+.tab-panel.active {
+  display: block;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-label {
+  display: block;
+  font-size: 0.85rem;
+  font-family: var(--font-display);
+  text-transform: uppercase;
+  margin-bottom: 8px;
+  color: rgba(245, 243, 233, 0.8);
+}
+
+.form-input {
+  width: 100%;
+  padding: 14px 18px;
+  border-radius: var(--radius-sm);
+  border: 1px solid rgba(245, 243, 233, 0.2);
+  background: rgba(20, 20, 20, 0.6);
+  color: #FFF;
+  font-family: var(--font-body);
+  font-size: 1rem;
+}
+
+.form-input:focus {
+  outline: none;
+  border-color: var(--ollimia-olive-lime);
+}
+
+/* RESPONSIVE BREAKPOINTS */
+@media (max-width: 900px) {
+  .hero-section {
+    grid-template-columns: 1fr;
+    text-align: center;
+    padding-top: 50px;
+  }
+  .hero-subtitle { margin: 0 auto 36px; }
+  .hero-actions { justify-content: center; }
+  .comparative-grid { grid-template-columns: 1fr; }
+  .header-nav { display: none; }
+}
+
+/* ==========================================================================
+   NOVOS COMPONENTES: DUAL VIDEO HERO, COUNTERTOP LUXURY & BOTANICAL SHOWCASE
+   ========================================================================== */
+
+/* 1. DUAL VIDEO BACKGROUND HERO WITH VERDE ORIGEM OVERLAY */
+.hero-video-wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.hero-video-item {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  min-width: 100%;
+  min-height: 100%;
+  width: auto;
+  height: auto;
+  object-fit: cover;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  transition: opacity 1.5s ease-in-out;
+}
+
+.hero-video-item.video-active {
+  opacity: 1;
+}
+
+.hero-green-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(180deg, 
+    rgba(30, 38, 20, 0.88) 0%, 
+    rgba(30, 38, 20, 0.74) 45%, 
+    rgba(30, 38, 20, 0.96) 100%
+  );
+  backdrop-filter: contrast(105%) brightness(95%);
+}
+
+/* 2. PRESS & MARQUEE ICONS */
+.press-logos {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+
+.press-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-display);
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  color: var(--ollimia-marfim);
+  text-transform: uppercase;
+}
+
+.press-item svg {
+  width: 20px;
+  height: 20px;
+  color: var(--ollimia-ambar-solar);
+  flex-shrink: 0;
+}
+
+/* 3. COUNTERTOP LUXURY CARDS ("Pensado para a Bancada da sua Cozinha") */
+.countertop-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 28px;
+  margin-top: 40px;
+}
+
+.countertop-card-luxury {
+  position: relative;
+  background: linear-gradient(145deg, rgba(30, 38, 20, 0.92) 0%, rgba(79, 92, 19, 0.65) 100%);
+  border: 1px solid rgba(231, 228, 201, 0.22);
+  border-radius: 20px;
+  padding: 36px 28px 32px;
+  color: var(--ollimia-marfim);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.25);
+  backdrop-filter: blur(10px);
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  overflow: hidden;
+}
+
+.countertop-card-luxury::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: linear-gradient(90deg, var(--ollimia-ambar-solar), var(--ollimia-verde-colina));
+  opacity: 0.7;
+}
+
+.countertop-card-luxury:hover {
+  transform: translateY(-8px);
+  border-color: var(--ollimia-ambar-solar);
+  box-shadow: 0 24px 50px rgba(30, 38, 20, 0.4), 0 0 25px rgba(216, 147, 70, 0.25);
+}
+
+.card-top-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.stamp-number {
+  font-family: var(--font-display);
+  font-size: 0.8rem;
+  font-weight: 800;
+  letter-spacing: 2px;
+  color: var(--ollimia-ambar-solar);
+  background: rgba(216, 147, 70, 0.15);
+  border: 1px solid rgba(216, 147, 70, 0.3);
+  padding: 4px 12px;
+  border-radius: var(--radius-pill);
+  text-transform: uppercase;
+}
+
+.gold-icon-wrapper {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(216, 147, 70, 0.2) 0%, rgba(30, 38, 20, 0) 70%);
+  border: 1px solid rgba(216, 147, 70, 0.35);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--ollimia-ambar-solar);
+}
+
+.card-luxury-title {
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--ollimia-marfim);
+  margin-bottom: 12px;
+}
+
+.card-luxury-desc {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: rgba(231, 228, 201, 0.85);
+  font-weight: 400;
+}
+
+/* 4. BOTANICAL GOURMET SHOWCASE ("Conheça a Linha Ollimia") */
+.botanical-showcase-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 36px;
+  margin-top: 48px;
+}
+
+.botanical-card {
+  position: relative;
+  background: linear-gradient(165deg, rgba(30, 38, 20, 0.95) 0%, rgba(20, 20, 20, 0.98) 100%);
+  border: 1px solid rgba(231, 228, 201, 0.2);
+  border-radius: 24px;
+  padding: 36px 28px;
+  box-shadow: 0 16px 45px rgba(0,0,0,0.3);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: all 0.35s ease;
+  overflow: hidden;
+}
+
+.botanical-card:hover {
+  transform: translateY(-6px);
+  border-color: var(--ollimia-verde-colina);
+  box-shadow: 0 25px 60px rgba(0,0,0,0.4), 0 0 30px rgba(157, 163, 0, 0.2);
+}
+
+.botanical-card-header {
+  text-align: center;
+  position: relative;
+  z-index: 2;
+  margin-bottom: 16px;
+}
+
+.script-subtitle {
+  font-family: var(--font-script);
+  font-size: 1.8rem;
+  color: var(--ollimia-ambar-solar);
+  line-height: 1;
+  margin-bottom: 4px;
+  display: block;
+}
+
+.botanical-card-title {
+  font-family: var(--font-display);
+  font-size: 1.6rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--ollimia-marfim);
+}
+
+.gourmet-stamp-seal {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(157, 163, 0, 0.15);
+  border: 1px solid var(--ollimia-verde-colina);
+  padding: 6px 14px;
+  border-radius: var(--radius-pill);
+  font-family: var(--font-display);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  color: var(--ollimia-verde-colina);
+  text-transform: uppercase;
+  margin: 12px auto 0;
+}
+
+.pedestal-img-wrapper {
+  position: relative;
+  height: 280px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 20px 0;
+}
+
+.pedestal-arch {
+  position: absolute;
+  width: 200px;
+  height: 250px;
+  border-radius: 100px 100px 0 0;
+  background: radial-gradient(circle at center, rgba(79, 92, 19, 0.3) 0%, rgba(30, 38, 20, 0) 70%);
+  border: 1px solid rgba(231, 228, 201, 0.12);
+  z-index: 1;
+}
+
+.pedestal-bottle-img {
+  position: relative;
+  z-index: 2;
+  height: 240px;
+  width: auto;
+  filter: drop-shadow(0 15px 25px rgba(0,0,0,0.5));
+  transition: transform 0.35s ease;
+}
+
+.botanical-card:hover .pedestal-bottle-img {
+  transform: scale(1.06) translateY(-4px);
+}
+
+/* REGUA ORGANOLÉPTICA DE DEGUSTAÇÃO (ESTILO DE AZEITES FINOS) */
+.organoleptic-box {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(231, 228, 201, 0.12);
+  border-radius: 14px;
+  padding: 16px 20px;
+  margin-bottom: 24px;
+}
+
+.organoleptic-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.organoleptic-row:last-child {
+  margin-bottom: 0;
+}
+
+.organoleptic-label {
+  font-size: 0.8rem;
+  font-family: var(--font-display);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: rgba(231, 228, 201, 0.75);
+}
+
+.organoleptic-meter {
+  width: 110px;
+  height: 6px;
+  background: rgba(255,255,255,0.1);
+  border-radius: 3px;
+  overflow: hidden;
+  position: relative;
+}
+
+.organoleptic-fill {
+  height: 100%;
+  border-radius: 3px;
+  background: linear-gradient(90deg, var(--ollimia-ambar-solar), var(--ollimia-verde-colina));
+}
+
+.botanical-card-footer {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  justify-content: space-between;
+}
+

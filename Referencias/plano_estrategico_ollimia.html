@@ -1,0 +1,997 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ollimia - Painel Estratégico de Lançamento</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-base: #FAF8F5;
+            --card-bg: #FFFFFF;
+            --olive-dark: #3E4A35;
+            --olive-medium: #5D6B54;
+            --olive-light: #F0F3ED;
+            --gold: #D49A29;
+            --gold-light: #FBF6EC;
+            --border-color: #E8E5DF;
+            --text-main: #2A2A28;
+            --text-muted: #5A5A57;
+            --shadow: 0 10px 40px rgba(62, 74, 53, 0.04);
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-base);
+            color: var(--text-main);
+            line-height: 1.6;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Top Bar */
+        .top-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 20px;
+        }
+
+        .logo-area h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.2rem;
+            color: var(--olive-dark);
+            font-weight: 700;
+        }
+
+        .logo-area span {
+            font-size: 0.85rem;
+            color: var(--gold);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 600;
+        }
+
+        .meeting-badge {
+            background-color: var(--gold-light);
+            border: 1px solid var(--gold);
+            color: var(--gold);
+            padding: 8px 16px;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .pulse {
+            width: 8px;
+            height: 8px;
+            background-color: var(--gold);
+            border-radius: 50%;
+            display: inline-block;
+            animation: pulse-ani 1.5s infinite;
+        }
+
+        @keyframes pulse-ani {
+            0% { transform: scale(0.9); opacity: 0.6; }
+            50% { transform: scale(1.2); opacity: 1; }
+            100% { transform: scale(0.9); opacity: 0.6; }
+        }
+
+        /* Hero Banner */
+        .hero {
+            background: linear-gradient(135deg, var(--olive-dark) 0%, #20271B 100%);
+            color: #ffffff;
+            padding: 60px 40px;
+            border-radius: 24px;
+            box-shadow: var(--shadow);
+            margin-bottom: 40px;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .hero h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 3.2rem;
+            font-weight: 700;
+            line-height: 1.15;
+            margin-bottom: 15px;
+            max-width: 800px;
+        }
+
+        .hero p.tagline {
+            font-size: 1.15rem;
+            opacity: 0.9;
+            max-width: 650px;
+            font-weight: 300;
+        }
+
+        /* Partners Section */
+        .partners-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .partner-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            padding: 20px;
+            border-radius: 16px;
+            box-shadow: var(--shadow);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            transition: var(--transition);
+        }
+
+        .partner-card:hover {
+            transform: translateY(-3px);
+            border-color: var(--olive-medium);
+        }
+
+        .avatar-placeholder {
+            width: 48px;
+            height: 48px;
+            background-color: var(--olive-light);
+            color: var(--olive-dark);
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid var(--border-color);
+        }
+
+        .partner-info h4 {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--text-main);
+        }
+
+        .partner-info p {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* Tab System */
+        .tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 30px;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 15px;
+            overflow-x: auto;
+        }
+
+        .tab-btn {
+            background: none;
+            border: none;
+            outline: none;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: var(--transition);
+            white-space: nowrap;
+        }
+
+        .tab-btn:hover {
+            color: var(--olive-dark);
+            background-color: var(--olive-light);
+        }
+
+        .tab-btn.active {
+            color: #ffffff;
+            background-color: var(--olive-dark);
+        }
+
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.4s ease;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Portfolio split styling */
+        .portfolio-split {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        @media (max-width: 768px) {
+            .portfolio-split { grid-template-columns: 1fr; }
+        }
+
+        .product-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: var(--shadow);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .product-card.premium {
+            border-left: 6px solid var(--gold);
+        }
+
+        .product-card.competitive {
+            border-left: 6px solid var(--olive-dark);
+        }
+
+        .product-badge {
+            align-self: flex-start;
+            padding: 4px 12px;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 20px;
+        }
+
+        .premium .product-badge { background-color: var(--gold-light); color: var(--gold); }
+        .competitive .product-badge { background-color: var(--olive-light); color: var(--olive-dark); }
+
+        .product-card h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.8rem;
+            color: var(--olive-dark);
+            margin-bottom: 10px;
+        }
+
+        .product-card p.description {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            margin-bottom: 20px;
+        }
+
+        .specs-list {
+            list-style: none;
+            margin-bottom: 25px;
+        }
+
+        .specs-list li {
+            padding: 8px 0;
+            border-bottom: 1px dashed var(--border-color);
+            font-size: 0.9rem;
+            color: var(--text-main);
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .specs-list li span.val {
+            font-weight: 600;
+            color: var(--olive-dark);
+        }
+
+        .copy-hook {
+            background-color: var(--bg-base);
+            border-radius: 12px;
+            padding: 20px;
+            font-style: italic;
+            font-size: 0.95rem;
+            border-left: 3px solid var(--border-color);
+            color: var(--text-muted);
+        }
+
+        /* Tension check & physics of the doser */
+        .doser-info {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: var(--shadow);
+            margin-bottom: 40px;
+            display: grid;
+            grid-template-columns: 1fr 1.5fr;
+            gap: 40px;
+            align-items: center;
+        }
+
+        @media (max-width: 768px) {
+            .doser-info { grid-template-columns: 1fr; gap: 20px; }
+        }
+
+        .doser-graphic {
+            background-color: var(--olive-light);
+            border-radius: 16px;
+            padding: 20px;
+            text-align: center;
+            border: 1px solid var(--border-color);
+        }
+
+        .doser-graphic svg {
+            max-width: 150px;
+            height: auto;
+        }
+
+        .doser-features h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.8rem;
+            color: var(--olive-dark);
+            margin-bottom: 15px;
+        }
+
+        .doser-feature-item {
+            margin-bottom: 20px;
+        }
+
+        .doser-feature-item h4 {
+            font-size: 1.05rem;
+            font-weight: 600;
+            color: var(--olive-dark);
+            margin-bottom: 5px;
+        }
+
+        .doser-feature-item p {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+
+        /* Timeline and Phases */
+        .timeline {
+            position: relative;
+            padding-left: 30px;
+            margin-bottom: 40px;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 9px;
+            top: 10px;
+            bottom: 10px;
+            width: 2px;
+            background-color: var(--border-color);
+        }
+
+        .timeline-step {
+            position: relative;
+            margin-bottom: 40px;
+        }
+
+        .timeline-step:last-child {
+            margin-bottom: 0;
+        }
+
+        .timeline-marker {
+            position: absolute;
+            left: -30px;
+            top: 2px;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background-color: #ffffff;
+            border: 4px solid var(--olive-dark);
+            transition: var(--transition);
+        }
+
+        .timeline-step.active .timeline-marker {
+            background-color: var(--gold);
+            border-color: var(--gold);
+            transform: scale(1.2);
+        }
+
+        .step-content {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 25px;
+            box-shadow: var(--shadow);
+        }
+
+        .step-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            border-bottom: 1px dashed var(--border-color);
+            padding-bottom: 10px;
+        }
+
+        .step-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--olive-dark);
+        }
+
+        .step-time {
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--gold);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .step-list {
+            padding-left: 20px;
+            margin-bottom: 15px;
+        }
+
+        .step-list li {
+            font-size: 0.9rem;
+            color: var(--text-main);
+            margin-bottom: 8px;
+        }
+
+        .step-strategy {
+            background-color: var(--olive-light);
+            border-radius: 8px;
+            padding: 15px;
+            font-size: 0.9rem;
+            border-left: 3px solid var(--olive-medium);
+        }
+
+        .step-strategy p {
+            color: var(--olive-dark);
+            font-weight: 600;
+        }
+
+        /* Meeting Prompts / Pending Questions */
+        .agenda-card {
+            background-color: var(--gold-light);
+            border: 1px solid #E9D2A3;
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 40px;
+        }
+
+        .agenda-card h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.8rem;
+            color: #8C6514;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .agenda-list {
+            list-style: none;
+        }
+
+        .agenda-item {
+            padding: 15px;
+            background: #ffffff;
+            border: 1px solid rgba(212,154,41,0.15);
+            border-radius: 12px;
+            margin-bottom: 12px;
+            display: flex;
+            gap: 15px;
+            align-items: flex-start;
+        }
+
+        .agenda-num {
+            background-color: var(--gold);
+            color: #ffffff;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.85rem;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+
+        .agenda-text h4 {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--text-main);
+            margin-bottom: 4px;
+        }
+
+        .agenda-text p {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        /* Readiness Checklist Calculator */
+        .calc-card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 35px;
+            box-shadow: var(--shadow);
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .calc-card h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2rem;
+            color: var(--olive-dark);
+            margin-bottom: 10px;
+        }
+
+        .progress-bar-container {
+            width: 100%;
+            height: 16px;
+            background-color: var(--olive-light);
+            border-radius: 50px;
+            margin: 20px 0;
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+        }
+
+        .progress-bar {
+            width: 25%;
+            height: 100%;
+            background: linear-gradient(90deg, var(--olive-medium) 0%, var(--gold) 100%);
+            border-radius: 50px;
+            transition: width 0.5s ease;
+        }
+
+        .score-value {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--olive-dark);
+            margin-bottom: 25px;
+        }
+
+        .checklist-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            text-align: left;
+            margin-top: 25px;
+        }
+
+        @media (max-width: 768px) {
+            .checklist-grid { grid-template-columns: 1fr; }
+        }
+
+        .check-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.95rem;
+            cursor: pointer;
+            padding: 10px 15px;
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            background-color: var(--bg-base);
+            transition: var(--transition);
+        }
+
+        .check-item:hover {
+            border-color: var(--olive-medium);
+        }
+
+        .check-item.checked {
+            background-color: var(--olive-light);
+            border-color: var(--olive-medium);
+        }
+
+        .check-item input {
+            cursor: pointer;
+            width: 16px;
+            height: 16px;
+            accent-color: var(--olive-dark);
+        }
+
+        /* Sell Without Stock Info */
+        .sell-strategy-box {
+            background: linear-gradient(135deg, var(--gold-light) 0%, #FAF0DF 100%);
+            border: 1px solid #EAD8B8;
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 40px;
+        }
+
+        .sell-strategy-box h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.8rem;
+            color: #835B0B;
+            margin-bottom: 15px;
+        }
+
+        .sell-strategy-box ul {
+            padding-left: 20px;
+        }
+
+        .sell-strategy-box li {
+            margin-bottom: 12px;
+            font-size: 0.95rem;
+            color: #61440A;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Top Bar -->
+        <div class="top-bar">
+            <div class="logo-area">
+                <h2>OLLIMIA</h2>
+                <span>Roadmap de Lançamento Digital</span>
+            </div>
+            <div class="meeting-badge">
+                <span class="pulse"></span>
+                Reunião de Alinhamento: 15:30
+            </div>
+        </div>
+
+        <!-- Hero Header -->
+        <div class="hero">
+            <h1>Como ativaremos a Ollimia no mercado digital</h1>
+            <p class="tagline">O plano de ação para transformar azeite Picual importado em objeto de desejo na cozinha do consumidor brasileiro.</p>
+        </div>
+
+        <!-- Partners Grid -->
+        <div class="partners-grid">
+            <div class="partner-card">
+                <div class="avatar-placeholder">CO</div>
+                <div class="partner-info">
+                    <h4>Carlos d'Orsi</h4>
+                    <p>Sócio / Executivo</p>
+                </div>
+            </div>
+            <div class="partner-card">
+                <div class="avatar-placeholder">IO</div>
+                <div class="partner-info">
+                    <h4>Isabella d'Orsi</h4>
+                    <p>Sócia / Branding</p>
+                </div>
+            </div>
+            <div class="partner-card">
+                <div class="avatar-placeholder">G</div>
+                <div class="partner-info">
+                    <h4>Guto</h4>
+                    <p>Sócio / Logística</p>
+                </div>
+            </div>
+            <div class="partner-card" style="background-color: var(--olive-light); border-color: var(--olive-dark);">
+                <div class="avatar-placeholder" style="background-color: var(--olive-dark); color: #fff;">EST</div>
+                <div class="partner-info">
+                    <h4>Estrategista</h4>
+                    <p>Growth & Ads</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tabs -->
+        <div class="tabs">
+            <button class="tab-btn active" onclick="switchTab(event, 'portfolio')">1. Portfólio de Produtos</button>
+            <button class="tab-btn" onclick="switchTab(event, 'doser')">2. Inovação Squeeze</button>
+            <button class="tab-btn" onclick="switchTab(event, 'roadmap')">3. Cronograma e Prazos</button>
+            <button class="tab-btn" onclick="switchTab(event, 'sell-without-stock')">4. Vender Sem Estoque</button>
+            <button class="tab-btn" onclick="switchTab(event, 'agenda')">5. Pauta da Reunião (15:30)</button>
+        </div>
+
+        <!-- TAB 1: PORTFOLIO -->
+        <div id="portfolio" class="tab-content active">
+            <div class="portfolio-split">
+                <div class="product-card premium">
+                    <div>
+                        <div class="product-badge">Premium / Colheita Precoce</div>
+                        <h3>Ollimia Colheita Selecionada</h3>
+                        <p class="description">Focado em saúde, alta gastronomia, diferenciação extrema de marca e uso de finalização.</p>
+                        <ul class="specs-list">
+                            <li><span>Matéria-prima</span><span class="val">100% Varietal Picual (Outubro)</span></li>
+                            <li><span>Acidez Máxima</span><span class="val">0,1% a 0,2% (Pura e fresca)</span></li>
+                            <li><span>Polifenóis (Antioxidantes)</span><span class="val">Acima de 500 mg/kg</span></li>
+                            <li><span>Sabor</span><span class="val">Herbáceo, verde, amargo e picante</span></li>
+                            <li><span>Uso Recomendado</span><span class="val">Saladas, carnes prontas e uso cru</span></li>
+                        </ul>
+                    </div>
+                    <div class="copy-hook">
+                        "O ápice da oliva Picual. Colhida verde no início da safra, onde sacrificamos o volume em troca da maior pureza e antioxidantes que a terra pode produzir."
+                    </div>
+                </div>
+
+                <div class="product-card competitive">
+                    <div>
+                        <div class="product-badge">Competitivo / Uso Diário</div>
+                        <h3>Ollimia Tradição Diária</h3>
+                        <p class="description">Focado em volume, custo-benefício e na substituição completa de óleos vegetais de cozinha.</p>
+                        <ul class="specs-list">
+                            <li><span>Matéria-prima</span><span class="val">Picual maduro (Dezembro/Janeiro)</span></li>
+                            <li><span>Acidez Máxima</span><span class="val">0,4% a 0,5% (Muito superior ao mercado)</span></li>
+                            <li><span>Polifenóis (Antioxidantes)</span><span class="val">150 a 200 mg/kg</span></li>
+                            <li><span>Sabor</span><span class="val">Dourado, plano, suave, levemente adocicado</span></li>
+                            <li><span>Uso Recomendado</span><span class="val">Refogar, fritar e cozinhar no dia a dia</span></li>
+                        </ul>
+                    </div>
+                    <div class="copy-hook">
+                        "Esqueça os óleos inflamatórios e os azeites misturados de gôndola. Tenha a estabilidade e a qualidade da Andaluzia na sua panela diária."
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB 2: DOSER -->
+        <div id="doser" class="tab-content">
+            <div class="doser-info">
+                <div class="doser-graphic">
+                    <svg viewBox="0 0 100 200" width="100%" height="100%">
+                        <!-- Squeeze bottle representation -->
+                        <path d="M 30,60 L 70,60 L 70,180 C 70,190 60,200 50,200 C 40,200 30,190 30,180 Z" fill="#3E4A35" />
+                        <!-- Golden details/cap -->
+                        <rect x="42" y="35" width="16" height="25" fill="#D49A29" rx="3" />
+                        <path d="M 45,35 L 50,15 L 55,35 Z" fill="#D49A29" />
+                        <!-- Droplet indicator -->
+                        <path d="M 50,0 C 48,8 45,10 45,12 C 45,15 47,17 50,17 C 53,17 55,15 55,12 C 55,10 52,8 50,0 Z" fill="#D49A29" opacity="0.8">
+                            <animate attributeName="transform" type="translate" values="0,0; 0,15; 0,0" dur="2s" repeatCount="indefinite"/>
+                        </path>
+                    </svg>
+                    <p style="margin-top:15px; font-weight:600; color:var(--olive-dark); font-size:0.9rem;">Bico Twist-to-Open</p>
+                </div>
+                <div class="doser-features">
+                    <h3>A Física da Tecnologia de Bancada</h3>
+                    <p style="color:var(--text-muted); font-size:0.95rem; margin-bottom:20px;">Como transformamos um produto comum em desejo por praticidade e higiene:</p>
+                    
+                    <div class="doser-feature-item">
+                        <h4>🔄 Mecanismo Twist-to-Open (Girar para Abrir)</h4>
+                        <p>Você não remove a tampa para usar. O giro eleva uma haste mecânica interna que libera a saída. Evita a perda de tampas na cozinha e permite o manuseio rápido com apenas uma mão durante o fogo ativo.</p>
+                    </div>
+
+                    <div class="doser-feature-item">
+                        <h4>✂️ Corte de Fluxo por Tensão e Vácuo</h4>
+                        <p>Ponta plástica com diâmetro estreito e bordas retas. Ao aliviar a pressão da garrafa, o vácuo puxa o ar e o azeite residual de volta. **Zero escoamento externo nas laterais e armários limpos.**</p>
+                    </div>
+
+                    <div class="doser-feature-item">
+                        <h4>🛡️ Opacidade de Proteção Total</h4>
+                        <p>A garrafa squeeze opaca escura bloqueia 100% dos raios UV e do oxigênio externo, preservando os polifenóis e a acidez de 0,1% que seriam destruídos na garrafa de vidro transparente exposta à luz.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB 3: ROADMAP -->
+        <div id="roadmap" class="tab-content">
+            <div class="timeline">
+                <div class="timeline-step active">
+                    <div class="timeline-marker"></div>
+                    <div class="step-content">
+                        <div class="step-header">
+                            <div class="step-title">Fase 1: Setup & Alinhamento Estratégico</div>
+                            <div class="step-time">Tempo: 1 a 3 dias</div>
+                        </div>
+                        <ul class="step-list">
+                            <li>Reunião de Alinhamento hoje (15:30) para definir preços, margens e metas de estoque.</li>
+                            <li>Coleta e transcrição de áudios das perguntas pendentes do Briefing com os sócios.</li>
+                            <li>Criação dos perfis comerciais nas redes oficiais (TikTok e Instagram).</li>
+                        </ul>
+                        <div class="step-strategy">
+                            <p>💡 Por que fazer?</p>
+                            Garante que os criativos e ofertas comecem com a margem correta e sem falsas promessas, operando sob compliance de risco zero do TikTok Shop.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="timeline-step">
+                    <div class="timeline-marker"></div>
+                    <div class="step-content">
+                        <div class="step-header">
+                            <div class="step-title">Fase 2: Estrutura Base e Pré-Venda de Afiliados</div>
+                            <div class="step-time">Tempo: 4 a 7 dias</div>
+                        </div>
+                        <ul class="step-list">
+                            <li>Configuração do Seller Center do TikTok Shop com CNPJ.</li>
+                            <li>Criação dos primeiros 5 roteiros campeões (Modelo V3) focados no bico inteligente, fritura saudável Picual e no ASMR.</li>
+                            <li>Mapeamento e abordagem de 15 a 20 micro-influenciadores de culinária para envio de amostras sem cobrança comercial de postagem (seeding).</li>
+                        </ul>
+                        <div class="step-strategy">
+                            <p>💡 Por que fazer?</p>
+                            O tráfego de afiliados gera 89% das vendas de azeite. Abordá-los cedo cria a esteira orgânica de postagens antes mesmo do tráfego pago ir para o ar.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="timeline-step">
+                    <div class="timeline-marker"></div>
+                    <div class="step-content">
+                        <div class="step-header">
+                            <div class="step-title">Fase 3: E-commerce Próprio (Shopify) & Recompra</div>
+                            <div class="step-time">Tempo: 10 a 15 dias</div>
+                        </div>
+                        <ul class="step-list">
+                            <li>Desenvolvimento de uma Landing Page/Loja Shopify otimizada para mobile com foco em combos (Duo Premium + Diário).</li>
+                            <li>Lançamento da opção de Assinatura Culinária (Refil em Lata de alumínio reciclável com nitrogênio).</li>
+                            <li>Integração da API da Shopify com o TikTok Shop para inventário em tempo real.</li>
+                        </ul>
+                        <div class="step-strategy">
+                            <p>💡 Por que fazer?</p>
+                            Azeite é consumível. Se não criarmos uma lista de clientes próprios na Shopify para e-mail/SMS marketing de refis, perderemos a margem de recompra (LTV).
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB 4: SELL WITHOUT STOCK -->
+        <div id="sell-without-stock" class="tab-content">
+            <div class="sell-strategy-box">
+                <h3>Como começar a vender antes mesmo do estoque físico estar 100% disponível?</h3>
+                <p style="margin-bottom:15px; font-weight:600;">Estratégias de Growth Hacking para ativação de mercado sem fricção logística imediata:</p>
+                <ul>
+                    <li><strong>1. Pré-Venda e Reserva Digital (Shopify/TikTok):</strong> Criar ofertas com descontos expressivos de lançamento para envio programado na semana seguinte. O cliente compra com a consciência de que é um lote exclusivo importado da Andaluzia.</li>
+                    <li><strong>2. Produção de Conteúdo "B-Roll" da Origem:</strong> Utilizar vídeos e materiais dos campos da Espanha e da prensagem para aquecer as redes orgânicas antes da garrafa física chegar ao consumidor.</li>
+                    <li><strong>3. Envio de Amostras Antecipadas de Gifting:</strong> Enviar as primeiras garrafas produzidas unicamente para formadores de opinião gravarem. O atraso de frete deles postarem casa com a data de entrada do seu estoque de venda.</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- TAB 5: AGENDA -->
+        <div id="agenda" class="tab-content">
+            <div class="agenda-card">
+                <h3>📌 Pautas Cruciais para a Reunião das 15:30</h3>
+                <p style="color:#61440A; font-size:0.95rem; margin-bottom:20px;">Carlos, Isabella e Guto precisam definir estes 4 pontos para avançarmos na estrutura de vendas:</p>
+                
+                <div class="agenda-list">
+                    <div class="agenda-item">
+                        <div class="agenda-num">1</div>
+                        <div class="agenda-text">
+                            <h4>Margens e Viabilidade de Tráfego Pago (Ads)</h4>
+                            <p>Qual é o custo final de importação e embalagem (COGS) por garrafa? Quanto podemos gastar em comissões ou anúncios para manter a operação lucrativa?</p>
+                        </div>
+                    </div>
+
+                    <div class="agenda-item">
+                        <div class="agenda-num">2</div>
+                        <div class="agenda-text">
+                            <h4>Parceiros Logísticos & Despacho Rápido</h4>
+                            <p>Quem fará o empacotamento físico? Conseguimos garantir postagem em até 24/48 horas para blindar a loja de punições no TikTok Shop?</p>
+                        </div>
+                    </div>
+
+                    <div class="agenda-item">
+                        <div class="agenda-num">3</div>
+                        <div class="agenda-text">
+                            <h4>Estoque de Seeding (Envio Grátis)</h4>
+                            <p>Quantas garrafas físicas podemos separar para enviar de graça para criadores de culinária na primeira semana?</p>
+                        </div>
+                    </div>
+
+                    <div class="agenda-item">
+                        <div class="agenda-num">4</div>
+                        <div class="agenda-text">
+                            <h4>Acervo Visual e Materiais de Apoio</h4>
+                            <p>Há fotos em alta definição do produto ou dos olivais na Andaluzia para iniciarmos os criativos imediatamente?</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Dynamic Calculator Card -->
+        <div class="calc-card">
+            <h3>Nível de Prontidão para o Lançamento</h3>
+            <p style="color:var(--text-muted); font-size:0.9rem;">Preencha os marcos abaixo com os sócios para acompanhar o avanço da operação em tempo real.</p>
+            
+            <div class="progress-bar-container">
+                <div id="p-bar" class="progress-bar"></div>
+            </div>
+            <div id="score" class="score-value">25% Completo - Setup Inicial Garantido</div>
+
+            <div class="checklist-grid">
+                <div class="check-item checked" onclick="toggleCheck(this, 15)">
+                    <input type="checkbox" checked onclick="event.stopPropagation(); updateScore();">
+                    <span>Estrutura de Pastas e Repositório Criados</span>
+                </div>
+                <div class="check-item checked" onclick="toggleCheck(this, 10)">
+                    <input type="checkbox" checked onclick="event.stopPropagation(); updateScore();">
+                    <span>Playbook e Dossiê Competitivo Prontos</span>
+                </div>
+                <div class="check-item" onclick="toggleCheck(this, 20)">
+                    <input type="checkbox" onclick="event.stopPropagation(); updateScore();">
+                    <span>Definição de Preços e Margens (Sócios)</span>
+                </div>
+                <div class="check-item" onclick="toggleCheck(this, 15)">
+                    <input type="checkbox" onclick="event.stopPropagation(); updateScore();">
+                    <span>Abertura do TikTok Shop Seller Center</span>
+                </div>
+                <div class="check-item" onclick="toggleCheck(this, 15)">
+                    <input type="checkbox" onclick="event.stopPropagation(); updateScore();">
+                    <span>Mapeamento de 20 Micro-influenciadores</span>
+                </div>
+                <div class="check-item" onclick="toggleCheck(this, 25)">
+                    <input type="checkbox" onclick="event.stopPropagation(); updateScore();">
+                    <span>Desenvolvimento da Shopify e Refil Recorrente</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function switchTab(evt, tabId) {
+            const contents = document.querySelectorAll('.tab-content');
+            contents.forEach(content => content.classList.remove('active'));
+
+            const buttons = document.querySelectorAll('.tab-btn');
+            buttons.forEach(btn => btn.classList.remove('active'));
+
+            document.getElementById(tabId).classList.add('active');
+            evt.currentTarget.classList.add('active');
+        }
+
+        function toggleCheck(element, weight) {
+            const checkbox = element.querySelector('input[type="checkbox"]');
+            checkbox.checked = !checkbox.checked;
+            element.classList.toggle('checked', checkbox.checked);
+            updateScore();
+        }
+
+        function updateScore() {
+            const items = document.querySelectorAll('.check-item');
+            let total = 0;
+            
+            // Re-apply checked classes to elements based on inputs
+            items.forEach((item, index) => {
+                const checked = item.querySelector('input').checked;
+                item.classList.toggle('checked', checked);
+                
+                // Assign weights to checklist items dynamically
+                const weights = [15, 10, 20, 15, 15, 25];
+                if (checked) {
+                    total += weights[index];
+                }
+            });
+
+            const pBar = document.getElementById('p-bar');
+            const scoreText = document.getElementById('score');
+
+            pBar.style.width = total + '%';
+
+            if (total <= 30) {
+                scoreText.innerHTML = total + '% Completo - Setup e Governança Alinhados';
+            } else if (total <= 60) {
+                scoreText.innerHTML = total + '% Completo - Operações e Canais em Definição';
+            } else if (total <= 85) {
+                scoreText.innerHTML = total + '% Completo - Validação de Copy e Influenciadores';
+            } else {
+                scoreText.innerHTML = total + '% Completo - PRONTO PARA FATURAR NO AR!';
+            }
+        }
+
+        // Initialize score calculation on load
+        window.onload = function() {
+            updateScore();
+        };
+    </script>
+</body>
+</html>

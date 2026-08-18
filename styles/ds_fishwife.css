@@ -1,0 +1,203 @@
+/* ==========================================================================
+   DESIGN SYSTEM 2: FISHWIFE (Retro-Chic, Bold Illustrated & Thick Outlines)
+   ========================================================================== */
+@import url('https://fonts.googleapis.com/css2?family=Chivo:ital,wght@0,700;0,900;1,900&family=Inter:wght@400;600;700&family=Playfair+Display:ital,wght@1,700&display=swap');
+
+:root {
+  --ds-bg: #FAF5E8;
+  --ds-card-bg: #FFF9ED;
+  --ds-yellow: #FFD23F;
+  --ds-navy: #1B263B;
+  --ds-red: #EE4266;
+  --ds-border-color: #1B263B;
+  --ds-border-thick: 3px solid #1B263B;
+  --ds-radius: 18px;
+  --ds-font-heading: 'Chivo', sans-serif;
+  --ds-font-script: 'Playfair Display', serif;
+  --ds-font-body: 'Inter', sans-serif;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background-color: var(--ds-bg);
+  color: var(--ds-navy);
+  font-family: var(--ds-font-body);
+  line-height: 1.6;
+}
+
+.top-bar-fishwife {
+  background: var(--ds-yellow);
+  color: var(--ds-navy);
+  font-family: var(--ds-font-heading);
+  font-size: 0.85rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  padding: 10px 0;
+  text-align: center;
+  border-bottom: var(--ds-border-thick);
+}
+
+.site-header {
+  background: var(--ds-bg);
+  padding: 16px 0;
+  border-bottom: var(--ds-border-thick);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.header-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo-text {
+  font-family: var(--ds-font-heading);
+  font-size: 2.2rem;
+  font-weight: 900;
+  color: var(--ds-navy);
+  text-decoration: none;
+  letter-spacing: -1px;
+}
+
+.nav-links {
+  display: flex;
+  gap: 20px;
+  list-style: none;
+}
+
+.nav-links a {
+  color: var(--ds-navy);
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+}
+
+.btn-fishwife {
+  background: var(--ds-yellow);
+  color: var(--ds-navy);
+  padding: 14px 28px;
+  border-radius: 999px;
+  font-family: var(--ds-font-heading);
+  font-weight: 900;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  border: var(--ds-border-thick);
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-block;
+  box-shadow: 4px 4px 0px #1B263B;
+  transition: all 0.15s ease;
+}
+
+.btn-fishwife:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 6px 6px 0px #1B263B;
+  background: #FFE066;
+}
+
+.btn-red {
+  background: var(--ds-red);
+  color: #FFF;
+}
+
+.hero-fishwife {
+  padding: 60px 0;
+}
+
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 40px;
+  align-items: center;
+}
+
+.hero-title {
+  font-family: var(--ds-font-heading);
+  font-size: clamp(3rem, 5vw, 4.2rem);
+  font-weight: 900;
+  line-height: 1.05;
+  text-transform: uppercase;
+  margin: 16px 0;
+}
+
+.hero-img-box {
+  background: var(--ds-yellow);
+  border-radius: var(--ds-radius);
+  padding: 30px;
+  border: var(--ds-border-thick);
+  box-shadow: 8px 8px 0px #1B263B;
+  text-align: center;
+}
+
+.hero-img-box img {
+  max-width: 100%;
+  max-height: 380px;
+  object-fit: contain;
+}
+
+.badge-retro {
+  background: var(--ds-red);
+  color: #FFF;
+  font-family: var(--ds-font-heading);
+  font-weight: 900;
+  font-size: 0.8rem;
+  padding: 6px 14px;
+  border-radius: 999px;
+  border: 2px solid #1B263B;
+  text-transform: uppercase;
+  display: inline-block;
+}
+
+.grid-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 28px;
+  margin-top: 40px;
+}
+
+.card-fishwife {
+  background: var(--ds-card-bg);
+  border-radius: var(--ds-radius);
+  padding: 28px;
+  border: var(--ds-border-thick);
+  box-shadow: 6px 6px 0px #1B263B;
+}
+
+.card-fishwife img {
+  width: 100%;
+  height: 240px;
+  object-fit: contain;
+}
+
+.comp-table-fw {
+  width: 100%;
+  border-collapse: collapse;
+  border: var(--ds-border-thick);
+  box-shadow: 8px 8px 0px #1B263B;
+  background: #FFF;
+  margin-top: 30px;
+}
+
+.comp-table-fw th, .comp-table-fw td {
+  padding: 16px 20px;
+  border: var(--ds-border-thick);
+  text-align: left;
+}
+
+.comp-table-fw th {
+  background: var(--ds-navy);
+  color: #FFF;
+  font-family: var(--ds-font-heading);
+  font-size: 1.1rem;
+}
