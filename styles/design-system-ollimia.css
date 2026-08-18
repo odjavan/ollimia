@@ -3,13 +3,13 @@
    Design Tokens, Brandbook Rules & DTC Luxury Aesthetic
    ========================================================================== */
 
-@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Condensed:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600;1,700&family=Alex+Brush&family=Playfair+Display:ital,wght@0,600;1,600;1,700&family=Inter:wght@300;400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Condensed:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600;1,700&family=Alex+Brush&display=swap');
 
 :root {
-  /* --- PALETA OFICIAL DO BRANDBOOK OLLIMIA --- */
+  /* --- PALETA OFICIAL DO BRANDBOOK OLLIMIA (PÁG 27) --- */
   --ollimia-verde-origem:  #1E2614; /* #1e2614 - RGB 30, 38, 20 (Verde Origem - Fundo Master) */
   --ollimia-verde-pomar:   #4F5C13; /* #4f5c13 - RGB 78, 92, 19 (Verde Pomar - Acentos & Cards) */
-  --ollimia-verde-colina:  #9DA300; /* #9da300 - RGB 157, 163, 0 (Verde Colina - Limão/Destaques) */
+  --ollimia-verde-colina:  #9DA300; /* #9da300 - RGB 157, 163, 0 (Verde Colina - Destaques/CTAs) */
   --ollimia-ambar-solar:   #D89346; /* #d89346 - RGB 216, 147, 70 (Âmbar Solar - Dourado/Rótulo) */
   --ollimia-marfim:        #E7E4C9; /* #e7e4c9 - RGB 231, 228, 201 (Marfim Natural - Texto/Bordas) */
 
@@ -19,21 +19,22 @@
   --ollimia-olive-lime:   var(--ollimia-verde-colina);
   --ollimia-terracotta:   var(--ollimia-ambar-solar);
   --ollimia-cream:        var(--ollimia-marfim);
-  --ollimia-cream-light:  #FAF9F5;
+  --ollimia-cream-light:  #F7F6EE;
   --ollimia-carbon:       #141414;
   --ollimia-gold:         var(--ollimia-ambar-solar);
 
   /* --- CORES FUNCIONAIS & ESTADOS --- */
   --color-text-main:    #141414;
-  --color-text-muted:   #5A6551;
+  --color-text-muted:   #4A5442;
   --color-text-on-dark: var(--ollimia-marfim);
   --color-border-light: rgba(30, 38, 20, 0.12);
   --color-border-dark:  rgba(231, 228, 201, 0.18);
 
   /* --- TIPOGRAFIA OFICIAL BRANDBOOK (PÁG 28) --- */
   --font-display: 'IBM Plex Sans Condensed', sans-serif;
-  --font-body:    'IBM Plex Sans Condensed', 'Inter', sans-serif;
-  --font-accent:  'Playfair Display', serif;
+  --font-body:    'IBM Plex Sans Condensed', sans-serif;
+  --font-heading: 'IBM Plex Sans Condensed', sans-serif;
+  --font-accent:  'IBM Plex Sans Condensed', sans-serif;
   --font-script:  'Alex Brush', cursive;
 
   /* --- ESCALA TIPOGRÁFICA DYNAMIC CLAMP --- */
@@ -300,10 +301,11 @@ body {
 }
 
 .hero-title span {
-  color: var(--ollimia-olive-lime);
-  font-family: var(--font-accent);
-  text-transform: none;
-  font-style: italic;
+  color: var(--ollimia-verde-colina);
+  font-family: var(--font-display);
+  font-weight: 700;
+  text-transform: uppercase;
+  font-style: normal;
   display: block;
 }
 
