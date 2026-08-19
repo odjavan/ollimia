@@ -849,15 +849,36 @@ body {
 
 .countertop-card-luxury {
   position: relative;
-  background: linear-gradient(145deg, rgba(30, 38, 20, 0.92) 0%, rgba(79, 92, 19, 0.65) 100%);
+  background: linear-gradient(160deg, #1E2614 0%, #131A0D 100%);
   border: 1px solid rgba(231, 228, 201, 0.22);
   border-radius: 20px;
   padding: 36px 28px 32px;
   color: var(--ollimia-marfim);
-  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.25);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.3);
   backdrop-filter: blur(10px);
   transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
   overflow: hidden;
+  z-index: 1;
+}
+
+/* BRANDBOOK PÁGS 29-32: GRAFISMO CONCEITUAL DO ACENTO DO "I" (V-MOSAIC GEOMÉTRICO) */
+.countertop-card-luxury::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: -15px;
+  width: 210px;
+  height: 210px;
+  background: linear-gradient(135deg, rgba(157, 163, 0, 0.22) 0%, rgba(79, 92, 19, 0.05) 75%);
+  clip-path: polygon(50% 100%, 0 0, 100% 0);
+  pointer-events: none;
+  z-index: 0;
+  transition: transform 0.4s ease, opacity 0.4s ease;
+}
+
+.countertop-card-luxury:hover::after {
+  transform: scale(1.15) translateY(6px);
+  opacity: 0.95;
 }
 
 .countertop-card-luxury::before {
@@ -869,6 +890,7 @@ body {
   height: 3px;
   background: linear-gradient(90deg, var(--ollimia-ambar-solar), var(--ollimia-verde-colina));
   opacity: 0.7;
+  z-index: 2;
 }
 
 .countertop-card-luxury:hover {
@@ -882,6 +904,8 @@ body {
   justify-content: space-between;
   align-items: center;
   margin-bottom: 24px;
+  position: relative;
+  z-index: 2;
 }
 
 .stamp-number {
@@ -917,6 +941,8 @@ body {
   letter-spacing: 0.5px;
   color: var(--ollimia-marfim);
   margin-bottom: 12px;
+  position: relative;
+  z-index: 2;
 }
 
 .card-luxury-desc {
@@ -924,6 +950,8 @@ body {
   line-height: 1.6;
   color: rgba(231, 228, 201, 0.85);
   font-weight: 400;
+  position: relative;
+  z-index: 2;
 }
 
 /* 4. BOTANICAL GOURMET SHOWCASE ("Conheça a Linha Ollimia") */
