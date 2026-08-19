@@ -613,19 +613,19 @@ body {
   color: var(--ollimia-marfim);
 }
 
-/* Page 9 Pill Badges with Right-Aligned Icons */
+/* Page 9 Pill Badges with Right-Aligned Monocromatic SVG Icons */
 .brandbook-pill-badge {
   display: inline-flex;
   align-items: center;
   justify-content: space-between;
-  gap: 12px;
-  background: var(--ollimia-verde-pomar);
-  color: var(--ollimia-marfim);
-  border: 1px solid rgba(231, 228, 201, 0.25);
+  gap: 10px;
+  background: var(--ollimia-verde-colina);
+  color: var(--ollimia-carbon);
+  border: 1px solid rgba(30, 38, 20, 0.15);
   font-family: var(--font-display);
-  font-size: 0.9rem;
-  font-weight: 600;
-  padding: 10px 18px;
+  font-size: 0.88rem;
+  font-weight: 700;
+  padding: 8px 18px;
   border-radius: var(--radius-pill);
   box-shadow: 0 4px 14px rgba(0, 0, 0, 0.2);
   transition: all 0.25s ease;
@@ -633,21 +633,28 @@ body {
 }
 
 .brandbook-pill-badge:hover {
-  background: var(--ollimia-verde-colina);
-  color: var(--ollimia-carbon);
+  background: var(--ollimia-verde-pomar);
+  color: var(--ollimia-marfim);
   transform: translateY(-2px);
-  box-shadow: 0 6px 18px rgba(157, 163, 0, 0.35);
+  box-shadow: 0 6px 18px rgba(30, 38, 20, 0.4);
 }
 
-.brandbook-pill-badge .pill-icon {
+.brandbook-pill-badge .pill-icon-svg {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 26px;
-  height: 26px;
+  width: 24px;
+  height: 24px;
   border-radius: 50%;
-  background: rgba(0, 0, 0, 0.25);
-  font-size: 0.85rem;
+  background: rgba(20, 20, 20, 0.15);
+  color: var(--ollimia-carbon);
+  flex-shrink: 0;
+  transition: all 0.25s ease;
+}
+
+.brandbook-pill-badge:hover .pill-icon-svg {
+  background: rgba(231, 228, 201, 0.2);
+  color: var(--ollimia-marfim);
 }
 
 /* Page 6 Comparative Section Cards & Layout */
