@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 500" width="160" height="500">
+  <defs>
+    <linearGradient id="glassGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#2D3B18" />
+      <stop offset="30%" stop-color="#556B27" />
+      <stop offset="60%" stop-color="#3C4F1F" />
+      <stop offset="100%" stop-color="#1E2710" />
+    </linearGradient>
+    <linearGradient id="oilReflect" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="rgba(216, 147, 70, 0.4)" />
+      <stop offset="50%" stop-color="rgba(157, 163, 0, 0.2)" />
+      <stop offset="100%" stop-color="rgba(30, 38, 20, 0)" />
+    </linearGradient>
+    <linearGradient id="capGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#111" />
+      <stop offset="50%" stop-color="#333" />
+      <stop offset="100%" stop-color="#050505" />
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-10%" width="140%" height="120%">
+      <feDropShadow dx="0" dy="12" stdDeviation="15" flood-color="#000" flood-opacity="0.4"/>
+    </filter>
+  </defs>
+  
+  <g filter="url(#shadow)">
+    <!-- Bottle Body -->
+    <rect x="25" y="140" width="110" height="330" rx="8" fill="url(#glassGrad)" stroke="rgba(255,255,255,0.15)" stroke-width="1.5"/>
+    
+    <!-- Shoulder -->
+    <path d="M 25 140 Q 25 100 60 85 L 60 65 L 100 65 L 100 85 Q 135 100 135 140 Z" fill="url(#glassGrad)" stroke="rgba(255,255,255,0.15)" stroke-width="1.5"/>
+    
+    <!-- Oil reflection highlight inside glass -->
+    <rect x="35" y="150" width="90" height="300" rx="4" fill="url(#oilReflect)"/>
+    
+    <!-- Vertical glass highlight -->
+    <rect x="38" y="100" width="12" height="350" rx="6" fill="rgba(255,255,255,0.2)"/>
+    <rect x="115" y="120" width="6" height="320" rx="3" fill="rgba(255,255,255,0.08)"/>
+
+    <!-- Neck & Screw Cap -->
+    <rect x="58" y="25" width="44" height="42" rx="3" fill="url(#capGrad)"/>
+    <line x1="58" y1="35" x2="102" y2="35" stroke="#444" stroke-width="1.5"/>
+    <line x1="58" y1="45" x2="102" y2="45" stroke="#444" stroke-width="1.5"/>
+    <rect x="55" y="62" width="50" height="6" rx="2" fill="#222"/>
+  </g>
+</svg>
